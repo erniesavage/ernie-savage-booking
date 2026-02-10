@@ -51,7 +51,7 @@ async function processBooking(meta: Record<string, string>, paymentIntentId: str
       .select('available_seats')
       .eq('id', meta.show_id)
       .single()
-      .then(({ data: show }: any) => {
+      .then(({ data: show }) => {
         if (show) {
           supabaseAdmin
             .from('shows')
@@ -128,6 +128,41 @@ export async function POST(request: NextRequest) {
       var piMeta = pi.metadata;
       if (piMeta?.show_id) {
         await processBooking(piMeta as Record<string, string>, pi.id);
+      }
+    } else if (event.type === 'charge.refunded') {
+      var charge = event.data.object as Stripe.Charge;
+      var chargePI = charge.payment_intent as string;
+      if (chargePI) {
+        // Find the booking by payment intent
+        var { data: booking } = await supabaseAdmin
+          .from('bookings')
+          .select('id, show_id, ticket_count')
+          .eq('stripe_payment_intent_id', chargePI)
+          .maybeSingle();
+
+        if (booking) {
+          // Update booking status to refunded
+          await supabaseAdmin
+            .from('bookings')
+            .update({ stripe_payment_status: 'refunded' })
+            .eq('id', booking.id);
+
+          // Restore available seats
+          var { data: show } = await supabaseAdmin
+            .from('shows')
+            .select('available_seats')
+            .eq('id', booking.show_id)
+            .single();
+
+          if (show) {
+            await supabaseAdmin
+              .from('shows')
+              .update({ available_seats: show.available_seats + booking.ticket_count })
+              .eq('id', booking.show_id);
+          }
+
+          console.log('Refund processed for booking:', booking.id);
+        }
       }
     }
   } catch (err) {
