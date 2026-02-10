@@ -35,22 +35,22 @@ export async function GET() {
       .limit(20);
 
     const totalBookings = bookings?.length || 0;
-    const totalRevenue = bookings?.reduce((sum, b) => sum + (b.total_cents || 0), 0) || 0;
-    const totalTickets = bookings?.reduce((sum, b) => sum + (b.ticket_count || 0), 0) || 0;
+    const totalRevenue = bookings?.reduce((sum: number, b: any) => sum + (b.total_cents || 0), 0) || 0;
+    const totalTickets = bookings?.reduce((sum: number, b: any) => sum + (b.ticket_count || 0), 0) || 0;
     const upcomingShows = shows?.length || 0;
 
     const expLookup: Record<string, string> = {};
-    experiences?.forEach((e) => { expLookup[e.id] = e.title; });
+    experiences?.forEach((e: any) => { expLookup[e.id] = e.title; });
 
-    const enrichedShows = shows?.map((s) => ({
+    const enrichedShows = shows?.map((s: any) => ({
       ...s,
       experience_title: expLookup[s.experience_id] || 'Unknown',
     })) || [];
 
     const showLookup: Record<string, any> = {};
-    shows?.forEach((s) => { showLookup[s.id] = s; });
+    shows?.forEach((s: any) => { showLookup[s.id] = s; });
 
-    const enrichedBookings = recentBookings?.map((b) => ({
+    const enrichedBookings = recentBookings?.map((b: any) => ({
       ...b,
       show: showLookup[b.show_id] ? {
         ...showLookup[b.show_id],
