@@ -50,22 +50,38 @@ export default function AdminPage() {
 }
 
 function AdminDashboard() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/admin/stats')
-      .then(res => res.json())
-      .then(json => setData(json))
-      .catch(err => console.error(err))
+      .then((res) => res.json())
+      .then((json) => setData(json))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p style={{ color: '#8a7d6d' }}>Loading dashboard...</p>;
-  if (!data) return <p style={{ color: '#c4a574' }}>Error loading dashboard data.</p>;
+  if (loading) {
+    return <p style={{ color: '#8a7d6d' }}>Loading dashboard...</p>;
+  }
+  if (!data) {
+    return <p style={{ color: '#c4a574' }}>Error loading dashboard data.</p>;
+  }
 
-  const td = { padding: '12px', fontSize: '14px', color: '#e8dcc8' };
-  const th = { textAlign: 'left', padding: '10px 12px', fontSize: '11px', color: '#8a7d6d', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500 };
+  const tdS: React.CSSProperties = { padding: '12px', fontSize: '14px', color: '#e8dcc8' };
+  const thS: React.CSSProperties = {
+    textAlign: 'left',
+    padding: '10px 12px',
+    fontSize: '11px',
+    color: '#8a7d6d',
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    fontWeight: 500,
+  };
+
+  const formatMoney = (cents: number) => {
+    return '$' + (cents / 100).toFixed(2);
+  };
 
   return (
     <>
@@ -73,9 +89,9 @@ function AdminDashboard() {
         {[
           { label: 'Total Bookings', value: data.totalBookings },
           { label: 'Tickets Sold', value: data.totalTickets },
-          { label: 'Revenue', value: '$' + (data.totalRevenue / 100).toFixed(2) },
+          { label: 'Revenue', value: formatMoney(data.totalRevenue) },
           { label: 'Upcoming Shows', value: data.upcomingShows },
-        ].map((stat) => (
+        ].map((stat: any) => (
           <div key={stat.label} style={{ background: 'rgba(35,30,24,0.5)', border: '1px solid rgba(196,165,116,0.12)', padding: '24px', textAlign: 'center' }}>
             <div style={{ fontSize: '28px', color: '#c4a574', fontFamily: "'Playfair Display', serif" }}>{stat.value}</div>
             <div style={{ fontSize: '12px', color: '#8a7d6d', marginTop: '8px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{stat.label}</div>
@@ -91,18 +107,25 @@ function AdminDashboard() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid rgba(196,165,116,0.2)' }}>
-                {['Experience','Date','Time','Venue','Seats Left','Status'].map(h => <th key={h} style={th}>{h}</th>)}
+                <th style={thS}>Experience</th>
+                <th style={thS}>Date</th>
+                <th style={thS}>Time</th>
+                <th style={thS}>Venue</th>
+                <th style={thS}>Seats Left</th>
+                <th style={thS}>Status</th>
               </tr>
             </thead>
             <tbody>
-              {data.shows.map((s) => (
+              {data.shows.map((s: any) => (
                 <tr key={s.id} style={{ borderBottom: '1px solid rgba(196,165,116,0.08)' }}>
-                  <td style={td}>{s.experience_title}</td>
-                  <td style={td}>{new Date(s.show_date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</td>
-                  <td style={td}>{s.show_time}</td>
-                  <td style={td}>{s.venue_name}</td>
-                  <td style={td}>{s.available_seats}</td>
-                  <td style={td}><span style={{ color: s.status === 'scheduled' ? '#7ab87a' : '#c4a574', textTransform: 'capitalize' }}>{s.status}</span></td>
+                  <td style={tdS}>{s.experience_title}</td>
+                  <td style={tdS}>{new Date(s.show_date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</td>
+                  <td style={tdS}>{s.show_time}</td>
+                  <td style={tdS}>{s.venue_name}</td>
+                  <td style={tdS}>{s.available_seats}</td>
+                  <td style={tdS}>
+                    <span style={{ color: s.status === 'scheduled' ? '#7ab87a' : '#c4a574', textTransform: 'capitalize' }}>{s.status}</span>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -118,19 +141,37 @@ function AdminDashboard() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid rgba(196,165,116,0.2)' }}>
-                {['Customer','Contact','Tickets','Amount','Code','Status','Date'].map(h => <th key={h} style={th}>{h}</th>)}
+                <th style={thS}>Customer</th>
+                <th style={thS}>Contact</th>
+                <th style={thS}>Tickets</th>
+                <th style={thS}>Amount</th>
+                <th style={thS}>Code</th>
+                <th style={thS}>Status</th>
+                <th style={thS}>Date</th>
               </tr>
             </thead>
             <tbody>
-              {data.recentBookings.map((b) => (
+              {data.recentBookings.map((b: any) => (
                 <tr key={b.id} style={{ borderBottom: '1px solid rgba(196,165,116,0.08)' }}>
-                  <td style={td}>{b.customer_name}</td>
-                  <td style={td}><div style={{ fontSize: '13px' }}>{b.customer_email}</div>{b.customer_phone && <div style={{ fontSize: '12px', color: '#8a7d6d' }}>{b.customer_phone}</div>}</td>
-                  <td style={td}>{b.ticket_count}</td>
-                  <td style={td}>${(b.total_cents / 100).toFixed(2)}</td>
-                  <td style={td}><span style={{ fontFamily: 'monospace', color: '#c4a574', fontSize: '13px' }}>{b.ticket_code}</span></td>
-                  <td style={td}><span style={{ color: b.stripe_payment_status === 'succeeded' ? '#7ab87a' : b.stripe_payment_status === 'refunded' ? '#c4a574' : '#d9534f', textTransform: 'capitalize' }}>{b.stripe_payment_status}</span></td>
-                  <td style={td}><span style={{ fontSize: '13px' }}>{new Date(b.created_at).toLocaleDateString()}</span></td>
+                  <td style={tdS}>{b.customer_name}</td>
+                  <td style={tdS}>
+                    <div style={{ fontSize: '13px' }}>{b.customer_email}</div>
+                    {b.customer_phone && <div style={{ fontSize: '12px', color: '#8a7d6d' }}>{b.customer_phone}</div>}
+                  </td>
+                  <td style={tdS}>{b.ticket_count}</td>
+                  <td style={tdS}>{formatMoney(b.total_cents)}</td>
+                  <td style={tdS}>
+                    <span style={{ fontFamily: 'monospace', color: '#c4a574', fontSize: '13px' }}>{b.ticket_code}</span>
+                  </td>
+                  <td style={tdS}>
+                    <span style={{
+                      color: b.stripe_payment_status === 'succeeded' ? '#7ab87a' : b.stripe_payment_status === 'refunded' ? '#c4a574' : '#d9534f',
+                      textTransform: 'capitalize',
+                    }}>{b.stripe_payment_status}</span>
+                  </td>
+                  <td style={tdS}>
+                    <span style={{ fontSize: '13px' }}>{new Date(b.created_at).toLocaleDateString()}</span>
+                  </td>
                 </tr>
               ))}
             </tbody>
