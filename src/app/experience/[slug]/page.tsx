@@ -49,7 +49,7 @@ export default function ExperiencePage() {
 
   async function fetchShows() {
     try {
-      const res = await fetch(`/api/shows?slug=${slug}`);
+      const res = await fetch(`/api/shows?experience=${slug}`);
       const data = await res.json();
       if (data.experience) setExperience(data.experience);
       if (data.shows) setShows(data.shows);
