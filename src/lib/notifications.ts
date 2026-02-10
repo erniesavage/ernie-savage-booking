@@ -94,10 +94,17 @@ export async function sendConfirmationSMS(booking: BookingDetails) {
       process.env.TWILIO_AUTH_TOKEN
     );
 
+    // Format phone number with country code
+    var phoneNumber = booking.customerPhone.replace(/\D/g, '');
+    if (!phoneNumber.startsWith('1')) {
+      phoneNumber = '1' + phoneNumber;
+    }
+    phoneNumber = '+' + phoneNumber;
+
     await twilio.messages.create({
       body: `🎵 Ernie Savage — You're in!\n\n${booking.experienceTitle}\n${formattedDate} at ${booking.showTime}\n${booking.venueName}\n\nTicket: ${booking.ticketCode}\n${booking.ticketCount} ticket(s)\n\nSee you there.`,
       from: process.env.TWILIO_PHONE_NUMBER,
-      to: booking.customerPhone,
+      to: phoneNumber,
     });
     return true;
   } catch (error) {
