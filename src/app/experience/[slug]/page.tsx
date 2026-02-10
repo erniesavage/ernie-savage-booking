@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FormEvent } from 'react';
 import { useParams } from 'next/navigation';
 import { experienceData } from '@/lib/experiences';
 
@@ -25,22 +25,35 @@ interface Experience {
 }
 
 export default function ExperiencePage() {
-  const params = useParams();
-  const slug = params.slug as string;
-  const info = experienceData[slug];
+  var params = useParams();
+  var slug = params.slug as string;
+  var info = experienceData[slug];
 
-  const [experience, setExperience] = useState<Experience | null>(null);
-  const [shows, setShows] = useState<Show[]>([]);
-  const [selectedShow, setSelectedShow] = useState<Show | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
+  var [experience, setExperience] = useState<Experience | null>(null);
+  var [shows, setShows] = useState<Show[]>([]);
+  var [selectedShow, setSelectedShow] = useState<Show | null>(null);
+  var [loading, setLoading] = useState(true);
+  var [submitting, setSubmitting] = useState(false);
 
   // Form state
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [contactPref, setContactPref] = useState('both');
-  const [tickets, setTickets] = useState(1);
+  var [name, setName] = useState('');
+  var [email, setEmail] = useState('');
+  var [phone, setPhone] = useState('');
+  var [contactPref, setContactPref] = useState('both');
+  var [tickets, setTickets] = useState(1);
+
+  // Payment state
+  var [paymentStep, setPaymentStep] = useState<'form' | 'payment' | 'confirmed'>('form');
+  var [clientSecret, setClientSecret] = useState('');
+  var [paymentIntentId, setPaymentIntentId] = useState('');
+  var [cardError, setCardError] = useState('');
+  var [processing, setProcessing] = useState(false);
+
+  // Card fields state
+  var [cardNumber, setCardNumber] = useState('');
+  var [cardExpiry, setCardExpiry] = useState('');
+  var [cardCvc, setCardCvc] = useState('');
+  var [cardZip, setCardZip] = useState('');
 
   useEffect(() => {
     if (!slug) return;
@@ -49,8 +62,8 @@ export default function ExperiencePage() {
 
   async function fetchShows() {
     try {
-      const res = await fetch(`/api/shows?experience=${slug}`);
-      const data = await res.json();
+      var res = await fetch('/api/shows?experience=' + slug);
+      var data = await res.json();
       if (data.experience) setExperience(data.experience);
       if (data.shows) setShows(data.shows);
     } catch (err) {
@@ -65,7 +78,7 @@ export default function ExperiencePage() {
   }
 
   function formatPrice(cents: number) {
-    return `$${(cents / 100).toFixed(0)}`;
+    return '$' + (cents / 100).toFixed(0);
   }
 
   function formatDate(dateStr: string) {
@@ -78,19 +91,21 @@ export default function ExperiencePage() {
   }
 
   function formatTime(timeStr: string) {
-    const [h, m] = timeStr.split(':');
-    const hour = parseInt(h);
-    const ampm = hour >= 12 ? 'PM' : 'AM';
-    const h12 = hour % 12 || 12;
-    return `${h12}:${m} ${ampm}`;
+    var parts = timeStr.split(':');
+    var hour = parseInt(parts[0]);
+    var min = parts[1];
+    var ampm = hour >= 12 ? 'PM' : 'AM';
+    var h12 = hour % 12 || 12;
+    return h12 + ':' + min + ' ' + ampm;
   }
 
-  async function handleCheckout() {
+  async function handleReserve() {
     if (!selectedShow || !name) return;
     setSubmitting(true);
+    setCardError('');
 
     try {
-      const res = await fetch('/api/create-checkout', {
+      var res = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -105,19 +120,113 @@ export default function ExperiencePage() {
         }),
       });
 
-      const data = await res.json();
+      var data = await res.json();
 
-      if (data.url) {
-        window.location.href = data.url;
+      if (data.clientSecret) {
+        setClientSecret(data.clientSecret);
+        setPaymentIntentId(data.paymentIntentId);
+        setPaymentStep('payment');
       } else {
-        alert('Something went wrong. Please try again.');
+        setCardError(data.error || 'Something went wrong. Please try again.');
       }
     } catch (err) {
-      console.error('Checkout error:', err);
-      alert('Something went wrong. Please try again.');
+      console.error('Payment intent error:', err);
+      setCardError('Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
+  }
+
+  async function handlePayment(e: FormEvent) {
+    e.preventDefault();
+    if (!clientSecret) return;
+    setProcessing(true);
+    setCardError('');
+
+    try {
+      // Load Stripe
+      var stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+      if (!stripeKey) {
+        setCardError('Payment configuration error.');
+        setProcessing(false);
+        return;
+      }
+
+      // @ts-ignore - Stripe.js loaded via script tag
+      var stripeInstance = window.Stripe ? window.Stripe(stripeKey) : null;
+      if (!stripeInstance) {
+        setCardError('Payment system loading. Please wait a moment and try again.');
+        setProcessing(false);
+        return;
+      }
+
+      // Parse card details
+      var expParts = cardExpiry.split('/');
+      var expMonth = parseInt(expParts[0]);
+      var expYear = parseInt('20' + (expParts[1] || '').trim());
+
+      // Create payment method
+      var { paymentMethod, error: pmError } = await stripeInstance.createPaymentMethod({
+        type: 'card',
+        card: {
+          number: cardNumber.replace(/\s/g, ''),
+          exp_month: expMonth,
+          exp_year: expYear,
+          cvc: cardCvc,
+        },
+        billing_details: {
+          name: name,
+          email: email || undefined,
+          phone: phone || undefined,
+          address: { postal_code: cardZip || undefined },
+        },
+      });
+
+      if (pmError) {
+        setCardError(pmError.message || 'Invalid card details.');
+        setProcessing(false);
+        return;
+      }
+
+      // Confirm payment
+      var { paymentIntent, error: confirmError } = await stripeInstance.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
+
+      if (confirmError) {
+        setCardError(confirmError.message || 'Payment failed. Please try again.');
+        setProcessing(false);
+        return;
+      }
+
+      if (paymentIntent && paymentIntent.status === 'succeeded') {
+        setPaymentStep('confirmed');
+      } else {
+        setCardError('Payment was not completed. Please try again.');
+      }
+    } catch (err: any) {
+      console.error('Payment error:', err);
+      setCardError(err.message || 'Payment failed. Please try again.');
+    } finally {
+      setProcessing(false);
+    }
+  }
+
+  function formatCardNumber(value: string) {
+    var v = value.replace(/\D/g, '').substring(0, 16);
+    var parts = [];
+    for (var i = 0; i < v.length; i += 4) {
+      parts.push(v.substring(i, i + 4));
+    }
+    return parts.join(' ');
+  }
+
+  function formatExpiry(value: string) {
+    var v = value.replace(/\D/g, '').substring(0, 4);
+    if (v.length > 2) {
+      return v.substring(0, 2) + ' / ' + v.substring(2);
+    }
+    return v;
   }
 
   if (!info) {
@@ -133,13 +242,16 @@ export default function ExperiencePage() {
 
   return (
     <main>
+      {/* Stripe.js script */}
+      <script src="https://js.stripe.com/v3/" async />
+
       {/* EXPERIENCE HERO */}
       <section className="exp-hero">
         <h1>{info.title}</h1>
         <p className="exp-subtitle">{info.subtitle}</p>
         <img src={info.image} alt={info.title} className="exp-image" />
         <div className="exp-desc">
-          {info.fullDesc.map((p, i) => (
+          {info.fullDesc.map((p: string, i: number) => (
             <p key={i}>{p}</p>
           ))}
         </div>
@@ -153,8 +265,7 @@ export default function ExperiencePage() {
 
         {!loading && shows.length === 0 && (
           <p className="no-shows-msg">
-            No dates currently scheduled. Check back soon — new experiences are added
-            regularly.
+            No dates currently scheduled. Check back soon — new experiences are added regularly.
           </p>
         )}
 
@@ -163,15 +274,12 @@ export default function ExperiencePage() {
             key={show.id}
             className="show-card"
             style={{
-              borderColor:
-                selectedShow?.id === show.id
-                  ? 'rgba(196, 165, 116, 0.5)'
-                  : undefined,
+              borderColor: selectedShow?.id === show.id ? 'rgba(196, 165, 116, 0.5)' : undefined,
               cursor: show.status === 'sold_out' ? 'default' : 'pointer',
               opacity: show.status === 'sold_out' ? 0.5 : 1,
             }}
             onClick={() => {
-              if (show.status !== 'sold_out') {
+              if (show.status !== 'sold_out' && paymentStep === 'form') {
                 setSelectedShow(selectedShow?.id === show.id ? null : show);
                 setTickets(1);
               }
@@ -180,68 +288,41 @@ export default function ExperiencePage() {
             <div className="show-date">{formatDate(show.show_date)}</div>
             <div className="show-details">
               {formatTime(show.show_time)}
-              {show.doors_time && ` · Doors ${formatTime(show.doors_time)}`}
+              {show.doors_time && (' \u00B7 Doors ' + formatTime(show.doors_time))}
             </div>
             <div className="show-details">
               {show.venue_name}
-              {show.venue_address && ` · ${show.venue_address}`}
+              {show.venue_address && (' \u00B7 ' + show.venue_address)}
             </div>
             <div className="show-price">
               {formatPrice(getPrice(show))} per person
             </div>
-            <div
-              className={`show-seats ${show.available_seats <= 3 ? 'low' : ''}`}
-            >
-              {show.status === 'sold_out'
-                ? 'Sold Out'
-                : `${show.available_seats} seats remaining`}
+            <div className={'show-seats' + (show.available_seats <= 3 ? ' low' : '')}>
+              {show.status === 'sold_out' ? 'Sold Out' : show.available_seats + ' seats remaining'}
             </div>
 
-            {/* BOOKING FORM — appears under selected show */}
-            {selectedShow?.id === show.id && show.status !== 'sold_out' && (
-              <div
-                className="booking-form"
-                onClick={(e) => e.stopPropagation()}
-              >
+            {/* BOOKING FORM */}
+            {selectedShow?.id === show.id && show.status !== 'sold_out' && paymentStep === 'form' && (
+              <div className="booking-form" onClick={(e) => e.stopPropagation()}>
                 <div className="divider" style={{ margin: '12px 0' }}>
                   <span className="divider-line" />
-                  <span style={{ fontSize: '11px', color: '#5a4d3d' }}>
-                    BOOK YOUR SPOT
-                  </span>
+                  <span style={{ fontSize: '11px', color: '#5a4d3d' }}>BOOK YOUR SPOT</span>
                   <span className="divider-line" />
                 </div>
 
                 <div>
                   <label className="form-label">Your Name *</label>
-                  <input
-                    className="form-input"
-                    type="text"
-                    placeholder="Full name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
+                  <input className="form-input" type="text" placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
 
                 <div className="form-row">
                   <div>
                     <label className="form-label">Email</label>
-                    <input
-                      className="form-input"
-                      type="email"
-                      placeholder="you@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <input className="form-input" type="email" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                   </div>
                   <div>
                     <label className="form-label">Phone</label>
-                    <input
-                      className="form-input"
-                      type="tel"
-                      placeholder="(555) 555-5555"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                    <input className="form-input" type="tel" placeholder="(555) 555-5555" value={phone} onChange={(e) => setPhone(e.target.value)} />
                   </div>
                 </div>
 
@@ -249,11 +330,7 @@ export default function ExperiencePage() {
                   <label className="form-label">Send confirmation via</label>
                   <div className="contact-options">
                     {['email', 'sms', 'both'].map((opt) => (
-                      <div
-                        key={opt}
-                        className={`contact-option ${contactPref === opt ? 'active' : ''}`}
-                        onClick={() => setContactPref(opt)}
-                      >
+                      <div key={opt} className={'contact-option' + (contactPref === opt ? ' active' : '')} onClick={() => setContactPref(opt)}>
                         {opt === 'both' ? 'Email & SMS' : opt.toUpperCase()}
                       </div>
                     ))}
@@ -263,46 +340,138 @@ export default function ExperiencePage() {
                 <div>
                   <label className="form-label">Tickets</label>
                   <div className="ticket-selector">
-                    <button
-                      className="ticket-btn"
-                      onClick={() => setTickets(Math.max(1, tickets - 1))}
-                    >
-                      −
-                    </button>
+                    <button className="ticket-btn" onClick={() => setTickets(Math.max(1, tickets - 1))}>&#8722;</button>
                     <span className="ticket-count">{tickets}</span>
-                    <button
-                      className="ticket-btn"
-                      onClick={() =>
-                        setTickets(
-                          Math.min(show.available_seats, tickets + 1)
-                        )
-                      }
-                    >
-                      +
-                    </button>
+                    <button className="ticket-btn" onClick={() => setTickets(Math.min(show.available_seats, tickets + 1))}>+</button>
                     <span style={{ color: '#5a4d3d', fontSize: '14px' }}>
-                      × {formatPrice(getPrice(show))} ={' '}
-                      <span style={{ color: '#c4a574' }}>
-                        {formatPrice(getPrice(show) * tickets)}
-                      </span>
+                      &times; {formatPrice(getPrice(show))} ={' '}
+                      <span style={{ color: '#c4a574' }}>{formatPrice(getPrice(show) * tickets)}</span>
                     </span>
                   </div>
                 </div>
 
-                <button
-                  className="checkout-btn"
-                  disabled={!name || submitting}
-                  onClick={handleCheckout}
-                >
+                {cardError && <p style={{ color: '#d9534f', fontSize: '14px', margin: '8px 0' }}>{cardError}</p>}
+
+                <button className="checkout-btn" disabled={!name || submitting} onClick={handleReserve}>
                   {submitting ? (
-                    <>
-                      <span className="spinner" />
-                      Processing...
-                    </>
+                    <><span className="spinner" />Processing...</>
                   ) : (
-                    `Reserve ${tickets} ${tickets === 1 ? 'Seat' : 'Seats'} — ${formatPrice(getPrice(show) * tickets)}`
+                    'Continue to Payment \u2014 ' + formatPrice(getPrice(show) * tickets)
                   )}
                 </button>
+              </div>
+            )}
+
+            {/* PAYMENT FORM */}
+            {selectedShow?.id === show.id && paymentStep === 'payment' && (
+              <div className="booking-form" onClick={(e) => e.stopPropagation()}>
+                <div className="divider" style={{ margin: '12px 0' }}>
+                  <span className="divider-line" />
+                  <span style={{ fontSize: '11px', color: '#5a4d3d' }}>PAYMENT</span>
+                  <span className="divider-line" />
+                </div>
+
+                <div style={{ padding: '16px', background: 'rgba(196,165,116,0.05)', border: '1px solid rgba(196,165,116,0.15)', marginBottom: '16px' }}>
+                  <div style={{ fontSize: '14px', color: '#e8dcc8' }}>{name}</div>
+                  <div style={{ fontSize: '13px', color: '#8a7d6d' }}>{tickets} ticket{tickets > 1 ? 's' : ''} &middot; {formatPrice(getPrice(show) * tickets)}</div>
+                </div>
+
+                <form onSubmit={handlePayment}>
+                  <div>
+                    <label className="form-label">Card Number</label>
+                    <input
+                      className="form-input"
+                      type="text"
+                      placeholder="1234 5678 9012 3456"
+                      value={cardNumber}
+                      onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
+                      maxLength={19}
+                      autoComplete="cc-number"
+                    />
+                  </div>
+
+                  <div className="form-row">
+                    <div>
+                      <label className="form-label">Expiry</label>
+                      <input
+                        className="form-input"
+                        type="text"
+                        placeholder="MM / YY"
+                        value={cardExpiry}
+                        onChange={(e) => setCardExpiry(formatExpiry(e.target.value))}
+                        maxLength={7}
+                        autoComplete="cc-exp"
+                      />
+                    </div>
+                    <div>
+                      <label className="form-label">CVC</label>
+                      <input
+                        className="form-input"
+                        type="text"
+                        placeholder="123"
+                        value={cardCvc}
+                        onChange={(e) => setCardCvc(e.target.value.replace(/\D/g, '').substring(0, 4))}
+                        maxLength={4}
+                        autoComplete="cc-csc"
+                      />
+                    </div>
+                    <div>
+                      <label className="form-label">Zip</label>
+                      <input
+                        className="form-input"
+                        type="text"
+                        placeholder="10001"
+                        value={cardZip}
+                        onChange={(e) => setCardZip(e.target.value.replace(/\D/g, '').substring(0, 5))}
+                        maxLength={5}
+                        autoComplete="postal-code"
+                      />
+                    </div>
+                  </div>
+
+                  {cardError && <p style={{ color: '#d9534f', fontSize: '14px', margin: '8px 0' }}>{cardError}</p>}
+
+                  <button className="checkout-btn" type="submit" disabled={processing || !cardNumber || !cardExpiry || !cardCvc}>
+                    {processing ? (
+                      <><span className="spinner" />Processing Payment...</>
+                    ) : (
+                      'Pay ' + formatPrice(getPrice(show) * tickets)
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => { setPaymentStep('form'); setCardError(''); }}
+                    style={{ background: 'none', border: 'none', color: '#8a7d6d', fontSize: '13px', cursor: 'pointer', marginTop: '12px', width: '100%', textAlign: 'center' }}
+                  >
+                    &larr; Back to details
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {/* CONFIRMATION */}
+            {selectedShow?.id === show.id && paymentStep === 'confirmed' && (
+              <div className="booking-form" onClick={(e) => e.stopPropagation()}>
+                <div style={{ textAlign: 'center', padding: '24px 0' }}>
+                  <div style={{ fontSize: '36px', marginBottom: '12px' }}>&#9834;</div>
+                  <h3 style={{ fontSize: '22px', color: '#e8dcc8', marginBottom: '8px' }}>You&apos;re In.</h3>
+                  <p style={{ color: '#8a7d6d', fontSize: '14px', marginBottom: '20px' }}>{name}, your spot is confirmed.</p>
+                  <div style={{ padding: '16px', background: 'rgba(196,165,116,0.05)', border: '1px solid rgba(196,165,116,0.15)', textAlign: 'center' }}>
+                    <div style={{ color: '#c4a574', fontWeight: 600 }}>{info.title}</div>
+                    <div style={{ color: '#e8dcc8', fontSize: '14px', marginTop: '4px' }}>{formatDate(show.show_date)}</div>
+                    <div style={{ color: '#8a7d6d', fontSize: '14px' }}>{formatTime(show.show_time)} &middot; {show.venue_name}</div>
+                    <div style={{ color: '#8a7d6d', fontSize: '14px' }}>{tickets} ticket{tickets > 1 ? 's' : ''}</div>
+                  </div>
+                  {show.venue_notes && (
+                    <div style={{ marginTop: '16px', padding: '12px', background: 'rgba(35,30,24,0.5)', fontSize: '13px', color: '#c4a574' }}>
+                      <strong>Arrival:</strong> {show.venue_notes}
+                    </div>
+                  )}
+                  <p style={{ color: '#8a7d6d', fontSize: '13px', marginTop: '16px' }}>
+                    A confirmation has been sent to your email and/or phone. See you there.
+                  </p>
+                </div>
               </div>
             )}
           </div>
