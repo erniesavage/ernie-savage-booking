@@ -68,8 +68,8 @@ function AdminDashboard() {
     return <p style={{ color: '#c4a574' }}>Error loading dashboard data.</p>;
   }
 
-  var tdS: React.CSSProperties = { padding: '12px', fontSize: '14px', color: '#e8dcc8' };
-  var thS: React.CSSProperties = {
+  const tdS: React.CSSProperties = { padding: '12px', fontSize: '14px', color: '#e8dcc8' };
+  const thS: React.CSSProperties = {
     textAlign: 'left',
     padding: '10px 12px',
     fontSize: '11px',
@@ -79,9 +79,9 @@ function AdminDashboard() {
     fontWeight: 500,
   };
 
-  function formatMoney(cents: number) {
+  const formatMoney = (cents: number) => {
     return '$' + (cents / 100).toFixed(2);
-  }
+  };
 
   return (
     <>
@@ -113,18 +113,22 @@ function AdminDashboard() {
                 <th style={thS}>Venue</th>
                 <th style={thS}>Seats Left</th>
                 <th style={thS}>Status</th>
+                <th style={thS}>Guests</th>
               </tr>
             </thead>
             <tbody>
               {data.shows.map((s: any) => (
-                <tr key={s.id} style={{ borderBottom: '1px solid rgba(196,165,116,0.08)' }}>
+                <tr key={s.id} onClick={() => window.location.href = '/admin/guests?show_id=' + s.id} style={{ borderBottom: '1px solid rgba(196,165,116,0.08)', cursor: 'pointer' }}>
                   <td style={tdS}>{s.experience_title}</td>
-                  <td style={tdS}>{s.show_date}</td>
+                  <td style={tdS}>{new Date(s.show_date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</td>
                   <td style={tdS}>{s.show_time}</td>
                   <td style={tdS}>{s.venue_name}</td>
                   <td style={tdS}>{s.available_seats}</td>
                   <td style={tdS}>
                     <span style={{ color: s.status === 'scheduled' ? '#7ab87a' : '#c4a574', textTransform: 'capitalize' }}>{s.status}</span>
+                  </td>
+                  <td style={tdS}>
+                    <span style={{ color: '#c4a574', textDecoration: 'underline' }}>View</span>
                   </td>
                 </tr>
               ))}
