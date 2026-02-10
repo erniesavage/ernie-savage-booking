@@ -68,8 +68,8 @@ function AdminDashboard() {
     return <p style={{ color: '#c4a574' }}>Error loading dashboard data.</p>;
   }
 
-  const tdS: React.CSSProperties = { padding: '12px', fontSize: '14px', color: '#e8dcc8' };
-  const thS: React.CSSProperties = {
+  var tdS: React.CSSProperties = { padding: '12px', fontSize: '14px', color: '#e8dcc8' };
+  var thS: React.CSSProperties = {
     textAlign: 'left',
     padding: '10px 12px',
     fontSize: '11px',
@@ -79,9 +79,9 @@ function AdminDashboard() {
     fontWeight: 500,
   };
 
-  const formatMoney = (cents: number) => {
+  function formatMoney(cents: number) {
     return '$' + (cents / 100).toFixed(2);
-  };
+  }
 
   return (
     <>
@@ -119,7 +119,7 @@ function AdminDashboard() {
               {data.shows.map((s: any) => (
                 <tr key={s.id} style={{ borderBottom: '1px solid rgba(196,165,116,0.08)' }}>
                   <td style={tdS}>{s.experience_title}</td>
-                  <td style={tdS}>{new Date(s.show_date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</td>
+                  <td style={tdS}>{s.show_date}</td>
                   <td style={tdS}>{s.show_time}</td>
                   <td style={tdS}>{s.venue_name}</td>
                   <td style={tdS}>{s.available_seats}</td>
