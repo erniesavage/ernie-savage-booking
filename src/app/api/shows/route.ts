@@ -1,5 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase, supabaseAdmin } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
+
+function getAdminClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
+
+function getPublicClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,18 +32,19 @@ export async function POST(request: NextRequest) {
       availableSeats,
     } = body;
 
-    // Get experience ID from slug
-    const { data: exp, error: expErr } = await supabaseAdmin
+    const admin = getAdminClient();
+
+    const { data: exp, error: expErr } = await admin
       .from('experiences')
       .select('id')
       .eq('slug', experienceSlug)
       .single();
 
     if (expErr || !exp) {
-      return NextResponse.json({ error: 'Experience not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Experience not found', slug: experienceSlug, detail: expErr?.message }, { status: 404 });
     }
 
-    const { data: show, error: showErr } = await supabaseAdmin
+    const { data: show, error: showErr } = await admin
       .from('shows')
       .insert({
         experience_id: exp.id,
@@ -66,7 +81,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Experience slug required' }, { status: 400 });
   }
 
-  const { data: exp } = await supabaseAdmin
+  const admin = getAdminClient();
+  const pub = getPublicClient();
+
+  const { data: exp } = await admin
     .from('experiences')
     .select('id')
     .eq('slug', experienceSlug)
@@ -76,7 +94,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ shows: [] });
   }
 
-  const { data: shows, error } = await supabase
+  const { data: shows, error } = await pub
     .from('shows')
     .select('*')
     .eq('experience_id', exp.id)
