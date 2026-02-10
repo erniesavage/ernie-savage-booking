@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState, useRef, FormEvent } from 'react';
 import { useParams } from 'next/navigation';
 import { experienceData } from '@/lib/experiences';
 
@@ -45,20 +45,78 @@ export default function ExperiencePage() {
   // Payment state
   var [paymentStep, setPaymentStep] = useState<'form' | 'payment' | 'confirmed'>('form');
   var [clientSecret, setClientSecret] = useState('');
-  var [paymentIntentId, setPaymentIntentId] = useState('');
   var [cardError, setCardError] = useState('');
   var [processing, setProcessing] = useState(false);
 
-  // Card fields state
-  var [cardNumber, setCardNumber] = useState('');
-  var [cardExpiry, setCardExpiry] = useState('');
-  var [cardCvc, setCardCvc] = useState('');
-  var [cardZip, setCardZip] = useState('');
+  // Stripe refs
+  var stripeRef = useRef<any>(null);
+  var cardElementRef = useRef<any>(null);
+  var cardMountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!slug) return;
     fetchShows();
   }, [slug]);
+
+  // Load Stripe.js
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    // @ts-ignore
+    if (window.Stripe) {
+      // @ts-ignore
+      stripeRef.current = window.Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+      return;
+    }
+    var script = document.createElement('script');
+    script.src = 'https://js.stripe.com/v3/';
+    script.onload = () => {
+      // @ts-ignore
+      stripeRef.current = window.Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+    };
+    document.head.appendChild(script);
+  }, []);
+
+  // Mount card element when entering payment step
+  useEffect(() => {
+    if (paymentStep !== 'payment') return;
+    if (!stripeRef.current) return;
+    if (!cardMountRef.current) return;
+
+    // Small delay to ensure DOM is ready
+    var timer = setTimeout(() => {
+      if (!cardMountRef.current) return;
+      var elements = stripeRef.current.elements();
+      var card = elements.create('card', {
+        style: {
+          base: {
+            color: '#e8dcc8',
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: '16px',
+            '::placeholder': { color: '#5a4d3d' },
+          },
+          invalid: { color: '#d9534f' },
+        },
+      });
+      card.mount(cardMountRef.current);
+      cardElementRef.current = card;
+
+      card.on('change', (event: any) => {
+        if (event.error) {
+          setCardError(event.error.message);
+        } else {
+          setCardError('');
+        }
+      });
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      if (cardElementRef.current) {
+        cardElementRef.current.unmount();
+        cardElementRef.current = null;
+      }
+    };
+  }, [paymentStep]);
 
   async function fetchShows() {
     try {
@@ -124,7 +182,6 @@ export default function ExperiencePage() {
 
       if (data.clientSecret) {
         setClientSecret(data.clientSecret);
-        setPaymentIntentId(data.paymentIntentId);
         setPaymentStep('payment');
       } else {
         setCardError(data.error || 'Something went wrong. Please try again.');
@@ -139,67 +196,29 @@ export default function ExperiencePage() {
 
   async function handlePayment(e: FormEvent) {
     e.preventDefault();
-    if (!clientSecret) return;
+    if (!clientSecret || !stripeRef.current || !cardElementRef.current) return;
     setProcessing(true);
     setCardError('');
 
     try {
-      // Load Stripe
-      var stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-      if (!stripeKey) {
-        setCardError('Payment configuration error.');
-        setProcessing(false);
-        return;
-      }
-
-      // @ts-ignore - Stripe.js loaded via script tag
-      var stripeInstance = window.Stripe ? window.Stripe(stripeKey) : null;
-      if (!stripeInstance) {
-        setCardError('Payment system loading. Please wait a moment and try again.');
-        setProcessing(false);
-        return;
-      }
-
-      // Parse card details
-      var expParts = cardExpiry.split('/');
-      var expMonth = parseInt(expParts[0]);
-      var expYear = parseInt('20' + (expParts[1] || '').trim());
-
-      // Create payment method
-      var { paymentMethod, error: pmError } = await stripeInstance.createPaymentMethod({
-        type: 'card',
-        card: {
-          number: cardNumber.replace(/\s/g, ''),
-          exp_month: expMonth,
-          exp_year: expYear,
-          cvc: cardCvc,
-        },
-        billing_details: {
-          name: name,
-          email: email || undefined,
-          phone: phone || undefined,
-          address: { postal_code: cardZip || undefined },
+      var result = await stripeRef.current.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElementRef.current,
+          billing_details: {
+            name: name,
+            email: email || undefined,
+            phone: phone || undefined,
+          },
         },
       });
 
-      if (pmError) {
-        setCardError(pmError.message || 'Invalid card details.');
+      if (result.error) {
+        setCardError(result.error.message || 'Payment failed. Please try again.');
         setProcessing(false);
         return;
       }
 
-      // Confirm payment
-      var { paymentIntent, error: confirmError } = await stripeInstance.confirmCardPayment(clientSecret, {
-        payment_method: paymentMethod.id,
-      });
-
-      if (confirmError) {
-        setCardError(confirmError.message || 'Payment failed. Please try again.');
-        setProcessing(false);
-        return;
-      }
-
-      if (paymentIntent && paymentIntent.status === 'succeeded') {
+      if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
         setPaymentStep('confirmed');
       } else {
         setCardError('Payment was not completed. Please try again.');
@@ -210,23 +229,6 @@ export default function ExperiencePage() {
     } finally {
       setProcessing(false);
     }
-  }
-
-  function formatCardNumber(value: string) {
-    var v = value.replace(/\D/g, '').substring(0, 16);
-    var parts = [];
-    for (var i = 0; i < v.length; i += 4) {
-      parts.push(v.substring(i, i + 4));
-    }
-    return parts.join(' ');
-  }
-
-  function formatExpiry(value: string) {
-    var v = value.replace(/\D/g, '').substring(0, 4);
-    if (v.length > 2) {
-      return v.substring(0, 2) + ' / ' + v.substring(2);
-    }
-    return v;
   }
 
   if (!info) {
@@ -242,9 +244,6 @@ export default function ExperiencePage() {
 
   return (
     <main>
-      {/* Stripe.js script */}
-      <script src="https://js.stripe.com/v3/" async />
-
       {/* EXPERIENCE HERO */}
       <section className="exp-hero">
         <h1>{info.title}</h1>
@@ -378,60 +377,22 @@ export default function ExperiencePage() {
 
                 <form onSubmit={handlePayment}>
                   <div>
-                    <label className="form-label">Card Number</label>
-                    <input
-                      className="form-input"
-                      type="text"
-                      placeholder="1234 5678 9012 3456"
-                      value={cardNumber}
-                      onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
-                      maxLength={19}
-                      autoComplete="cc-number"
+                    <label className="form-label">Card Details</label>
+                    <div
+                      ref={cardMountRef}
+                      style={{
+                        padding: '14px 16px',
+                        background: 'rgba(20,17,13,0.8)',
+                        border: '1px solid rgba(196,165,116,0.15)',
+                        borderRadius: '0',
+                        minHeight: '44px',
+                      }}
                     />
-                  </div>
-
-                  <div className="form-row">
-                    <div>
-                      <label className="form-label">Expiry</label>
-                      <input
-                        className="form-input"
-                        type="text"
-                        placeholder="MM / YY"
-                        value={cardExpiry}
-                        onChange={(e) => setCardExpiry(formatExpiry(e.target.value))}
-                        maxLength={7}
-                        autoComplete="cc-exp"
-                      />
-                    </div>
-                    <div>
-                      <label className="form-label">CVC</label>
-                      <input
-                        className="form-input"
-                        type="text"
-                        placeholder="123"
-                        value={cardCvc}
-                        onChange={(e) => setCardCvc(e.target.value.replace(/\D/g, '').substring(0, 4))}
-                        maxLength={4}
-                        autoComplete="cc-csc"
-                      />
-                    </div>
-                    <div>
-                      <label className="form-label">Zip</label>
-                      <input
-                        className="form-input"
-                        type="text"
-                        placeholder="10001"
-                        value={cardZip}
-                        onChange={(e) => setCardZip(e.target.value.replace(/\D/g, '').substring(0, 5))}
-                        maxLength={5}
-                        autoComplete="postal-code"
-                      />
-                    </div>
                   </div>
 
                   {cardError && <p style={{ color: '#d9534f', fontSize: '14px', margin: '8px 0' }}>{cardError}</p>}
 
-                  <button className="checkout-btn" type="submit" disabled={processing || !cardNumber || !cardExpiry || !cardCvc}>
+                  <button className="checkout-btn" type="submit" disabled={processing} style={{ marginTop: '16px' }}>
                     {processing ? (
                       <><span className="spinner" />Processing Payment...</>
                     ) : (
