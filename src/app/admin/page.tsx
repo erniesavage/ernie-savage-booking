@@ -121,7 +121,7 @@ function AdminDashboard() {
                 <tr key={s.id} onClick={() => window.location.href = '/admin/guests?show_id=' + s.id} style={{ borderBottom: '1px solid rgba(196,165,116,0.08)', cursor: 'pointer' }}>
                   <td style={tdS}>{s.experience_title}</td>
                   <td style={tdS}>{new Date(s.show_date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</td>
-                  <td style={tdS}>{s.show_time}</td>
+                  <td style={tdS}>{formatTime(s.show_time)}</td>
                   <td style={tdS}>{s.venue_name}</td>
                   <td style={tdS}>{s.available_seats}</td>
                   <td style={tdS}>
@@ -184,4 +184,13 @@ function AdminDashboard() {
       )}
     </>
   );
+}
+
+function formatTime(timeStr: string) {
+  var parts = timeStr.split(':');
+  var hour = parseInt(parts[0]);
+  var min = parts[1];
+  var ampm = hour >= 12 ? 'PM' : 'AM';
+  var displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+  return displayHour + ':' + min + ' ' + ampm;
 }

@@ -35,6 +35,18 @@ export async function POST(request: NextRequest) {
     }
 
     try {
+      // Check for duplicate - prevent double booking from webhook retries
+      const { data: existing } = await supabaseAdmin
+        .from('bookings')
+        .select('id')
+        .eq('stripe_payment_intent_id', session.payment_intent as string)
+        .maybeSingle();
+
+      if (existing) {
+        console.log('Duplicate webhook ignored for payment:', session.payment_intent);
+        return NextResponse.json({ received: true });
+      }
+
       // Create the booking
       const { data: booking, error: bookingError } = await supabaseAdmin
         .from('bookings')
