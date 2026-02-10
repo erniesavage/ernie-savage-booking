@@ -80,7 +80,12 @@ export async function sendConfirmationEmail(booking: BookingDetails) {
 }
 
 export async function sendConfirmationSMS(booking: BookingDetails) {
-  if (!booking.customerPhone) return;
+  if (!booking.customerPhone) {
+    console.log('SMS skipped: no phone number');
+    return;
+  }
+
+  console.log('SMS attempting to send to:', booking.customerPhone);
 
   const formattedDate = new Date(booking.showDate).toLocaleDateString('en-US', {
     weekday: 'short',
@@ -101,11 +106,14 @@ export async function sendConfirmationSMS(booking: BookingDetails) {
     }
     phoneNumber = '+' + phoneNumber;
 
-    await twilio.messages.create({
+    console.log('SMS sending to formatted number:', phoneNumber, 'from:', process.env.TWILIO_PHONE_NUMBER);
+
+    var result = await twilio.messages.create({
       body: `🎵 Ernie Savage — You're in!\n\n${booking.experienceTitle}\n${formattedDate} at ${booking.showTime}\n${booking.venueName}\n\nTicket: ${booking.ticketCode}\n${booking.ticketCount} ticket(s)\n\nSee you there.`,
       from: process.env.TWILIO_PHONE_NUMBER,
       to: phoneNumber,
     });
+    console.log('SMS sent successfully, SID:', result.sid);
     return true;
   } catch (error) {
     console.error('SMS send error:', error);
