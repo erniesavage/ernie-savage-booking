@@ -51,7 +51,7 @@ async function processBooking(meta: Record<string, string>, paymentIntentId: str
       .select('available_seats')
       .eq('id', meta.show_id)
       .single()
-      .then(({ data: show }) => {
+      .then(({ data: show }: any) => {
         if (show) {
           supabaseAdmin
             .from('shows')
