@@ -5,10 +5,25 @@ import { useEffect, useState } from 'react';
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  function handleLogin() {
-    if (password) {
-      setAuthenticated(true);
+  async function handleLogin() {
+    if (!password) return;
+    setError('');
+    try {
+      var res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      var data = await res.json();
+      if (data.success) {
+        setAuthenticated(true);
+      } else {
+        setError('Incorrect password.');
+      }
+    } catch (err) {
+      setError('Something went wrong.');
     }
   }
 
@@ -25,6 +40,7 @@ export default function AdminPage() {
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
           />
+          {error && <p style={{ color: '#d9534f', fontSize: '14px', marginTop: '8px' }}>{error}</p>}
           <button className="checkout-btn" style={{ marginTop: '16px' }} onClick={handleLogin}>
             Login
           </button>
