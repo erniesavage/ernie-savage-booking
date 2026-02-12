@@ -50,6 +50,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer>
           <p className="footer-copy">© 2026 Ernie Savage. All rights reserved.</p>
           <p className="footer-company">Ernie Savage, LLC</p>
+          <p style={{ marginTop: '12px', fontSize: '12px' }}>
+            <Link href="/privacy" style={{ color: '#5a4d3d', textDecoration: 'none', marginRight: '16px' }}>Privacy Policy</Link>
+            <Link href="/terms" style={{ color: '#5a4d3d', textDecoration: 'none' }}>Terms &amp; Conditions</Link>
+          </p>
         </footer>
       </body>
     </html>
