@@ -323,9 +323,11 @@ footer {
   margin-bottom: 4px;
 }
 .show-seats {
-  font-size: 13px;
-  color: #5a4d3d;
+  font-size: 15px;
+  color: #c4a574;
   margin-top: 8px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 .show-seats.low { color: #b87333; }
 

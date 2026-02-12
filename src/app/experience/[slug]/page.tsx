@@ -219,6 +219,8 @@ export default function ExperiencePage() {
       }
 
       if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
+        // Update seat count locally
+        setShows(shows.map((s) => s.id === selectedShow!.id ? { ...s, available_seats: s.available_seats - tickets } : s));
         setPaymentStep('confirmed');
       } else {
         setCardError('Payment was not completed. Please try again.');
