@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+import Script from 'next/script';
+
 export const metadata: Metadata = {
   title: 'Ernie Savage | Intimate Music Experiences',
   description:
@@ -36,6 +38,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-GBFTTC1KRL" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GBFTTC1KRL');
+          `}
+        </Script>
+      </head>
       <body>
         <nav>
           <Link href="/" className="logo">
