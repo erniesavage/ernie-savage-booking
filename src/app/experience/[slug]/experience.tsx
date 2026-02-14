@@ -302,6 +302,22 @@ export default function ExperiencePage() {
               {show.status === 'sold_out' ? 'Sold Out' : show.available_seats + ' seats remaining'}
             </div>
 
+            {show.status !== 'sold_out' && selectedShow?.id !== show.id && (
+              <button
+                className="checkout-btn"
+                style={{ marginTop: '16px', width: '100%' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (paymentStep === 'form') {
+                    setSelectedShow(show);
+                    setTickets(1);
+                  }
+                }}
+              >
+                Purchase Seats
+              </button>
+            )}
+
             {/* BOOKING FORM */}
             {selectedShow?.id === show.id && show.status !== 'sold_out' && paymentStep === 'form' && (
               <div className="booking-form" onClick={(e) => e.stopPropagation()}>
