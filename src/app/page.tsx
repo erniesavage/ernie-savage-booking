@@ -72,13 +72,14 @@ export default function HomePage() {
           backgroundImage:
             "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.6) 30%, rgba(13,11,9,0.6) 70%, rgba(13,11,9,0.9) 100%), url('/images/what-to-expect-bg.jpg')",
           minHeight: 'auto',
-          padding: '120px 24px',
+          padding: '60px 24px 120px',
+          marginTop: '0',
         }}
       >
         <div className="hero-content">
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>What to Expect</h2>
           <p className="hero-main-text">8&ndash;10 guests seated in a private NYC studio</p>
-          <p className="hero-main-text">75&ndash;90 minutes of live piano, voice, and story</p>
+          <p className="hero-main-text">75&ndash;90 minutes of live piano/guitar, voice, and story</p>
           <p className="hero-main-text">Songs played without rush or amplification spectacle</p>
           <p className="hero-main-text">Space for silence</p>
           <p className="hero-main-text" style={{ marginTop: '24px' }}>No background noise. No distraction.</p>

@@ -22,7 +22,7 @@ export const experienceData: Record<string, ExperienceInfo> = {
       'An intimate songwriter salon featuring classic ballads, forgotten gems, and personal stories — performed up close, without spectacle. Just piano, guitar, voice, and the songs that deserve to be heard the way they were written.',
       "This is not a concert. It's more like being invited backstage into a songwriter's living room, where every song has a story and every story leads to the next song. Limited to 10 seats. No distractions — just music the way it was meant to be experienced.",
     ],
-    image: '/images/secret-ballads.jpg',
+    image: '/images/secret-ballads-new.jpg',
     color: '#c4a574',
   },
   'everybody-knows-this-song': {
