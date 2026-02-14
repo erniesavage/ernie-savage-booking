@@ -133,15 +133,9 @@ export default function HomePage() {
               <p>
                 A long-time live performer on piano, guitar, and voice, Ernie has appeared regularly in New York and beyond, and has written and produced music for television and media heard on major broadcast networks.
               </p>
-              <p>
-                These experiences grew out of a simple observation:
-              </p>
               <p style={{ fontStyle: 'italic', color: '#c4a574' }}>
-                Some music only works when it&apos;s this close.
+                Some music works best when it&apos;s up close and intimate.
               </p>
-            </div>
-            <div style={{ marginTop: '28px' }}>
-              <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>Learn More &amp; Reserve &rarr;</Link>
             </div>
           </div>
         </div>
