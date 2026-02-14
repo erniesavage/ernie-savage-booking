@@ -336,6 +336,11 @@ export default function ExperiencePage() {
                       </div>
                     ))}
                   </div>
+                  {(contactPref === 'sms' || contactPref === 'both') && (
+                    <p style={{ fontSize: '11px', color: '#5a4d3d', marginTop: '8px', lineHeight: 1.5 }}>
+                      By selecting SMS, you consent to receive a one-time booking confirmation text message. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No recurring messages. See our <a href="/privacy" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Privacy Policy</a> and <a href="/terms" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Terms</a>.
+                    </p>
+                  )}
                 </div>
 
                 <div>
