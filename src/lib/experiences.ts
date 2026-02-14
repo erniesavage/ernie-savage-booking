@@ -70,7 +70,7 @@ export const experienceData: Record<string, ExperienceInfo> = {
     fullDesc: [
       "Bring an intimate musical experience into your own home or private space. A solo piano/guitar and vocal performance. Custom curated for celebrations, dinner parties, or any occasion that deserves real music, we'll work together to create the perfect experience for you and your guests.",
     ],
-    image: '/images/private-concerts.jpg',
+    image: '/images/private-concerts-new.jpg',
     color: '#96784a',
   },
 };

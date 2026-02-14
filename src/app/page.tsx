@@ -65,41 +65,56 @@ export default function HomePage() {
       </section>
 
       {/* WHAT TO EXPECT */}
-      <section className="about" id="expect" style={{ borderBottom: '1px solid rgba(196,165,116,0.1)' }}>
-        <div className="about-content" style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
-          <div className="about-title">What to Expect</div>
-          <div className="about-text" style={{ textAlign: 'center' }}>
-            <p>8&ndash;10 guests seated in a private NYC studio</p>
-            <p>75&ndash;90 minutes of live piano, voice, and story</p>
-            <p>Songs played without rush or amplification spectacle</p>
-            <p>Space for silence</p>
-            <p style={{ marginTop: '20px' }}>No background noise. No distraction.</p>
-            <p style={{ marginTop: '20px' }}>This is not a concert in the traditional sense.</p>
-            <p>It is a listening experience.</p>
-            <div style={{ marginTop: '28px' }}>
-              <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>View Upcoming Dates &rarr;</Link>
-            </div>
+      <section
+        className="hero"
+        id="expect"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.6) 30%, rgba(13,11,9,0.6) 70%, rgba(13,11,9,0.9) 100%), url('/images/what-to-expect-bg.jpg')",
+          minHeight: 'auto',
+          padding: '120px 24px',
+        }}
+      >
+        <div className="hero-content">
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>What to Expect</h2>
+          <p className="hero-main-text">8&ndash;10 guests seated in a private NYC studio</p>
+          <p className="hero-main-text">75&ndash;90 minutes of live piano, voice, and story</p>
+          <p className="hero-main-text">Songs played without rush or amplification spectacle</p>
+          <p className="hero-main-text">Space for silence</p>
+          <p className="hero-main-text" style={{ marginTop: '24px' }}>No background noise. No distraction.</p>
+          <p className="hero-main-text" style={{ marginTop: '24px' }}>This is not a concert in the traditional sense.</p>
+          <p className="hero-main-text">It is a listening experience.</p>
+          <div style={{ marginTop: '32px' }}>
+            <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>View Upcoming Dates &rarr;</Link>
           </div>
         </div>
       </section>
 
       {/* WHY IT'S SMALL */}
-      <section className="about" style={{ borderBottom: '1px solid rgba(196,165,116,0.1)' }}>
-        <div className="about-content" style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
-          <div className="about-text" style={{ textAlign: 'center' }}>
-            <p>This experience is intentionally limited to 8&ndash;10 people because the room changes when it grows larger.</p>
-            <p style={{ marginTop: '20px' }}>
-              Listening changes.<br />
-              The music changes.<br />
-              The silence matters.
-            </p>
-            <p style={{ marginTop: '20px' }}>
-              If you&apos;re looking for a show, this may not be it.<br />
-              If you&apos;re looking to be present in the room while something real happens — it is.
-            </p>
-            <div style={{ marginTop: '28px' }}>
-              <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>Reserve a Seat &rarr;</Link>
-            </div>
+      <section
+        className="hero"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.6) 30%, rgba(13,11,9,0.6) 70%, rgba(13,11,9,0.9) 100%), url('/images/why-small-bg.jpg')",
+          minHeight: 'auto',
+          padding: '120px 24px',
+        }}
+      >
+        <div className="hero-content">
+          <p className="hero-main-text">
+            This experience is intentionally limited to 8&ndash;10 people because the room changes when it grows larger.
+          </p>
+          <p className="hero-main-text" style={{ marginTop: '24px' }}>
+            Listening changes.<br />
+            The music changes.<br />
+            The silence matters.
+          </p>
+          <p className="hero-main-text" style={{ marginTop: '24px' }}>
+            If you&apos;re looking for a show, this may not be it.<br />
+            If you&apos;re looking to be present in the room while something real happens — it is.
+          </p>
+          <div style={{ marginTop: '32px' }}>
+            <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>Reserve a Seat &rarr;</Link>
           </div>
         </div>
       </section>
@@ -129,14 +144,6 @@ export default function HomePage() {
             </div>
             <div style={{ marginTop: '28px' }}>
               <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>Learn More &amp; Reserve &rarr;</Link>
-            </div>
-            <div className="quote-block">
-              <p className="quote-text">
-                &quot;I think he&apos;s been recognized as a genius, rightfully so... The
-                beauty of his songs are in the juxtaposition of the beauty and the darkness.
-                He&apos;s like the boy next door, who secretly is a super hero!&quot;
-              </p>
-              <p className="quote-attr">&mdash; @SRMerola, YouTube</p>
             </div>
           </div>
         </div>
