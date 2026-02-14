@@ -40,9 +40,6 @@ export default function HomePage() {
           <p className="hero-main-text" style={{ marginTop: '20px' }}>
             Seats are limited to 8&ndash;10 guests.
           </p>
-          <div style={{ marginTop: '28px' }}>
-            <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>Reserve a Seat &rarr;</Link>
-          </div>
         </div>
       </section>
 
@@ -72,7 +69,7 @@ export default function HomePage() {
           backgroundImage:
             "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.6) 30%, rgba(13,11,9,0.6) 70%, rgba(13,11,9,0.9) 100%), url('/images/what-to-expect-bg.jpg')",
           minHeight: 'auto',
-          padding: '60px 24px 120px',
+          padding: '0px 24px 120px',
           marginTop: '0',
         }}
       >
@@ -86,7 +83,7 @@ export default function HomePage() {
           <p className="hero-main-text" style={{ marginTop: '24px' }}>This is not a concert in the traditional sense.</p>
           <p className="hero-main-text">It is a listening experience.</p>
           <div style={{ marginTop: '32px' }}>
-            <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>View Upcoming Dates &rarr;</Link>
+            <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>View Experiences &rarr;</Link>
           </div>
         </div>
       </section>
@@ -115,7 +112,7 @@ export default function HomePage() {
             If you&apos;re looking to be present in the room while something real happens — it is.
           </p>
           <div style={{ marginTop: '32px' }}>
-            <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>Reserve a Seat &rarr;</Link>
+            <Link href="/#experiences" className="card-link" style={{ fontSize: '16px' }}>View Experiences &rarr;</Link>
           </div>
         </div>
       </section>
