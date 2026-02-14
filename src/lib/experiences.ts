@@ -3,6 +3,8 @@ export interface ExperienceInfo {
   title: string;
   subtitle: string;
   cardDesc: string;
+  cardDesc2?: string;
+  cardCta: string;
   fullDesc: string[];
   image: string;
   color: string;
@@ -14,7 +16,8 @@ export const experienceData: Record<string, ExperienceInfo> = {
     title: 'Secret Ballads',
     subtitle: 'An intimate songwriter salon',
     cardDesc:
-      'An intimate songwriter salon featuring classic ballads, forgotten gems, and personal stories — performed up close.',
+      'Sensitive songs — both classic and forgotten — played close enough to be handled with care.',
+    cardCta: 'Reserve a Seat',
     fullDesc: [
       'An intimate songwriter salon featuring classic ballads, forgotten gems, and personal stories — performed up close, without spectacle. Just piano, guitar, voice, and the songs that deserve to be heard the way they were written.',
       "This is not a concert. It's more like being invited backstage into a songwriter's living room, where every song has a story and every story leads to the next song. Limited to 10 seats. No distractions — just music the way it was meant to be experienced.",
@@ -27,7 +30,10 @@ export const experienceData: Record<string, ExperienceInfo> = {
     title: 'Everybody Knows This Song',
     subtitle: 'The Songs That Lived on the Radio — and Still Live in Us',
     cardDesc:
-      "A live, piano-driven journey through the golden age of FM radio: These are songs that didn't just play on the radio — they stayed there. They followed us in cars, kitchens, dorm rooms, and late nights. If you know one, you probably know them all. Everybody knows this song.",
+      "Songs you've lived with for years — heard close enough to feel why they stayed.",
+    cardDesc2:
+      "These are the songs that followed us in cars, kitchens, dorm rooms, and late nights. In a small room, they land differently.",
+    cardCta: 'Reserve a Seat',
     fullDesc: [
       'A live, piano-driven journey through the golden age of FM radio. These are the songs everyone knows — the ones that soundtracked road trips, heartbreaks, and Saturday mornings.',
       "Performed with stories, context, and feeling you won't get from a playlist. These are songs that didn't just play on the radio — they stayed there. They followed us in cars, kitchens, dorm rooms, and late nights. If you know one, you probably know them all.",
@@ -40,7 +46,10 @@ export const experienceData: Record<string, ExperienceInfo> = {
     title: 'The Heart of Harry',
     subtitle: 'The simple, stunning joy of Harry Nilsson',
     cardDesc:
-      'He was the wild one with the golden voice. But behind the chaos lived songs that were fragile, tender, and full of sweetness. A rare evening of truth, beauty, and melody.',
+      'The music of Harry Nilsson — played in the spirit in which it was written: vulnerable, exposed, and without armor.',
+    cardDesc2:
+      'A small-room piano and voice experience exploring the beauty and fragility beneath the surface.',
+    cardCta: 'Reserve a Seat',
     fullDesc: [
       'He was the wild one with the golden voice. But behind the chaos lived songs that were fragile, tender, and full of sweetness.',
       "In this powerful solo performance, Ernie Savage brings Harry Nilsson's most emotional songs back to life — stripped down, reimagined, and deeply felt.",
@@ -54,7 +63,10 @@ export const experienceData: Record<string, ExperienceInfo> = {
     title: 'Private & In-Home Concerts',
     subtitle: 'Bring the experience to your space',
     cardDesc:
-      'Bring an intimate musical experience into your own home or private space. A solo piano/guitar and vocal performance custom curated for any occasion that deserves real music.',
+      'The same small-room experience, hosted in your home or personal space.',
+    cardDesc2:
+      'For private gatherings, salons, and curated evenings.',
+    cardCta: 'Inquire About Hosting',
     fullDesc: [
       "Bring an intimate musical experience into your own home or private space. A solo piano/guitar and vocal performance. Custom curated for celebrations, dinner parties, or any occasion that deserves real music, we'll work together to create the perfect experience for you and your guests.",
     ],
