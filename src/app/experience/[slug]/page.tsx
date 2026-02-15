@@ -35,20 +35,17 @@ export default function ExperiencePage() {
   var [loading, setLoading] = useState(true);
   var [submitting, setSubmitting] = useState(false);
 
-  // Form state
   var [name, setName] = useState('');
   var [email, setEmail] = useState('');
   var [phone, setPhone] = useState('');
   var [contactPref, setContactPref] = useState('both');
   var [tickets, setTickets] = useState(1);
 
-  // Payment state
   var [paymentStep, setPaymentStep] = useState<'form' | 'payment' | 'confirmed'>('form');
   var [clientSecret, setClientSecret] = useState('');
   var [cardError, setCardError] = useState('');
   var [processing, setProcessing] = useState(false);
 
-  // Stripe refs
   var stripeRef = useRef<any>(null);
   var cardElementRef = useRef<any>(null);
   var cardMountRef = useRef<HTMLDivElement>(null);
@@ -58,7 +55,6 @@ export default function ExperiencePage() {
     fetchShows();
   }, [slug]);
 
-  // Load Stripe.js
   useEffect(() => {
     if (typeof window === 'undefined') return;
     // @ts-ignore
@@ -76,13 +72,11 @@ export default function ExperiencePage() {
     document.head.appendChild(script);
   }, []);
 
-  // Mount card element when entering payment step
   useEffect(() => {
     if (paymentStep !== 'payment') return;
     if (!stripeRef.current) return;
     if (!cardMountRef.current) return;
 
-    // Small delay to ensure DOM is ready
     var timer = setTimeout(() => {
       if (!cardMountRef.current) return;
       var elements = stripeRef.current.elements();
@@ -99,13 +93,9 @@ export default function ExperiencePage() {
       });
       card.mount(cardMountRef.current);
       cardElementRef.current = card;
-
       card.on('change', (event: any) => {
-        if (event.error) {
-          setCardError(event.error.message);
-        } else {
-          setCardError('');
-        }
+        if (event.error) setCardError(event.error.message);
+        else setCardError('');
       });
     }, 100);
 
@@ -179,7 +169,6 @@ export default function ExperiencePage() {
       });
 
       var data = await res.json();
-
       if (data.clientSecret) {
         setClientSecret(data.clientSecret);
         setPaymentStep('payment');
@@ -219,7 +208,6 @@ export default function ExperiencePage() {
       }
 
       if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
-        // Update seat count locally
         setShows(shows.map((s) => s.id === selectedShow!.id ? { ...s, available_seats: s.available_seats - tickets } : s));
         setPaymentStep('confirmed');
       } else {
@@ -245,19 +233,15 @@ export default function ExperiencePage() {
   }
 
   // ============================================================
-  // BOOKING CTA COMPONENT (reused across sections)
+  // BOOKING CARDS (reused)
   // ============================================================
   function renderShowCards() {
     return (
       <>
         {loading && <p className="no-shows-msg">Loading dates...</p>}
-
         {!loading && shows.length === 0 && (
-          <p className="no-shows-msg">
-            No dates currently scheduled. Check back soon — new experiences are added regularly.
-          </p>
+          <p className="no-shows-msg">No dates currently scheduled. Check back soon — new experiences are added regularly.</p>
         )}
-
         {shows.map((show) => (
           <div
             key={show.id}
@@ -283,25 +267,13 @@ export default function ExperiencePage() {
               {show.venue_name}
               {show.venue_address && (' \u00B7 ' + show.venue_address)}
             </div>
-            <div className="show-price">
-              {formatPrice(getPrice(show))} per person
-            </div>
+            <div className="show-price">{formatPrice(getPrice(show))} per person</div>
             <div className={'show-seats' + (show.available_seats <= 3 ? ' low' : '')}>
               {show.status === 'sold_out' ? 'Sold Out' : show.available_seats + ' seats remaining'}
             </div>
 
             {show.status !== 'sold_out' && selectedShow?.id !== show.id && (
-              <button
-                className="checkout-btn"
-                style={{ marginTop: '16px', width: '100%' }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (paymentStep === 'form') {
-                    setSelectedShow(show);
-                    setTickets(1);
-                  }
-                }}
-              >
+              <button className="checkout-btn" style={{ marginTop: '16px', width: '100%' }} onClick={(e) => { e.stopPropagation(); if (paymentStep === 'form') { setSelectedShow(show); setTickets(1); } }}>
                 Purchase Seats
               </button>
             )}
@@ -314,12 +286,10 @@ export default function ExperiencePage() {
                   <span style={{ fontSize: '11px', color: '#5a4d3d' }}>BOOK YOUR SPOT</span>
                   <span className="divider-line" />
                 </div>
-
                 <div>
                   <label className="form-label">Your Name *</label>
                   <input className="form-input" type="text" placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
-
                 <div className="form-row">
                   <div>
                     <label className="form-label">Email</label>
@@ -330,7 +300,6 @@ export default function ExperiencePage() {
                     <input className="form-input" type="tel" placeholder="(555) 555-5555" value={phone} onChange={(e) => setPhone(e.target.value)} />
                   </div>
                 </div>
-
                 <div>
                   <label className="form-label">Send confirmation via</label>
                   <div className="contact-options">
@@ -346,7 +315,6 @@ export default function ExperiencePage() {
                     </p>
                   )}
                 </div>
-
                 <div>
                   <label className="form-label">Tickets</label>
                   <div className="ticket-selector">
@@ -359,15 +327,9 @@ export default function ExperiencePage() {
                     </span>
                   </div>
                 </div>
-
                 {cardError && <p style={{ color: '#d9534f', fontSize: '14px', margin: '8px 0' }}>{cardError}</p>}
-
                 <button className="checkout-btn" disabled={!name || submitting} onClick={handleReserve}>
-                  {submitting ? (
-                    <><span className="spinner" />Processing...</>
-                  ) : (
-                    'Continue to Payment \u2014 ' + formatPrice(getPrice(show) * tickets)
-                  )}
+                  {submitting ? (<><span className="spinner" />Processing...</>) : ('Continue to Payment \u2014 ' + formatPrice(getPrice(show) * tickets))}
                 </button>
               </div>
             )}
@@ -380,42 +342,20 @@ export default function ExperiencePage() {
                   <span style={{ fontSize: '11px', color: '#5a4d3d' }}>PAYMENT</span>
                   <span className="divider-line" />
                 </div>
-
                 <div style={{ padding: '16px', background: 'rgba(196,165,116,0.05)', border: '1px solid rgba(196,165,116,0.15)', marginBottom: '16px' }}>
                   <div style={{ fontSize: '14px', color: '#e8dcc8' }}>{name}</div>
                   <div style={{ fontSize: '13px', color: '#8a7d6d' }}>{tickets} ticket{tickets > 1 ? 's' : ''} &middot; {formatPrice(getPrice(show) * tickets)}</div>
                 </div>
-
                 <form onSubmit={handlePayment}>
                   <div>
                     <label className="form-label">Card Details</label>
-                    <div
-                      ref={cardMountRef}
-                      style={{
-                        padding: '14px 16px',
-                        background: 'rgba(20,17,13,0.8)',
-                        border: '1px solid rgba(196,165,116,0.15)',
-                        borderRadius: '0',
-                        minHeight: '44px',
-                      }}
-                    />
+                    <div ref={cardMountRef} style={{ padding: '14px 16px', background: 'rgba(20,17,13,0.8)', border: '1px solid rgba(196,165,116,0.15)', borderRadius: '0', minHeight: '44px' }} />
                   </div>
-
                   {cardError && <p style={{ color: '#d9534f', fontSize: '14px', margin: '8px 0' }}>{cardError}</p>}
-
                   <button className="checkout-btn" type="submit" disabled={processing} style={{ marginTop: '16px' }}>
-                    {processing ? (
-                      <><span className="spinner" />Processing Payment...</>
-                    ) : (
-                      'Pay ' + formatPrice(getPrice(show) * tickets)
-                    )}
+                    {processing ? (<><span className="spinner" />Processing Payment...</>) : ('Pay ' + formatPrice(getPrice(show) * tickets))}
                   </button>
-
-                  <button
-                    type="button"
-                    onClick={() => { setPaymentStep('form'); setCardError(''); }}
-                    style={{ background: 'none', border: 'none', color: '#8a7d6d', fontSize: '13px', cursor: 'pointer', marginTop: '12px', width: '100%', textAlign: 'center' }}
-                  >
+                  <button type="button" onClick={() => { setPaymentStep('form'); setCardError(''); }} style={{ background: 'none', border: 'none', color: '#8a7d6d', fontSize: '13px', cursor: 'pointer', marginTop: '12px', width: '100%', textAlign: 'center' }}>
                     &larr; Back to details
                   </button>
                 </form>
@@ -462,125 +402,242 @@ export default function ExperiencePage() {
         <section
           className="hero"
           style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(13,11,9,0.6) 0%, rgba(13,11,9,0.35) 30%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.95) 100%), url('/images/Piano_room_desktop_hero_no_mixer_EX.jpg')",
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.5) 0%, rgba(13,11,9,0.3) 30%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.95) 100%), url('/images/behind ernie.jpeg')",
             minHeight: 'auto',
-            padding: '120px 24px',
+            padding: '140px 24px 80px',
           }}
         >
           <div className="hero-content">
-            <h1>Secret Ballads</h1>
-            <p className="hero-main-text" style={{ marginTop: '16px', fontSize: '20px' }}>
-              An intimate evening of classic and forgotten songs — performed up close.
+            <h1 style={{ fontSize: '48px', marginBottom: '16px' }}>Secret Ballads</h1>
+            <p className="hero-main-text" style={{ fontSize: '20px', maxWidth: '600px' }}>
+              An intimate live piano concert of classic and forgotten songs — performed in a private Manhattan studio.
             </p>
-            <p style={{ marginTop: '28px', color: '#c4a574', fontSize: '20px', letterSpacing: '0.05em', fontFamily: "'Playfair Display', serif" }}>
-              $125 per guest &bull; Limited to 10 seats
+            <p style={{ marginTop: '20px', color: '#b8a88a', fontSize: '15px', fontStyle: 'italic' }}>
+              With singer-songwriter Ernie Savage
             </p>
-            <div style={{ marginTop: '28px' }}>
-              <a href="#reserve" className="card-link" style={{ fontSize: '18px', letterSpacing: '0.06em' }}>Reserve Your Seat &rarr;</a>
+            <p style={{ marginTop: '8px', color: '#8a7d6d', fontSize: '14px', maxWidth: '500px', lineHeight: 1.6 }}>
+              Award-winning songwriter and NYC-based live performer known for intimate, salon-style musical evenings.
+            </p>
+            <div style={{ marginTop: '32px', display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <span style={{ color: '#c4a574', fontSize: '14px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>90-minute live performance</span>
+              <span style={{ color: '#5a4d3d' }}>&bull;</span>
+              <span style={{ color: '#c4a574', fontSize: '14px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Limited to 10 guests</span>
+              <span style={{ color: '#5a4d3d' }}>&bull;</span>
+              <span style={{ color: '#c4a574', fontSize: '14px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>$125 per person</span>
+            </div>
+            <div style={{ marginTop: '28px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="#reserve" className="checkout-btn" style={{ display: 'inline-block', padding: '14px 36px', fontSize: '16px', textDecoration: 'none' }}>Reserve Your Seat</a>
             </div>
           </div>
         </section>
 
-        {/* 2. SHORT EXPERIENCE PROMISE */}
-        <section style={{ padding: '80px 24px', maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontSize: '22px', fontStyle: 'italic', color: '#c4a574', lineHeight: 1.6, marginBottom: '32px' }}>
-            Some songs don&apos;t shout. They stay with you quietly.
-          </p>
-          <p className="hero-main-text" style={{ marginBottom: '20px' }}>
-            Secret Ballads is an intimate songwriter salon — built around songs that shaped us. Some are well known. Some were quietly overlooked. All of them carry emotional weight.
-          </p>
-          <p className="hero-main-text">
-            This is not a concert hall. It&apos;s a small room. Real people. Real listening.
-          </p>
-        </section>
-
-        {/* 3. FIRST CTA — AVAILABLE DATES */}
+        {/* PURCHASE BOX — JUST BELOW HERO */}
         <section className="shows-section" id="reserve">
           <div className="shows-title">Available Dates</div>
           {renderShowCards()}
         </section>
 
-        {/* 4. VIDEO SECTION */}
-        <section style={{ padding: '80px 24px', maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
+        {/* 2. VIDEO SECTION */}
+        <section style={{ padding: '80px 24px', textAlign: 'center', background: '#0d0b09' }}>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '32px', color: '#e8dcc8' }}>
-            See What an Evening Feels Like
+            See What Secret Ballads Feels Like
           </h2>
-          <div style={{ background: 'rgba(20,17,13,0.6)', border: '1px solid rgba(196,165,116,0.15)', padding: '60px 24px', color: '#5a4d3d', fontSize: '14px' }}>
+          <div style={{ maxWidth: '700px', margin: '0 auto', background: 'rgba(20,17,13,0.6)', border: '1px solid rgba(196,165,116,0.15)', padding: '60px 24px', color: '#5a4d3d', fontSize: '14px' }}>
             Video coming soon
+          </div>
+          <p className="hero-main-text" style={{ marginTop: '24px', fontStyle: 'italic' }}>
+            An intimate room. A grand piano or guitar. Songs that still live inside you.
+          </p>
+          <div style={{ marginTop: '24px' }}>
+            <a href="#reserve" className="card-link" style={{ fontSize: '16px' }}>Reserve Your Seat &rarr;</a>
           </div>
         </section>
 
-        {/* 5. WHAT THIS EVENING FEELS LIKE */}
+        {/* 3. WHAT THIS EXPERIENCE IS */}
         <section
           className="hero"
           style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.55) 30%, rgba(13,11,9,0.55) 70%, rgba(13,11,9,0.9) 100%), url('/images/guitar_room_crop color_no_mixer_EX.jpg')",
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.7) 30%, rgba(13,11,9,0.7) 70%, rgba(13,11,9,0.92) 100%), url('/images/Piano hands warm color_EX.png')",
             minHeight: 'auto',
             padding: '100px 24px',
           }}
         >
-          <div className="hero-content">
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
-              What This Evening Feels Like
+          <div className="hero-content" style={{ maxWidth: '700px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '36px', color: '#e8dcc8' }}>
+              An Evening Inside the Music
             </h2>
-            <p className="hero-main-text">The kind of room where you can hear breath between phrases</p>
-            <p className="hero-main-text">Stories behind songs you thought you already knew</p>
-            <p className="hero-main-text">Unexpected emotional turns</p>
-            <p className="hero-main-text">Silence that feels shared — not empty</p>
+            <p className="hero-main-text" style={{ marginBottom: '20px' }}>
+              Secret Ballads is a live solo piano or guitar and vocal performance of timeless songs — some iconic, some nearly forgotten — brought back to life in an intimate Manhattan studio setting.
+            </p>
+            <p className="hero-main-text" style={{ marginBottom: '20px' }}>
+              This is not a bar show. It&apos;s not a loud venue. It&apos;s a private musical gathering.
+            </p>
+            <p className="hero-main-text" style={{ marginBottom: '16px' }}>
+              Between songs, Ernie shares the stories behind the music:
+            </p>
+            <p className="hero-main-text">Why the song was written</p>
+            <p className="hero-main-text">What was happening in the artist&apos;s life</p>
+            <p className="hero-main-text">The lyrical moments most people overlook</p>
+            <p className="hero-main-text">The emotional meaning that still resonates today</p>
+            <p className="hero-main-text" style={{ marginTop: '24px', fontStyle: 'italic', color: '#c4a574' }}>
+              You won&apos;t just hear the music. You&apos;ll understand why it endures.
+            </p>
           </div>
         </section>
 
-        {/* 6. WHAT YOU'LL EXPERIENCE */}
-        <section style={{ padding: '80px 24px', maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
-            What You&apos;ll Experience
-          </h2>
-          <p className="hero-main-text">75 minutes of live piano/guitar and vocal performance</p>
-          <p className="hero-main-text">Personal storytelling woven between songs</p>
-          <p className="hero-main-text">An audience of 8&ndash;10 guests</p>
-          <p className="hero-main-text">No amplification beyond what the room requires</p>
-          <p className="hero-main-text">A rare, human-scale musical gathering</p>
+        {/* 4. WHAT TO EXPECT */}
+        <section style={{ padding: '80px 24px' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8', textAlign: 'center' }}>
+              What to Expect
+            </h2>
+            <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+              <div style={{ flex: '1 1 320px' }}>
+                <p className="hero-main-text" style={{ marginBottom: '12px' }}>90-minute live solo performance</p>
+                <p className="hero-main-text" style={{ marginBottom: '12px' }}>Piano and/or guitar with vocal</p>
+                <p className="hero-main-text" style={{ marginBottom: '12px' }}>Intimate Manhattan studio setting</p>
+                <p className="hero-main-text" style={{ marginBottom: '12px' }}>8&ndash;10 guests maximum</p>
+                <p className="hero-main-text" style={{ marginBottom: '12px' }}>Storytelling woven between songs</p>
+                <p className="hero-main-text">Q&amp;A and informal conversation at the end</p>
+              </div>
+              <div style={{ flex: '1 1 320px' }}>
+                <img
+                  src="/images/Piano_room_desktop_hero_no_mixer_EX.jpg"
+                  alt="Private piano studio"
+                  style={{ width: '100%', height: 'auto', border: '1px solid rgba(196,165,116,0.1)' }}
+                />
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* 7. WHO THIS IS FOR */}
-        <section style={{ padding: '60px 24px 80px', maxWidth: '700px', margin: '0 auto', textAlign: 'center', borderTop: '1px solid rgba(196,165,116,0.1)' }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
-            Who This Is For
-          </h2>
-          <p className="hero-main-text">Listeners who value depth over volume</p>
-          <p className="hero-main-text">Couples looking for something meaningful</p>
-          <p className="hero-main-text">Music lovers who miss when songs felt personal</p>
+        {/* 5. WHY SMALL MATTERS */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.6) 30%, rgba(13,11,9,0.6) 70%, rgba(13,11,9,0.9) 100%), url('/images/Just 2 people only.jpg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '650px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '36px', color: '#e8dcc8' }}>
+              Why Only 8&ndash;10 Guests?
+            </h2>
+            <p className="hero-main-text" style={{ marginBottom: '24px', fontStyle: 'italic', color: '#c4a574' }}>
+              Because music changes when the room gets quiet.
+            </p>
+            <p className="hero-main-text" style={{ marginBottom: '16px' }}>In a small gathering:</p>
+            <p className="hero-main-text">You hear every lyric.</p>
+            <p className="hero-main-text">You feel every dynamic shift.</p>
+            <p className="hero-main-text">You see the hands on the keys.</p>
+            <p className="hero-main-text">The performance feels personal — not projected.</p>
+            <p className="hero-main-text" style={{ marginTop: '24px' }}>
+              Secret Ballads is designed for depth — not volume.
+            </p>
+            <p className="hero-main-text" style={{ marginTop: '16px', fontStyle: 'italic', color: '#c4a574' }}>
+              When the room fills, the evening begins.
+            </p>
+          </div>
         </section>
 
-        {/* 8. LOGISTICS + PRICE */}
-        <section style={{ padding: '60px 24px 80px', maxWidth: '700px', margin: '0 auto', textAlign: 'center', borderTop: '1px solid rgba(196,165,116,0.1)' }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
-            Details
-          </h2>
-          <p className="hero-main-text">Duration: 90 minutes</p>
-          <p className="hero-main-text">Capacity: 10 guests max</p>
-          <p className="hero-main-text">Location: Manhattan, NYC studio (address noted with your booking date selection)</p>
-          <p className="hero-main-text" style={{ color: '#c4a574' }}>Price: $125 per guest</p>
+        {/* 6. WHO IS ERNIE SAVAGE? */}
+        <section style={{ padding: '80px 24px' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8', textAlign: 'center' }}>
+              About Ernie Savage
+            </h2>
+            <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+              <div style={{ flex: '0 0 280px' }}>
+                <img
+                  src="/images/Ernie Piano looking at keys.jpeg"
+                  alt="Ernie Savage"
+                  style={{ width: '100%', height: 'auto', border: '1px solid rgba(196,165,116,0.1)' }}
+                />
+              </div>
+              <div style={{ flex: '1 1 320px' }}>
+                <p className="hero-main-text" style={{ marginBottom: '16px' }}>
+                  Ernie Savage is a Manhattan-based pianist, guitarist, vocalist, and songwriter known for intimate, story-driven performances that blend musical precision with emotional depth.
+                </p>
+                <p className="hero-main-text" style={{ marginBottom: '16px' }}>
+                  His work draws from the golden era of singer-songwriters, orchestral pop, and deeply lyrical ballads — reimagined through solo piano or guitar and voice.
+                </p>
+                <p className="hero-main-text" style={{ marginBottom: '16px' }}>
+                  For decades, Ernie has created salon-style musical evenings that feel personal, intelligent, and immersive.
+                </p>
+                <p className="hero-main-text" style={{ fontStyle: 'italic', color: '#c4a574' }}>
+                  Secret Ballads is the culmination of that approach — performed in one of Manhattan&apos;s most intimate studio environments.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. THE ROOM EXPERIENCE */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.55) 30%, rgba(13,11,9,0.55) 70%, rgba(13,11,9,0.9) 100%), url('/images/private-concerts-new.jpg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '650px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '24px', color: '#e8dcc8' }}>
+              An Evening That Feels Personal
+            </h2>
+            <p className="hero-main-text" style={{ marginBottom: '16px' }}>
+              Guests don&apos;t just listen. They lean in. They remember.
+            </p>
+            <p className="hero-main-text">
+              This is music experienced at conversational distance — where every note matters and every lyric lands.
+            </p>
+          </div>
+        </section>
+
+        {/* 8. DETAILS */}
+        <section style={{ padding: '80px 24px', textAlign: 'center' }}>
+          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
+              Experience Details
+            </h2>
+            <p className="hero-main-text">Duration: 90 minutes</p>
+            <p className="hero-main-text">Location: Manhattan, New York City</p>
+            <p className="hero-main-text">Capacity: 8&ndash;10 guests</p>
+            <p className="hero-main-text" style={{ color: '#c4a574' }}>Price: $125 per guest</p>
+            <p className="hero-main-text">Setting: Private studio performance space</p>
+            <p className="hero-main-text">Seating: Limited and intimate</p>
+            <p className="hero-main-text" style={{ marginTop: '16px', fontStyle: 'italic' }}>
+              Private bookings available upon request
+            </p>
+          </div>
         </section>
 
         {/* 9. FINAL CTA */}
         <section
           className="hero"
           style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.5) 30%, rgba(13,11,9,0.5) 70%, rgba(13,11,9,0.9) 100%), url('/images/Piano hands warm color_EX.png')",
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.8) 0%, rgba(13,11,9,0.55) 30%, rgba(13,11,9,0.55) 70%, rgba(13,11,9,0.9) 100%), url('/images/behind ernie.jpeg')",
             minHeight: 'auto',
             padding: '120px 24px',
           }}
         >
           <div className="hero-content">
-            <p className="hero-main-text" style={{ fontSize: '22px', fontStyle: 'italic' }}>
-              A small room. A real piano. Songs that still matter.
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px', letterSpacing: '0.04em', marginBottom: '16px', color: '#e8dcc8' }}>
+              Only 10 Seats Per Evening
+            </h2>
+            <p className="hero-main-text" style={{ fontSize: '20px', fontStyle: 'italic', marginBottom: '32px' }}>
+              When the room is full, the experience begins.
             </p>
-            <div style={{ marginTop: '32px' }}>
-              <a href="#reserve" className="card-link" style={{ fontSize: '16px' }}>Reserve Your Seat &rarr;</a>
+            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
+              <a href="#reserve" className="checkout-btn" style={{ display: 'inline-block', padding: '14px 36px', fontSize: '16px', textDecoration: 'none' }}>
+                Reserve Your Seat — $125
+              </a>
+            </div>
+            <div style={{ marginTop: '20px' }}>
+              <a href="mailto:booking@erniesavage.com" style={{ color: '#8a7d6d', fontSize: '14px', textDecoration: 'underline' }}>
+                Inquire About Private Performance
+              </a>
             </div>
           </div>
         </section>
@@ -593,7 +650,6 @@ export default function ExperiencePage() {
   // ============================================================
   return (
     <main>
-      {/* EXPERIENCE HERO */}
       <section className="exp-hero">
         <h1>{info.title}</h1>
         <p className="exp-subtitle">{info.subtitle}</p>
@@ -605,7 +661,6 @@ export default function ExperiencePage() {
         </div>
       </section>
 
-      {/* AVAILABLE SHOWS */}
       <section className="shows-section">
         <div className="shows-title">Available Dates</div>
         {renderShowCards()}
