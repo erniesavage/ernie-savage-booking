@@ -464,7 +464,8 @@ export default function ExperiencePage() {
           style={{
             backgroundImage:
               "linear-gradient(180deg, rgba(13,11,9,0.6) 0%, rgba(13,11,9,0.35) 30%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.95) 100%), url('/images/Piano_room_desktop_hero_no_mixer_EX.jpg')",
-            minHeight: '100vh',
+            minHeight: 'auto',
+            padding: '120px 24px',
           }}
         >
           <div className="hero-content">
@@ -472,11 +473,11 @@ export default function ExperiencePage() {
             <p className="hero-main-text" style={{ marginTop: '16px', fontSize: '20px' }}>
               An intimate evening of classic and forgotten songs — performed up close.
             </p>
-            <p className="hero-main-text" style={{ marginTop: '24px', color: '#c4a574', fontSize: '16px', letterSpacing: '0.05em' }}>
-              $150 per guest &bull; Limited to 12 seats
+            <p style={{ marginTop: '28px', color: '#c4a574', fontSize: '20px', letterSpacing: '0.05em', fontFamily: "'Playfair Display', serif" }}>
+              $125 per guest &bull; Limited to 10 seats
             </p>
-            <div style={{ marginTop: '32px' }}>
-              <a href="#reserve" className="card-link" style={{ fontSize: '16px' }}>Reserve Your Seat &rarr;</a>
+            <div style={{ marginTop: '28px' }}>
+              <a href="#reserve" className="card-link" style={{ fontSize: '18px', letterSpacing: '0.06em' }}>Reserve Your Seat &rarr;</a>
             </div>
           </div>
         </section>
@@ -536,9 +537,9 @@ export default function ExperiencePage() {
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
             What You&apos;ll Experience
           </h2>
-          <p className="hero-main-text">75 minutes of live piano and vocal performance</p>
+          <p className="hero-main-text">75 minutes of live piano/guitar and vocal performance</p>
           <p className="hero-main-text">Personal storytelling woven between songs</p>
-          <p className="hero-main-text">An audience of 8&ndash;12 guests</p>
+          <p className="hero-main-text">An audience of 8&ndash;10 guests</p>
           <p className="hero-main-text">No amplification beyond what the room requires</p>
           <p className="hero-main-text">A rare, human-scale musical gathering</p>
         </section>
@@ -559,9 +560,9 @@ export default function ExperiencePage() {
             Details
           </h2>
           <p className="hero-main-text">Duration: 90 minutes</p>
-          <p className="hero-main-text">Capacity: 12 guests max</p>
-          <p className="hero-main-text">Location: Manhattan studio (details provided after booking)</p>
-          <p className="hero-main-text" style={{ color: '#c4a574' }}>Price: $150 per guest</p>
+          <p className="hero-main-text">Capacity: 10 guests max</p>
+          <p className="hero-main-text">Location: Manhattan, NYC studio (address noted with your booking date selection)</p>
+          <p className="hero-main-text" style={{ color: '#c4a574' }}>Price: $125 per guest</p>
         </section>
 
         {/* 9. FINAL CTA */}
