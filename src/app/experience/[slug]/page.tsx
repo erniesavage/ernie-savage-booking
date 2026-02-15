@@ -244,24 +244,12 @@ export default function ExperiencePage() {
     );
   }
 
-  return (
-    <main>
-      {/* EXPERIENCE HERO */}
-      <section className="exp-hero">
-        <h1>{info.title}</h1>
-        <p className="exp-subtitle">{info.subtitle}</p>
-        <img src={info.image} alt={info.title} className="exp-image" />
-        <div className="exp-desc">
-          {info.fullDesc.map((p: string, i: number) => (
-            <p key={i}>{p}</p>
-          ))}
-        </div>
-      </section>
-
-      {/* AVAILABLE SHOWS */}
-      <section className="shows-section">
-        <div className="shows-title">Available Dates</div>
-
+  // ============================================================
+  // BOOKING CTA COMPONENT (reused across sections)
+  // ============================================================
+  function renderShowCards() {
+    return (
+      <>
         {loading && <p className="no-shows-msg">Loading dates...</p>}
 
         {!loading && shows.length === 0 && (
@@ -460,6 +448,166 @@ export default function ExperiencePage() {
             )}
           </div>
         ))}
+      </>
+    );
+  }
+
+  // ============================================================
+  // SECRET BALLADS — CUSTOM LAYOUT
+  // ============================================================
+  if (slug === 'secret-ballads') {
+    return (
+      <main>
+        {/* 1. HERO */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, rgba(13,11,9,0.6) 0%, rgba(13,11,9,0.35) 30%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.95) 100%), url('/images/Piano_room_desktop_hero_no_mixer_EX.jpg')",
+            minHeight: '100vh',
+          }}
+        >
+          <div className="hero-content">
+            <h1>Secret Ballads</h1>
+            <p className="hero-main-text" style={{ marginTop: '16px', fontSize: '20px' }}>
+              An intimate evening of classic and forgotten songs — performed up close.
+            </p>
+            <p className="hero-main-text" style={{ marginTop: '24px', color: '#c4a574', fontSize: '16px', letterSpacing: '0.05em' }}>
+              $150 per guest &bull; Limited to 12 seats
+            </p>
+            <div style={{ marginTop: '32px' }}>
+              <a href="#reserve" className="card-link" style={{ fontSize: '16px' }}>Reserve Your Seat &rarr;</a>
+            </div>
+          </div>
+        </section>
+
+        {/* 2. SHORT EXPERIENCE PROMISE */}
+        <section style={{ padding: '80px 24px', maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ fontSize: '22px', fontStyle: 'italic', color: '#c4a574', lineHeight: 1.6, marginBottom: '32px' }}>
+            Some songs don&apos;t shout. They stay with you quietly.
+          </p>
+          <p className="hero-main-text" style={{ marginBottom: '20px' }}>
+            Secret Ballads is an intimate songwriter salon — built around songs that shaped us. Some are well known. Some were quietly overlooked. All of them carry emotional weight.
+          </p>
+          <p className="hero-main-text">
+            This is not a concert hall. It&apos;s a small room. Real people. Real listening.
+          </p>
+        </section>
+
+        {/* 3. FIRST CTA — AVAILABLE DATES */}
+        <section className="shows-section" id="reserve">
+          <div className="shows-title">Available Dates</div>
+          {renderShowCards()}
+        </section>
+
+        {/* 4. VIDEO SECTION */}
+        <section style={{ padding: '80px 24px', maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '32px', color: '#e8dcc8' }}>
+            See What an Evening Feels Like
+          </h2>
+          <div style={{ background: 'rgba(20,17,13,0.6)', border: '1px solid rgba(196,165,116,0.15)', padding: '60px 24px', color: '#5a4d3d', fontSize: '14px' }}>
+            Video coming soon
+          </div>
+        </section>
+
+        {/* 5. WHAT THIS EVENING FEELS LIKE */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.55) 30%, rgba(13,11,9,0.55) 70%, rgba(13,11,9,0.9) 100%), url('/images/guitar_room_crop color_no_mixer_EX.jpg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content">
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
+              What This Evening Feels Like
+            </h2>
+            <p className="hero-main-text">The kind of room where you can hear breath between phrases</p>
+            <p className="hero-main-text">Stories behind songs you thought you already knew</p>
+            <p className="hero-main-text">Unexpected emotional turns</p>
+            <p className="hero-main-text">Silence that feels shared — not empty</p>
+          </div>
+        </section>
+
+        {/* 6. WHAT YOU'LL EXPERIENCE */}
+        <section style={{ padding: '80px 24px', maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
+            What You&apos;ll Experience
+          </h2>
+          <p className="hero-main-text">75 minutes of live piano and vocal performance</p>
+          <p className="hero-main-text">Personal storytelling woven between songs</p>
+          <p className="hero-main-text">An audience of 8&ndash;12 guests</p>
+          <p className="hero-main-text">No amplification beyond what the room requires</p>
+          <p className="hero-main-text">A rare, human-scale musical gathering</p>
+        </section>
+
+        {/* 7. WHO THIS IS FOR */}
+        <section style={{ padding: '60px 24px 80px', maxWidth: '700px', margin: '0 auto', textAlign: 'center', borderTop: '1px solid rgba(196,165,116,0.1)' }}>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
+            Who This Is For
+          </h2>
+          <p className="hero-main-text">Listeners who value depth over volume</p>
+          <p className="hero-main-text">Couples looking for something meaningful</p>
+          <p className="hero-main-text">Music lovers who miss when songs felt personal</p>
+        </section>
+
+        {/* 8. LOGISTICS + PRICE */}
+        <section style={{ padding: '60px 24px 80px', maxWidth: '700px', margin: '0 auto', textAlign: 'center', borderTop: '1px solid rgba(196,165,116,0.1)' }}>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
+            Details
+          </h2>
+          <p className="hero-main-text">Duration: 90 minutes</p>
+          <p className="hero-main-text">Capacity: 12 guests max</p>
+          <p className="hero-main-text">Location: Manhattan studio (details provided after booking)</p>
+          <p className="hero-main-text" style={{ color: '#c4a574' }}>Price: $150 per guest</p>
+        </section>
+
+        {/* 9. FINAL CTA */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.5) 30%, rgba(13,11,9,0.5) 70%, rgba(13,11,9,0.9) 100%), url('/images/Piano hands warm color_EX.png')",
+            minHeight: 'auto',
+            padding: '120px 24px',
+          }}
+        >
+          <div className="hero-content">
+            <p className="hero-main-text" style={{ fontSize: '22px', fontStyle: 'italic' }}>
+              A small room. A real piano. Songs that still matter.
+            </p>
+            <div style={{ marginTop: '32px' }}>
+              <a href="#reserve" className="card-link" style={{ fontSize: '16px' }}>Reserve Your Seat &rarr;</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  // ============================================================
+  // DEFAULT LAYOUT — ALL OTHER EXPERIENCES
+  // ============================================================
+  return (
+    <main>
+      {/* EXPERIENCE HERO */}
+      <section className="exp-hero">
+        <h1>{info.title}</h1>
+        <p className="exp-subtitle">{info.subtitle}</p>
+        <img src={info.image} alt={info.title} className="exp-image" />
+        <div className="exp-desc">
+          {info.fullDesc.map((p: string, i: number) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      </section>
+
+      {/* AVAILABLE SHOWS */}
+      <section className="shows-section">
+        <div className="shows-title">Available Dates</div>
+        {renderShowCards()}
       </section>
     </main>
   );
