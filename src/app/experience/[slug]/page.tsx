@@ -412,10 +412,10 @@ export default function ExperiencePage() {
             <p className="hero-main-text" style={{ fontSize: '20px', maxWidth: '600px' }}>
               An intimate live piano concert of classic and forgotten songs — performed in a private Manhattan studio.
             </p>
-            <p style={{ marginTop: '20px', color: '#b8a88a', fontSize: '15px', fontStyle: 'italic' }}>
+            <p style={{ marginTop: '24px', color: '#e8dcc8', fontSize: '18px', fontStyle: 'italic', textAlign: 'center' }}>
               With singer-songwriter Ernie Savage
             </p>
-            <p style={{ marginTop: '8px', color: '#8a7d6d', fontSize: '14px', maxWidth: '500px', lineHeight: 1.6 }}>
+            <p style={{ marginTop: '10px', color: '#b8a88a', fontSize: '16px', maxWidth: '550px', lineHeight: 1.7, textAlign: 'center', margin: '10px auto 0' }}>
               Award-winning songwriter and NYC-based live performer known for intimate, salon-style musical evenings.
             </p>
             <div style={{ marginTop: '32px', display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -426,7 +426,7 @@ export default function ExperiencePage() {
               <span style={{ color: '#c4a574', fontSize: '14px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>$125 per person</span>
             </div>
             <div style={{ marginTop: '28px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="#reserve" className="checkout-btn" style={{ display: 'inline-block', padding: '14px 36px', fontSize: '16px', textDecoration: 'none' }}>Reserve Your Seat</a>
+              <a href="#reserve" className="checkout-btn" style={{ display: 'inline-block', padding: '12px 28px', fontSize: '15px', textDecoration: 'none' }}>Reserve Your Seat</a>
             </div>
           </div>
         </section>
@@ -438,7 +438,7 @@ export default function ExperiencePage() {
         </section>
 
         {/* 2. VIDEO SECTION */}
-        <section style={{ padding: '80px 24px', textAlign: 'center', background: '#0d0b09' }}>
+        <section style={{ padding: '20px 24px 80px', textAlign: 'center', background: '#0d0b09' }}>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '32px', color: '#e8dcc8' }}>
             See What Secret Ballads Feels Like
           </h2>
