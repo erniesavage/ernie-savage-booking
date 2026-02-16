@@ -396,250 +396,145 @@ export default function ExperiencePage() {
   // SECRET BALLADS — CUSTOM LAYOUT
   // ============================================================
   if (slug === 'secret-ballads') {
+    // Shared section style for clean text sections
+    var sectionStyle = { padding: '80px 24px', maxWidth: '720px', margin: '0 auto' } as const;
+    var h2Style = { fontFamily: "'Playfair Display', serif", fontSize: '28px', letterSpacing: '0.04em', marginBottom: '36px', color: '#e8dcc8', textAlign: 'center' as const };
+    var bodyStyle = { fontSize: '17px', lineHeight: 1.8, color: '#c8bda8', marginBottom: '20px' };
+    var breathStyle = { fontSize: '17px', lineHeight: 2.2, color: '#c8bda8', marginBottom: '8px' };
+
     return (
       <main>
-        {/* 1. HERO */}
+        {/* SECTION 1 — HERO */}
         <section
           className="hero"
           style={{
-            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.5) 0%, rgba(13,11,9,0.3) 30%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.95) 100%), url('/images/behind ernie.jpeg')",
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.55) 0%, rgba(13,11,9,0.3) 30%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.95) 100%), url('/images/behind ernie.jpeg')",
             minHeight: 'auto',
-            padding: '140px 24px 80px',
+            padding: '160px 24px 80px',
           }}
         >
-          <div className="hero-content">
-            <h1 style={{ fontSize: '48px', marginBottom: '16px' }}>Secret Ballads</h1>
-            <p className="hero-main-text" style={{ fontSize: '20px', maxWidth: '600px' }}>
-              An intimate live piano concert of classic and forgotten songs — performed in a private Manhattan studio.
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
+            <h1 style={{ fontSize: '44px', letterSpacing: '0.12em', marginBottom: '20px', textTransform: 'uppercase' }}>Secret Ballads NYC</h1>
+            <p style={{ fontSize: '20px', color: '#c8bda8', fontStyle: 'italic', lineHeight: 1.7, marginBottom: '32px' }}>
+              An intimate piano &amp; vocal salon of iconic and forgotten ballads.
             </p>
-            <p style={{ marginTop: '24px', color: '#e8dcc8', fontSize: '18px', fontStyle: 'italic', textAlign: 'center' }}>
-              With singer-songwriter Ernie Savage
+            <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '600px', margin: '0 auto 28px' }}>
+              Inside a private Manhattan studio near Bryant Park and the Empire State Building, composer and performer Ernie Savage presents a close-listening concert devoted to the great pop ballads of the American singer-songwriter era.
             </p>
-            <p style={{ marginTop: '10px', color: '#b8a88a', fontSize: '16px', maxWidth: '550px', lineHeight: 1.7, textAlign: 'center', margin: '10px auto 0' }}>
-              Award-winning songwriter and NYC-based live performer known for intimate, salon-style musical evenings.
+            <p style={{ ...breathStyle, textAlign: 'center' }}>This is not a club performance.</p>
+            <p style={{ ...breathStyle, textAlign: 'center' }}>This is not background music.</p>
+            <p style={{ ...breathStyle, textAlign: 'center', marginTop: '20px', fontStyle: 'italic', color: '#c4a574' }}>
+              This is a room small enough for the music to breathe.
             </p>
-            <div style={{ marginTop: '32px', display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <span style={{ color: '#c4a574', fontSize: '14px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>90-minute live performance</span>
-              <span style={{ color: '#5a4d3d' }}>&bull;</span>
-              <span style={{ color: '#c4a574', fontSize: '14px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Limited to 10 guests</span>
-              <span style={{ color: '#5a4d3d' }}>&bull;</span>
-              <span style={{ color: '#c4a574', fontSize: '14px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>$125 per person</span>
-            </div>
-            <div style={{ marginTop: '28px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href="#reserve" className="checkout-btn" style={{ display: 'inline-block', padding: '12px 28px', fontSize: '15px', textDecoration: 'none' }}>Reserve Your Seat</a>
-            </div>
           </div>
         </section>
 
-        {/* PURCHASE BOX — JUST BELOW HERO */}
-        <section className="shows-section" id="reserve">
-          <div className="shows-title">Available Dates</div>
-          {renderShowCards()}
-        </section>
-
-        {/* 2. VIDEO SECTION */}
-        <section style={{ padding: '20px 24px 80px', textAlign: 'center', background: '#0d0b09' }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '32px', color: '#e8dcc8' }}>
-            See What Secret Ballads Feels Like
-          </h2>
-          <div style={{ maxWidth: '700px', margin: '0 auto', background: 'rgba(20,17,13,0.6)', border: '1px solid rgba(196,165,116,0.15)', padding: '60px 24px', color: '#5a4d3d', fontSize: '14px' }}>
-            Video coming soon
-          </div>
-          <p className="hero-main-text" style={{ marginTop: '24px', fontStyle: 'italic' }}>
-            An intimate room. A grand piano or guitar. Songs that still live inside you.
+        {/* SECTION 2 — THE CONCEPT */}
+        <section style={sectionStyle}>
+          <h2 style={h2Style}>The Concept</h2>
+          <p style={bodyStyle}>
+            Secret Ballads explores iconic and nearly forgotten songs from the golden era of American songwriting — works shaped by melody, restraint, and emotional precision.
           </p>
-          <div style={{ marginTop: '24px' }}>
-            <a href="#reserve" className="card-link" style={{ fontSize: '16px' }}>Reserve Your Seat &rarr;</a>
-          </div>
+          <p style={{ ...bodyStyle, marginBottom: '12px' }}>Songs associated with artists such as:</p>
+          <p style={{ fontSize: '16px', color: '#c4a574', lineHeight: 2.2, textAlign: 'center', letterSpacing: '0.02em', marginBottom: '24px' }}>
+            Elton John &nbsp;&middot;&nbsp; Paul Simon &nbsp;&middot;&nbsp; Leonard Cohen &nbsp;&middot;&nbsp; Harry Nilsson<br />
+            Billy Joel &nbsp;&middot;&nbsp; Don McLean &nbsp;&middot;&nbsp; Jimmy Webb
+          </p>
+          <p style={bodyStyle}>
+            are reinterpreted through solo piano, acoustic guitar, and voice — performed within conversational distance of the audience.
+          </p>
+          <p style={bodyStyle}>
+            Between performances, Ernie shares brief reflections on the writers, the era, and the craft behind the songs — offering context without interrupting the flow.
+          </p>
+          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
+            The result is a focused listening experience that rewards attention.
+          </p>
         </section>
 
-        {/* 3. WHAT THIS EXPERIENCE IS */}
-        <section
-          className="hero"
-          style={{
-            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.7) 30%, rgba(13,11,9,0.7) 70%, rgba(13,11,9,0.92) 100%), url('/images/Piano hands warm color_EX.png')",
-            minHeight: 'auto',
-            padding: '100px 24px',
-          }}
-        >
-          <div className="hero-content" style={{ maxWidth: '700px' }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '36px', color: '#e8dcc8' }}>
-              An Evening Inside the Music
-            </h2>
-            <p className="hero-main-text" style={{ marginBottom: '20px' }}>
-              Secret Ballads is a live solo piano or guitar and vocal performance of timeless songs — some iconic, some nearly forgotten — brought back to life in an intimate Manhattan studio setting.
-            </p>
-            <p className="hero-main-text" style={{ marginBottom: '20px' }}>
-              This is not a bar show. It&apos;s not a loud venue. It&apos;s a private musical gathering.
-            </p>
-            <p className="hero-main-text" style={{ marginBottom: '16px' }}>
-              Between songs, Ernie shares the stories behind the music:
-            </p>
-            <p className="hero-main-text">Why the song was written</p>
-            <p className="hero-main-text">What was happening in the artist&apos;s life</p>
-            <p className="hero-main-text">The lyrical moments most people overlook</p>
-            <p className="hero-main-text">The emotional meaning that still resonates today</p>
-            <p className="hero-main-text" style={{ marginTop: '24px', fontStyle: 'italic', color: '#c4a574' }}>
-              You won&apos;t just hear the music. You&apos;ll understand why it endures.
-            </p>
-          </div>
+        {/* SECTION 3 — THE SETTING */}
+        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+          <h2 style={h2Style}>The Setting</h2>
+          <p style={{ ...bodyStyle, textAlign: 'center', marginBottom: '8px' }}>Secret Ballads is hosted at</p>
+          <p style={{ fontSize: '18px', color: '#e8dcc8', textAlign: 'center', lineHeight: 1.8, marginBottom: '6px', fontWeight: 500 }}>
+            Michiko Studios
+          </p>
+          <p style={{ fontSize: '16px', color: '#c8bda8', textAlign: 'center', lineHeight: 1.8, marginBottom: '4px' }}>
+            15 West 39th Street, 7th Floor
+          </p>
+          <p style={{ fontSize: '15px', color: '#8a7d6d', textAlign: 'center', lineHeight: 1.8, marginBottom: '4px' }}>
+            Between 5th and 6th Avenues
+          </p>
+          <p style={{ fontSize: '15px', color: '#8a7d6d', textAlign: 'center', lineHeight: 1.8, marginBottom: '32px' }}>
+            Steps from Bryant Park and the New York Public Library
+          </p>
+          <p style={bodyStyle}>
+            The studio is an active working rehearsal space — simple, acoustic, unpolished.
+          </p>
+          <p style={bodyStyle}>
+            There is no theatrical lighting. No stage separation. No amplified spectacle.
+          </p>
+          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
+            Just a piano, a guitar, a voice — and a room designed for listening.
+          </p>
         </section>
 
-        {/* 4. WHAT TO EXPECT */}
-        <section style={{ padding: '80px 24px' }}>
-          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8', textAlign: 'center' }}>
-              What to Expect
-            </h2>
-            <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-              <div style={{ flex: '1 1 320px' }}>
-                <p className="hero-main-text" style={{ marginBottom: '12px' }}>90-minute live solo performance</p>
-                <p className="hero-main-text" style={{ marginBottom: '12px' }}>Piano and/or guitar with vocal</p>
-                <p className="hero-main-text" style={{ marginBottom: '12px' }}>Intimate Manhattan studio setting</p>
-                <p className="hero-main-text" style={{ marginBottom: '12px' }}>8&ndash;10 guests maximum</p>
-                <p className="hero-main-text" style={{ marginBottom: '12px' }}>Storytelling woven between songs</p>
-                <p className="hero-main-text">Q&amp;A and informal conversation at the end</p>
-              </div>
-              <div style={{ flex: '1 1 320px' }}>
-                <img
-                  src="/images/Piano_room_desktop_hero_no_mixer_EX.jpg"
-                  alt="Private piano studio"
-                  style={{ width: '100%', height: 'auto', border: '1px solid rgba(196,165,116,0.1)' }}
-                />
-              </div>
-            </div>
+        {/* SECTION 4 — THE EXPERIENCE */}
+        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+          <h2 style={h2Style}>The Experience</h2>
+          <div style={{ marginBottom: '32px' }}>
+            <p style={breathStyle}>&bull;&ensp;75&ndash;90 minute curated live performance</p>
+            <p style={breathStyle}>&bull;&ensp;Solo piano, guitar, and voice</p>
+            <p style={breathStyle}>&bull;&ensp;Limited to 8 guests</p>
+            <p style={breathStyle}>&bull;&ensp;Seated, salon-style listening</p>
+            <p style={breathStyle}>&bull;&ensp;Stories and musical context woven throughout</p>
+            <p style={breathStyle}>&bull;&ensp;Informal conversation after the final song</p>
           </div>
+          <p style={{ ...bodyStyle, marginTop: '16px' }}>
+            Guests are seated within feet of the instrument.
+          </p>
+          <p style={breathStyle}>You hear the breath before the lyric. You see the hands strike the keys. You feel the silence between phrases.</p>
+          <p style={{ ...bodyStyle, marginTop: '20px', fontStyle: 'italic', color: '#c4a574' }}>
+            This is proximity — not production.
+          </p>
         </section>
 
-        {/* 5. WHY SMALL MATTERS */}
-        <section
-          className="hero"
-          style={{
-            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.6) 30%, rgba(13,11,9,0.6) 70%, rgba(13,11,9,0.9) 100%), url('/images/Just 2 people only.jpg')",
-            minHeight: 'auto',
-            padding: '100px 24px',
-          }}
-        >
-          <div className="hero-content" style={{ maxWidth: '650px' }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '36px', color: '#e8dcc8' }}>
-              Why Only 8&ndash;10 Guests?
-            </h2>
-            <p className="hero-main-text" style={{ marginBottom: '24px', fontStyle: 'italic', color: '#c4a574' }}>
-              Because music changes when the room gets quiet.
-            </p>
-            <p className="hero-main-text" style={{ marginBottom: '16px' }}>In a small gathering:</p>
-            <p className="hero-main-text">You hear every lyric.</p>
-            <p className="hero-main-text">You feel every dynamic shift.</p>
-            <p className="hero-main-text">You see the hands on the keys.</p>
-            <p className="hero-main-text">The performance feels personal — not projected.</p>
-            <p className="hero-main-text" style={{ marginTop: '24px' }}>
-              Secret Ballads is designed for depth — not volume.
-            </p>
-            <p className="hero-main-text" style={{ marginTop: '16px', fontStyle: 'italic', color: '#c4a574' }}>
-              When the room fills, the evening begins.
-            </p>
+        {/* SECTION 5 — WHY ONLY EIGHT GUESTS? */}
+        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+          <h2 style={h2Style}>Why Only Eight Guests?</h2>
+          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574', textAlign: 'center', marginBottom: '28px' }}>
+            Because these songs were never meant to compete with noise.
+          </p>
+          <p style={{ ...bodyStyle, marginBottom: '16px' }}>The scale is deliberate.</p>
+          <p style={{ ...bodyStyle, marginBottom: '12px' }}>A smaller room allows:</p>
+          <div style={{ marginBottom: '28px' }}>
+            <p style={breathStyle}>&bull;&ensp;Emotional nuance</p>
+            <p style={breathStyle}>&bull;&ensp;Dynamic control</p>
+            <p style={breathStyle}>&bull;&ensp;Direct connection</p>
+            <p style={breathStyle}>&bull;&ensp;Shared stillness</p>
           </div>
+          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
+            Secret Ballads is designed for intimacy, not volume.
+          </p>
         </section>
 
-        {/* 6. WHO IS ERNIE SAVAGE? */}
-        <section style={{ padding: '80px 24px' }}>
-          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8', textAlign: 'center' }}>
-              About Ernie Savage
-            </h2>
-            <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-              <div style={{ flex: '0 0 280px' }}>
-                <img
-                  src="/images/Ernie Piano looking at keys.jpeg"
-                  alt="Ernie Savage"
-                  style={{ width: '100%', height: 'auto', border: '1px solid rgba(196,165,116,0.1)' }}
-                />
-              </div>
-              <div style={{ flex: '1 1 320px' }}>
-                <p className="hero-main-text" style={{ marginBottom: '16px' }}>
-                  Ernie Savage is a Manhattan-based pianist, guitarist, vocalist, and songwriter known for intimate, story-driven performances that blend musical precision with emotional depth.
-                </p>
-                <p className="hero-main-text" style={{ marginBottom: '16px' }}>
-                  His work draws from the golden era of singer-songwriters, orchestral pop, and deeply lyrical ballads — reimagined through solo piano or guitar and voice.
-                </p>
-                <p className="hero-main-text" style={{ marginBottom: '16px' }}>
-                  For decades, Ernie has created salon-style musical evenings that feel personal, intelligent, and immersive.
-                </p>
-                <p className="hero-main-text" style={{ fontStyle: 'italic', color: '#c4a574' }}>
-                  Secret Ballads is the culmination of that approach — performed in one of Manhattan&apos;s most intimate studio environments.
-                </p>
-              </div>
-            </div>
-          </div>
+        {/* SECTION 6 — ABOUT ERNIE SAVAGE */}
+        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+          <h2 style={h2Style}>About Ernie Savage</h2>
+          <p style={bodyStyle}>
+            Ernie Savage is a New York&ndash;based composer, pianist, guitarist, and recording artist whose career spans television scoring, international performance, and decades of live concerts.
+          </p>
+          <p style={bodyStyle}>
+            He has composed themes and music for major broadcast networks and led ensembles ranging from solo piano to full 10-piece bands. His work reflects a deep commitment to melodic songwriting and emotional clarity.
+          </p>
+          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
+            Secret Ballads represents the distilled version of that career — one performer, one instrument, one room.
+          </p>
         </section>
 
-        {/* 7. THE ROOM EXPERIENCE */}
-        <section
-          className="hero"
-          style={{
-            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.85) 0%, rgba(13,11,9,0.55) 30%, rgba(13,11,9,0.55) 70%, rgba(13,11,9,0.9) 100%), url('/images/private-concerts-new.jpg')",
-            minHeight: 'auto',
-            padding: '100px 24px',
-          }}
-        >
-          <div className="hero-content" style={{ maxWidth: '650px' }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '24px', color: '#e8dcc8' }}>
-              An Evening That Feels Personal
-            </h2>
-            <p className="hero-main-text" style={{ marginBottom: '16px' }}>
-              Guests don&apos;t just listen. They lean in. They remember.
-            </p>
-            <p className="hero-main-text">
-              This is music experienced at conversational distance — where every note matters and every lyric lands.
-            </p>
-          </div>
-        </section>
-
-        {/* 8. DETAILS */}
-        <section style={{ padding: '80px 24px', textAlign: 'center' }}>
-          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '30px', letterSpacing: '0.04em', marginBottom: '40px', color: '#e8dcc8' }}>
-              Experience Details
-            </h2>
-            <p className="hero-main-text">Duration: 90 minutes</p>
-            <p className="hero-main-text">Location: Manhattan, New York City</p>
-            <p className="hero-main-text">Capacity: 8&ndash;10 guests</p>
-            <p className="hero-main-text" style={{ color: '#c4a574' }}>Price: $125 per guest</p>
-            <p className="hero-main-text">Setting: Private studio performance space</p>
-            <p className="hero-main-text">Seating: Limited and intimate</p>
-            <p className="hero-main-text" style={{ marginTop: '16px', fontStyle: 'italic' }}>
-              Private bookings available upon request
-            </p>
-          </div>
-        </section>
-
-        {/* 9. FINAL CTA */}
-        <section
-          className="hero"
-          style={{
-            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.8) 0%, rgba(13,11,9,0.55) 30%, rgba(13,11,9,0.55) 70%, rgba(13,11,9,0.9) 100%), url('/images/behind ernie.jpeg')",
-            minHeight: 'auto',
-            padding: '120px 24px',
-          }}
-        >
-          <div className="hero-content">
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px', letterSpacing: '0.04em', marginBottom: '16px', color: '#e8dcc8' }}>
-              Only 10 Seats Per Evening
-            </h2>
-            <p className="hero-main-text" style={{ fontSize: '20px', fontStyle: 'italic', marginBottom: '32px' }}>
-              When the room is full, the experience begins.
-            </p>
-            <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-              <a href="#reserve" className="checkout-btn" style={{ display: 'inline-block', padding: '14px 36px', fontSize: '16px', textDecoration: 'none' }}>
-                Reserve Your Seat — $125
-              </a>
-            </div>
-            <div style={{ marginTop: '20px' }}>
-              <a href="mailto:booking@erniesavage.com" style={{ color: '#8a7d6d', fontSize: '14px', textDecoration: 'underline' }}>
-                Inquire About Private Performance
-              </a>
-            </div>
-          </div>
+        {/* SECTION 7 — RESERVATIONS */}
+        <section className="shows-section" id="reserve" style={{ borderTop: '1px solid rgba(196,165,116,0.1)' }}>
+          <div className="shows-title">Reservations</div>
+          {renderShowCards()}
         </section>
       </main>
     );
