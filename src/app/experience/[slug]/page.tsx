@@ -451,7 +451,50 @@ export default function ExperiencePage() {
           </p>
         </section>
 
-        {/* SECTION 3 — THE SETTING */}
+        {/* SECTION 3 — ABOUT ERNIE SAVAGE */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/Ernie Piano looking at keys.jpeg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
+          <h2 style={h2Style}>About Ernie Savage</h2>
+          <p style={bodyStyle}>
+            Ernie Savage is a New York&ndash;based composer, pianist, guitarist, and recording artist whose career spans television scoring, international performance, and decades of live concerts.
+          </p>
+          <p style={bodyStyle}>
+            He has composed themes and music for major broadcast networks and led ensembles ranging from solo piano to full 10-piece bands. His work reflects a deep commitment to melodic songwriting and emotional clarity.
+          </p>
+          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
+            Secret Ballads represents the distilled version of that career — one performer, one instrument, one room.
+          </p>
+          </div>
+        </section>
+
+        {/* SECTION 4 — THE EXPERIENCE */}
+        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+          <h2 style={h2Style}>The Experience</h2>
+          <div style={{ marginBottom: '32px' }}>
+            <p style={breathStyle}>&bull;&ensp;75&ndash;90 minute curated live performance</p>
+            <p style={breathStyle}>&bull;&ensp;Solo piano, guitar, and voice</p>
+            <p style={breathStyle}>&bull;&ensp;Limited to 8 guests</p>
+            <p style={breathStyle}>&bull;&ensp;Seated, salon-style listening</p>
+            <p style={breathStyle}>&bull;&ensp;Stories and musical context woven throughout</p>
+            <p style={breathStyle}>&bull;&ensp;Informal conversation after the final song</p>
+          </div>
+          <p style={{ ...bodyStyle, marginTop: '16px' }}>
+            Guests are seated within feet of the instrument.
+          </p>
+          <p style={breathStyle}>You hear the breath before the lyric. You see the hands strike the keys. You feel the silence between phrases.</p>
+          <p style={{ ...bodyStyle, marginTop: '20px', fontStyle: 'italic', color: '#c4a574' }}>
+            This is proximity — not production.
+          </p>
+        </section>
+
+        {/* SECTION 5 — THE SETTING */}
         <section
           className="hero"
           style={{
@@ -487,31 +530,11 @@ export default function ExperiencePage() {
           </div>
         </section>
 
-        {/* SECTION 4 — THE EXPERIENCE */}
-        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
-          <h2 style={h2Style}>The Experience</h2>
-          <div style={{ marginBottom: '32px' }}>
-            <p style={breathStyle}>&bull;&ensp;75&ndash;90 minute curated live performance</p>
-            <p style={breathStyle}>&bull;&ensp;Solo piano, guitar, and voice</p>
-            <p style={breathStyle}>&bull;&ensp;Limited to 8 guests</p>
-            <p style={breathStyle}>&bull;&ensp;Seated, salon-style listening</p>
-            <p style={breathStyle}>&bull;&ensp;Stories and musical context woven throughout</p>
-            <p style={breathStyle}>&bull;&ensp;Informal conversation after the final song</p>
-          </div>
-          <p style={{ ...bodyStyle, marginTop: '16px' }}>
-            Guests are seated within feet of the instrument.
-          </p>
-          <p style={breathStyle}>You hear the breath before the lyric. You see the hands strike the keys. You feel the silence between phrases.</p>
-          <p style={{ ...bodyStyle, marginTop: '20px', fontStyle: 'italic', color: '#c4a574' }}>
-            This is proximity — not production.
-          </p>
-        </section>
-
-        {/* SECTION 5 — WHY ONLY EIGHT GUESTS? */}
+        {/* SECTION 6 — WHY ONLY EIGHT GUESTS? */}
         <section
           className="hero"
           style={{
-            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/Just 2 people only.jpg')",
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/private-concerts-new.jpg')",
             minHeight: 'auto',
             padding: '100px 24px',
           }}
@@ -535,27 +558,11 @@ export default function ExperiencePage() {
           </div>
         </section>
 
-        {/* SECTION 6 — ABOUT ERNIE SAVAGE */}
-        <section
-          className="hero"
-          style={{
-            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/Ernie Piano looking at keys.jpeg')",
-            minHeight: 'auto',
-            padding: '100px 24px',
-          }}
-        >
-          <div className="hero-content" style={{ maxWidth: '720px' }}>
-          <h2 style={h2Style}>About Ernie Savage</h2>
-          <p style={bodyStyle}>
-            Ernie Savage is a New York&ndash;based composer, pianist, guitarist, and recording artist whose career spans television scoring, international performance, and decades of live concerts.
+        {/* TAGLINE ABOVE RESERVATIONS */}
+        <section style={{ padding: '60px 24px 0', textAlign: 'center' }}>
+          <p style={{ fontFamily: "'Playfair Display', serif", fontSize: '28px', letterSpacing: '0.04em', color: '#e8dcc8', fontStyle: 'italic' }}>
+            An evening for those who prefer listening over noise.
           </p>
-          <p style={bodyStyle}>
-            He has composed themes and music for major broadcast networks and led ensembles ranging from solo piano to full 10-piece bands. His work reflects a deep commitment to melodic songwriting and emotional clarity.
-          </p>
-          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
-            Secret Ballads represents the distilled version of that career — one performer, one instrument, one room.
-          </p>
-          </div>
         </section>
 
         {/* SECTION 7 — RESERVATIONS */}
