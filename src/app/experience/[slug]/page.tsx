@@ -399,8 +399,8 @@ export default function ExperiencePage() {
     // Shared section style for clean text sections
     var sectionStyle = { padding: '80px 24px', maxWidth: '720px', margin: '0 auto' } as const;
     var h2Style = { fontFamily: "'Playfair Display', serif", fontSize: '28px', letterSpacing: '0.04em', marginBottom: '36px', color: '#e8dcc8', textAlign: 'center' as const };
-    var bodyStyle = { fontSize: '17px', lineHeight: 1.8, color: '#c8bda8', marginBottom: '20px' };
-    var breathStyle = { fontSize: '17px', lineHeight: 2.2, color: '#c8bda8', marginBottom: '8px' };
+    var bodyStyle = { fontSize: '17px', lineHeight: 1.8, color: '#c8bda8', marginBottom: '20px', textAlign: 'center' as const };
+    var breathStyle = { fontSize: '17px', lineHeight: 2.2, color: '#c8bda8', marginBottom: '8px', textAlign: 'center' as const };
 
     return (
       <main>
@@ -452,9 +452,17 @@ export default function ExperiencePage() {
         </section>
 
         {/* SECTION 3 — THE SETTING */}
-        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/Piano_room_desktop_hero_no_mixer_EX.jpg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
           <h2 style={h2Style}>The Setting</h2>
-          <p style={{ ...bodyStyle, textAlign: 'center', marginBottom: '8px' }}>Secret Ballads is hosted at</p>
+          <p style={{ ...bodyStyle, marginBottom: '8px' }}>Secret Ballads is hosted at</p>
           <p style={{ fontSize: '18px', color: '#e8dcc8', textAlign: 'center', lineHeight: 1.8, marginBottom: '6px', fontWeight: 500 }}>
             Michiko Studios
           </p>
@@ -476,6 +484,7 @@ export default function ExperiencePage() {
           <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
             Just a piano, a guitar, a voice — and a room designed for listening.
           </p>
+          </div>
         </section>
 
         {/* SECTION 4 — THE EXPERIENCE */}
@@ -499,9 +508,17 @@ export default function ExperiencePage() {
         </section>
 
         {/* SECTION 5 — WHY ONLY EIGHT GUESTS? */}
-        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/Just 2 people only.jpg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
           <h2 style={h2Style}>Why Only Eight Guests?</h2>
-          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574', textAlign: 'center', marginBottom: '28px' }}>
+          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574', marginBottom: '28px' }}>
             Because these songs were never meant to compete with noise.
           </p>
           <p style={{ ...bodyStyle, marginBottom: '16px' }}>The scale is deliberate.</p>
@@ -515,10 +532,19 @@ export default function ExperiencePage() {
           <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
             Secret Ballads is designed for intimacy, not volume.
           </p>
+          </div>
         </section>
 
         {/* SECTION 6 — ABOUT ERNIE SAVAGE */}
-        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/Ernie Piano looking at keys.jpeg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
           <h2 style={h2Style}>About Ernie Savage</h2>
           <p style={bodyStyle}>
             Ernie Savage is a New York&ndash;based composer, pianist, guitarist, and recording artist whose career spans television scoring, international performance, and decades of live concerts.
@@ -529,6 +555,7 @@ export default function ExperiencePage() {
           <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
             Secret Ballads represents the distilled version of that career — one performer, one instrument, one room.
           </p>
+          </div>
         </section>
 
         {/* SECTION 7 — RESERVATIONS */}
