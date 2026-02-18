@@ -67,6 +67,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/privacy" style={{ color: '#5a4d3d', textDecoration: 'none', marginRight: '16px' }}>Privacy Policy</Link>
             <Link href="/terms" style={{ color: '#5a4d3d', textDecoration: 'none' }}>Terms &amp; Conditions</Link>
           </p>
+          <p style={{ marginTop: '16px', fontSize: '11px', color: '#5a4d3d', maxWidth: '500px', margin: '16px auto 0', lineHeight: 1.6, textAlign: 'center' }}>
+            SMS Consent: During ticket checkout, customers may opt in to receive a one-time SMS booking confirmation from Ernie Savage by selecting &quot;SMS&quot; or &quot;Email &amp; SMS.&quot; Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No recurring messages. See our <Link href="/privacy" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Privacy Policy</Link> and <Link href="/terms" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Terms</Link>.
+          </p>
         </footer>
       </body>
     </html>
