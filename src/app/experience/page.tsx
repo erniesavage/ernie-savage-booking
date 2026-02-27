@@ -419,12 +419,12 @@ export default function ExperiencePage() {
               An intimate live concert of iconic and forgotten ballads.
             </p>
             <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '600px', margin: '0 auto 28px' }}>
-              Composer and performer Ernie Savage presents a close-listening performance devoted to the great pop ballads of the American singer-songwriter era. Hosted in a private Manhattan studio near Bryant Park, this limited-seating experience brings listeners within arm&apos;s reach of the artist — where phrasing, pause, and presence shape the room in real time.
+              Composer and performer Ernie Savage presents a close-listening performance devoted to the great pop ballads of the singer-songwriter era. Hosted in a private Manhattan studio near Bryant Park, this limited-seating experience brings listeners within arm&apos;s reach of the artist — where phrasing, pause, and presence shape the room in real time.
             </p>
-            <p style={{ ...breathStyle, textAlign: 'center' }}>The beautiful ones. The melancholy ones. The ones that stay with you.</p>
-            <p style={{ ...breathStyle, textAlign: 'center', marginTop: '20px', fontStyle: 'italic', color: '#c4a574' }}>
+            <p style={{ ...breathStyle, textAlign: 'center', fontStyle: 'italic', color: '#c4a574' }}>
               Come inhabit the songs.
             </p>
+            <p style={{ ...breathStyle, textAlign: 'center', marginTop: '20px' }}>The beautiful ones. The melancholy ones. The ones that stay with you.</p>
             <div style={{ marginTop: '28px', textAlign: 'center' }}>
               <a href="#reserve" className="card-link" style={{ fontSize: '16px', letterSpacing: '0.06em' }}>Reserve a Seat &rarr;</a>
             </div>
@@ -435,7 +435,7 @@ export default function ExperiencePage() {
         <section style={{ ...sectionStyle, paddingBottom: '40px' }}>
           <h2 style={h2Style}>The Concept</h2>
           <p style={bodyStyle}>
-            Secret Ballads explores iconic and nearly forgotten songs from the golden era of American songwriting — works shaped by melody, restraint, and emotional precision.
+            Secret Ballads explores iconic and nearly forgotten songs from the golden era of songwriting — works shaped by melody, feeling, and truth.
           </p>
           <p style={{ ...bodyStyle, marginBottom: '12px' }}>Songs associated with artists such as:</p>
           <p style={{ fontSize: '16px', color: '#c4a574', lineHeight: 2.2, textAlign: 'center', letterSpacing: '0.02em', marginBottom: '24px' }}>
@@ -471,7 +471,7 @@ export default function ExperiencePage() {
             Savage held a residency at Sambucca Jazz Club in Houston (1998&ndash;2000). His live album <em>Swing This</em> received worldwide radio airplay and critical acclaim, and he and his band were routinely featured in the <em>Houston Chronicle</em>.
           </p>
           <p style={bodyStyle}>
-            From 2001&ndash;2007, he curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jesse Raphael, Jackie &quot;The Jokeman&quot; Martling, and Lisa Lampanelli.
+            From 2001&ndash;2007, he curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jesse Raphael, Jackie &quot;The Joke Man&quot; Martling, and Lisa Lampanelli.
           </p>
           <p style={bodyStyle}>
             His six-month Friday night engagement fronting his 10-piece big band at New York City&apos;s Carnegie Club was a sellout.
@@ -571,9 +571,6 @@ export default function ExperiencePage() {
         {/* SECTION 7 — RESERVATIONS */}
         <section className="shows-section" id="reserve" style={{ borderTop: '1px solid rgba(196,165,116,0.1)' }}>
           <div className="shows-title">Reservations</div>
-          <p style={{ fontSize: '11px', color: '#5a4d3d', textAlign: 'center', lineHeight: 1.6, maxWidth: '500px', margin: '0 auto 24px' }}>
-            During checkout, you may opt in to receive a one-time SMS booking confirmation from Ernie Savage by selecting &quot;SMS&quot; or &quot;Email &amp; SMS&quot; as your confirmation method. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No recurring messages. See our <a href="/privacy" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Privacy Policy</a> and <a href="/terms" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Terms</a>.
-          </p>
           {renderShowCards()}
         </section>
       </main>
