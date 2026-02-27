@@ -419,7 +419,7 @@ export default function ExperiencePage() {
               An intimate live concert of iconic and forgotten ballads.
             </p>
             <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '600px', margin: '0 auto 28px' }}>
-              Composer and performer Ernie Savage presents a close-listening performance devoted to the great pop ballads of the singer-songwriter era. Hosted in a private Manhattan studio near Bryant Park, this limited-seating experience brings listeners within arm&apos;s reach of the artist — where phrasing, pause, and presence shape the room in real time.
+              Composer and performer Ernie Savage presents a close-listening performance devoted to the great pop ballads of the singer-songwriter era. Hosted in a private Manhattan studio near Bryant Park, this limited-seating experience brings listeners within arm&apos;s reach of the artist.
             </p>
             <p style={{ ...breathStyle, textAlign: 'center', fontStyle: 'italic', color: '#c4a574' }}>
               Come inhabit the songs.
