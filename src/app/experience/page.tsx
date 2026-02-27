@@ -311,7 +311,7 @@ export default function ExperiencePage() {
                   </div>
                   {(contactPref === 'sms' || contactPref === 'both') && (
                     <p style={{ fontSize: '11px', color: '#5a4d3d', marginTop: '8px', lineHeight: 1.5 }}>
-                      By selecting SMS, you consent to receive a one-time booking confirmation text message. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No recurring messages. See our <a href="/privacy" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Privacy Policy</a> and <a href="/terms" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Terms</a>.
+                      By selecting SMS, you consent to receive a one-time booking confirmation text message from Ernie Savage. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No recurring messages. See our <a href="/privacy" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Privacy Policy</a> and <a href="/terms" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Terms</a>.
                     </p>
                   )}
                 </div>
@@ -416,21 +416,23 @@ export default function ExperiencePage() {
           <div className="hero-content" style={{ maxWidth: '720px' }}>
             <h1 style={{ fontSize: '44px', letterSpacing: '0.12em', marginBottom: '20px', textTransform: 'uppercase' }}>Secret Ballads NYC</h1>
             <p style={{ fontSize: '20px', color: '#c8bda8', fontStyle: 'italic', lineHeight: 1.7, marginBottom: '32px' }}>
-              An intimate piano &amp; vocal salon of iconic and forgotten ballads.
+              An intimate live concert of iconic and forgotten ballads.
             </p>
             <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '600px', margin: '0 auto 28px' }}>
-              Inside a private Manhattan studio near Bryant Park and the Empire State Building, composer and performer Ernie Savage presents a close-listening concert devoted to the great pop ballads of the American singer-songwriter era.
+              Composer and performer Ernie Savage presents a close-listening performance devoted to the great pop ballads of the American singer-songwriter era. Hosted in a private Manhattan studio near Bryant Park, this limited-seating experience brings listeners within arm&apos;s reach of the artist — where phrasing, pause, and presence shape the room in real time.
             </p>
-            <p style={{ ...breathStyle, textAlign: 'center' }}>This is not a club performance.</p>
-            <p style={{ ...breathStyle, textAlign: 'center' }}>This is not background music.</p>
+            <p style={{ ...breathStyle, textAlign: 'center' }}>The beautiful ones. The melancholy ones. The ones that stay with you.</p>
             <p style={{ ...breathStyle, textAlign: 'center', marginTop: '20px', fontStyle: 'italic', color: '#c4a574' }}>
-              This is a room small enough for the music to breathe.
+              Come inhabit the songs.
             </p>
+            <div style={{ marginTop: '28px', textAlign: 'center' }}>
+              <a href="#reserve" className="card-link" style={{ fontSize: '16px', letterSpacing: '0.06em' }}>Reserve a Seat &rarr;</a>
+            </div>
           </div>
         </section>
 
         {/* SECTION 2 — THE CONCEPT */}
-        <section style={sectionStyle}>
+        <section style={{ ...sectionStyle, paddingBottom: '40px' }}>
           <h2 style={h2Style}>The Concept</h2>
           <p style={bodyStyle}>
             Secret Ballads explores iconic and nearly forgotten songs from the golden era of American songwriting — works shaped by melody, restraint, and emotional precision.
@@ -443,11 +445,8 @@ export default function ExperiencePage() {
           <p style={bodyStyle}>
             are reinterpreted through solo piano, acoustic guitar, and voice — performed within conversational distance of the audience.
           </p>
-          <p style={bodyStyle}>
-            Between performances, Ernie shares brief reflections on the writers, the era, and the craft behind the songs — offering context without interrupting the flow.
-          </p>
-          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
-            The result is a focused listening experience that rewards attention.
+          <p style={{ ...bodyStyle, marginBottom: '0' }}>
+            Between performances, Ernie shares brief reflections on the writers, the era, and the craft behind the songs.
           </p>
         </section>
 
@@ -463,13 +462,25 @@ export default function ExperiencePage() {
           <div className="hero-content" style={{ maxWidth: '720px' }}>
           <h2 style={h2Style}>About Ernie Savage</h2>
           <p style={bodyStyle}>
-            Ernie Savage is a New York&ndash;based composer, pianist, guitarist, and recording artist whose career spans television scoring, international performance, and decades of live concerts.
+            Ernie Savage is a New York&ndash;based composer, songwriter, and performer whose four decades of musical work span live performance, studio production, and composition for television.
           </p>
           <p style={bodyStyle}>
-            He has composed themes and music for major broadcast networks and led ensembles ranging from solo piano to full 10-piece bands. His work reflects a deep commitment to melodic songwriting and emotional clarity.
+            He co-composed the theme for NBC&apos;s <em>Early Today</em>, heard nationwide for nearly a decade, and received the 2005 Promax Gold Award for Best Show Theme.
           </p>
-          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
-            Secret Ballads represents the distilled version of that career — one performer, one instrument, one room.
+          <p style={bodyStyle}>
+            Savage held a residency at Sambucca Jazz Club in Houston (1998&ndash;2000). His live album <em>Swing This</em> received worldwide radio airplay and critical acclaim, and he and his band were routinely featured in the <em>Houston Chronicle</em>.
+          </p>
+          <p style={bodyStyle}>
+            From 2001&ndash;2007, he curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jesse Raphael, Jackie &quot;The Jokeman&quot; Martling, and Lisa Lampanelli.
+          </p>
+          <p style={bodyStyle}>
+            His six-month Friday night engagement fronting his 10-piece big band at New York City&apos;s Carnegie Club was a sellout.
+          </p>
+          <p style={bodyStyle}>
+            Performances for corporate clients include American Express, Deloitte, Coca-Cola, and Apple.
+          </p>
+          <p style={bodyStyle}>
+            His studio production work ranges from pop and rock icons such as Stephen Stills and David Johansen to renowned chanteuses and recording artists such as Lisa Zane and Deanna Kirk.
           </p>
           </div>
         </section>
@@ -480,18 +491,17 @@ export default function ExperiencePage() {
           <div style={{ marginBottom: '32px' }}>
             <p style={breathStyle}>&bull;&ensp;75&ndash;90 minute curated live performance</p>
             <p style={breathStyle}>&bull;&ensp;Solo piano, guitar, and voice</p>
-            <p style={breathStyle}>&bull;&ensp;Limited to 8 guests</p>
+            <p style={breathStyle}>&bull;&ensp;Limited to 8&ndash;10 guests</p>
             <p style={breathStyle}>&bull;&ensp;Seated, salon-style listening</p>
             <p style={breathStyle}>&bull;&ensp;Stories and musical context woven throughout</p>
             <p style={breathStyle}>&bull;&ensp;Informal conversation after the final song</p>
           </div>
           <p style={{ ...bodyStyle, marginTop: '16px' }}>
-            Guests are seated within feet of the instrument.
+            You are seated within a few feet of the performer.
           </p>
-          <p style={breathStyle}>You hear the breath before the lyric. You see the hands strike the keys. You feel the silence between phrases.</p>
-          <p style={{ ...bodyStyle, marginTop: '20px', fontStyle: 'italic', color: '#c4a574' }}>
-            This is proximity — not production.
-          </p>
+          <div style={{ marginTop: '28px', textAlign: 'center' }}>
+            <a href="#reserve" className="card-link" style={{ fontSize: '16px', letterSpacing: '0.06em' }}>Reserve a Seat &rarr;</a>
+          </div>
         </section>
 
         {/* SECTION 5 — THE SETTING */}
@@ -519,13 +529,7 @@ export default function ExperiencePage() {
             Steps from Bryant Park and the New York Public Library
           </p>
           <p style={bodyStyle}>
-            The studio is an active working rehearsal space — simple, acoustic, unpolished.
-          </p>
-          <p style={bodyStyle}>
-            There is no theatrical lighting. No stage separation. No amplified spectacle.
-          </p>
-          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
-            Just a piano, a guitar, a voice — and a room designed for listening.
+            The studio is an active working rehearsal space — simple and acoustically rich.
           </p>
           </div>
         </section>
@@ -540,34 +544,36 @@ export default function ExperiencePage() {
           }}
         >
           <div className="hero-content" style={{ maxWidth: '720px' }}>
-          <h2 style={h2Style}>Why Only Eight Guests?</h2>
+          <h2 style={h2Style}>Why Only Eight to Ten Guests?</h2>
           <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574', marginBottom: '28px' }}>
-            Because these songs were never meant to compete with noise.
+            Because the setting is built for intimacy.
           </p>
-          <p style={{ ...bodyStyle, marginBottom: '16px' }}>The scale is deliberate.</p>
-          <p style={{ ...bodyStyle, marginBottom: '12px' }}>A smaller room allows:</p>
-          <div style={{ marginBottom: '28px' }}>
-            <p style={breathStyle}>&bull;&ensp;Emotional nuance</p>
-            <p style={breathStyle}>&bull;&ensp;Dynamic control</p>
-            <p style={breathStyle}>&bull;&ensp;Direct connection</p>
-            <p style={breathStyle}>&bull;&ensp;Shared stillness</p>
+          <p style={bodyStyle}>
+            Eight to ten guests creates the feeling of a private gathering — like music in a family living room.
+          </p>
+          <p style={{ ...breathStyle, marginTop: '8px' }}>Direct connection. Shared attention. Emotional immediacy.</p>
+          <p style={bodyStyle}>
+            The songs unfold as they would among friends.
+          </p>
+          <div style={{ marginTop: '28px', textAlign: 'center' }}>
+            <a href="#reserve" className="card-link" style={{ fontSize: '16px', letterSpacing: '0.06em' }}>Reserve your place &rarr;</a>
           </div>
-          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574' }}>
-            Secret Ballads is designed for intimacy, not volume.
-          </p>
           </div>
         </section>
 
         {/* TAGLINE ABOVE RESERVATIONS */}
         <section style={{ padding: '60px 24px 0', textAlign: 'center' }}>
           <p style={{ fontFamily: "'Playfair Display', serif", fontSize: '28px', letterSpacing: '0.04em', color: '#e8dcc8', fontStyle: 'italic' }}>
-            An evening for those who prefer listening over noise.
+            Come inhabit the songs.
           </p>
         </section>
 
         {/* SECTION 7 — RESERVATIONS */}
         <section className="shows-section" id="reserve" style={{ borderTop: '1px solid rgba(196,165,116,0.1)' }}>
           <div className="shows-title">Reservations</div>
+          <p style={{ fontSize: '11px', color: '#5a4d3d', textAlign: 'center', lineHeight: 1.6, maxWidth: '500px', margin: '0 auto 24px' }}>
+            During checkout, you may opt in to receive a one-time SMS booking confirmation from Ernie Savage by selecting &quot;SMS&quot; or &quot;Email &amp; SMS&quot; as your confirmation method. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No recurring messages. See our <a href="/privacy" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Privacy Policy</a> and <a href="/terms" style={{ color: '#8a7d6d', textDecoration: 'underline' }}>Terms</a>.
+          </p>
           {renderShowCards()}
         </section>
       </main>
