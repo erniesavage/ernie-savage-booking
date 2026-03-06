@@ -578,6 +578,195 @@ export default function ExperiencePage() {
   }
 
   // ============================================================
+  // HEART OF HARRY — CUSTOM LAYOUT
+  // ============================================================
+  if (slug === 'heart-of-harry') {
+    var sectionStyle = { padding: '80px 24px', maxWidth: '720px', margin: '0 auto' } as const;
+    var h2Style = { fontFamily: "'Playfair Display', serif", fontSize: '28px', letterSpacing: '0.04em', marginBottom: '36px', color: '#e8dcc8', textAlign: 'center' as const };
+    var bodyStyle = { fontSize: '17px', lineHeight: 1.8, color: '#c8bda8', marginBottom: '20px', textAlign: 'center' as const };
+    var breathStyle = { fontSize: '17px', lineHeight: 2.2, color: '#c8bda8', marginBottom: '8px', textAlign: 'center' as const };
+
+    return (
+      <main>
+        {/* SECTION 1 — HERO */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.55) 0%, rgba(13,11,9,0.3) 30%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.95) 100%), url('/images/behind ernie.jpeg')",
+            minHeight: 'auto',
+            padding: '160px 24px 80px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
+            <p style={{ fontSize: '16px', color: '#c4a574', fontStyle: 'italic', letterSpacing: '0.04em', marginBottom: '16px' }}>
+              He was the wild one with the golden voice — but the songs tell a deeper story.
+            </p>
+            <h1 style={{ fontSize: '44px', letterSpacing: '0.12em', marginBottom: '20px', textTransform: 'uppercase' }}>The Heart of Harry</h1>
+            <p style={{ fontSize: '20px', color: '#c8bda8', fontStyle: 'italic', lineHeight: 1.7, marginBottom: '32px' }}>
+              An intimate live concert celebrating the songs of Harry Nilsson.
+            </p>
+            <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '600px', margin: '0 auto 28px' }}>
+              Composer and performer Ernie Savage presents a close-listening performance devoted to the fragile beauty and emotional depth hidden inside Nilsson&apos;s extraordinary catalog.
+            </p>
+            <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '600px', margin: '0 auto 28px' }}>
+              In this powerful solo performance for piano, guitar, and voice, Nilsson&apos;s most tender songs are brought back to life — stripped down, reimagined, and deeply felt.
+            </p>
+            <p style={{ ...breathStyle, textAlign: 'center', marginTop: '20px', fontStyle: 'italic', color: '#c4a574' }}>
+              A rare evening of truth, beauty, and melody.
+            </p>
+            <div style={{ marginTop: '28px', textAlign: 'center' }}>
+              <a href="#reserve" className="card-link" style={{ fontSize: '16px', letterSpacing: '0.06em' }}>Reserve a Seat &rarr;</a>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 2 — THE CONCEPT */}
+        <section style={{ ...sectionStyle, paddingBottom: '40px' }}>
+          <h2 style={h2Style}>The Concept</h2>
+          <p style={bodyStyle}>
+            The Heart of Harry explores the emotional and deeply human songs of Harry Nilsson — music where sweetness and melancholy live side by side.
+          </p>
+          <p style={{ ...bodyStyle, marginBottom: '12px' }}>Songs such as:</p>
+          <p style={{ fontSize: '16px', color: '#c4a574', lineHeight: 2.2, textAlign: 'center', letterSpacing: '0.02em', marginBottom: '24px' }}>
+            Everybody&apos;s Talkin&apos; &nbsp;&middot;&nbsp; Without You &nbsp;&middot;&nbsp; Gotta Get Up &nbsp;&middot;&nbsp; Coconut<br />
+            Remember &nbsp;&middot;&nbsp; One &nbsp;&middot;&nbsp; Spaceman &nbsp;&middot;&nbsp; 1941
+          </p>
+          <p style={bodyStyle}>
+            are reimagined through solo piano, acoustic guitar, and voice — performed within conversational distance of the audience.
+          </p>
+          <p style={{ ...bodyStyle, marginBottom: '0' }}>
+            Between performances, Ernie shares brief reflections on Nilsson&apos;s life, the era that shaped his music, and the remarkable musical imagination that made him one of the most distinctive voices of the singer-songwriter era.
+          </p>
+        </section>
+
+        {/* SECTION 3 — ABOUT ERNIE SAVAGE */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/Ernie Piano looking at keys.jpeg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
+          <h2 style={h2Style}>About Ernie Savage</h2>
+          <p style={bodyStyle}>
+            Ernie Savage is a New York&ndash;based composer, songwriter, and performer whose four decades of musical work span live performance, studio production, and composition for television.
+          </p>
+          <p style={bodyStyle}>
+            He co-composed the theme for NBC&apos;s <em>Early Today</em>, heard nationwide for nearly a decade, and received the 2005 Promax Gold Award for Best Show Theme.
+          </p>
+          <p style={bodyStyle}>
+            Savage held a residency at Sambucca Jazz Club in Houston (1998&ndash;2000). His live album <em>Swing This</em> received worldwide radio airplay and critical acclaim, and he and his band were routinely featured in the <em>Houston Chronicle</em>.
+          </p>
+          <p style={bodyStyle}>
+            He curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jesse Raphael, Jackie &quot;The Joke Man&quot; Martling, Lisa Lampanelli and Jeff Ross.
+          </p>
+          <p style={bodyStyle}>
+            His six-month Friday night engagement fronting his 10-piece big band at New York City&apos;s Carnegie Club was a sellout.
+          </p>
+          <p style={bodyStyle}>
+            Performances for corporate clients include American Express, Deloitte, Coca-Cola, and Apple.
+          </p>
+          <p style={bodyStyle}>
+            His studio production work ranges from pop and rock icons such as Stephen Stills and David Johansen to renowned chanteuses and recording artists such as Lisa Zane and Deanna Kirk.
+          </p>
+          </div>
+        </section>
+
+        {/* SECTION 4 — THE EXPERIENCE */}
+        <section style={{ ...sectionStyle, borderTop: '1px solid rgba(196,165,116,0.1)', paddingTop: '80px' }}>
+          <h2 style={h2Style}>The Experience</h2>
+          <div style={{ marginBottom: '32px' }}>
+            <p style={breathStyle}>&bull;&ensp;75&ndash;90 minute curated live performance</p>
+            <p style={breathStyle}>&bull;&ensp;Solo piano, guitar, and voice</p>
+            <p style={breathStyle}>&bull;&ensp;Limited to 8&ndash;10 guests</p>
+            <p style={breathStyle}>&bull;&ensp;Seated, salon-style listening</p>
+            <p style={breathStyle}>&bull;&ensp;Stories and musical context woven throughout</p>
+            <p style={breathStyle}>&bull;&ensp;Informal conversation after the final song</p>
+          </div>
+          <p style={{ ...bodyStyle, marginTop: '16px' }}>
+            You are seated within a few feet of the performer.
+          </p>
+          <div style={{ marginTop: '28px', textAlign: 'center' }}>
+            <a href="#reserve" className="card-link" style={{ fontSize: '16px', letterSpacing: '0.06em' }}>Reserve a Seat &rarr;</a>
+          </div>
+        </section>
+
+        {/* SECTION 5 — THE SETTING */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/Piano_room_desktop_hero_no_mixer_EX.jpg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
+          <h2 style={h2Style}>The Setting</h2>
+          <p style={{ ...bodyStyle, marginBottom: '8px' }}>The Heart of Harry is hosted at</p>
+          <p style={{ fontSize: '18px', color: '#e8dcc8', textAlign: 'center', lineHeight: 1.8, marginBottom: '6px', fontWeight: 500 }}>
+            Michiko Studios
+          </p>
+          <p style={{ fontSize: '16px', color: '#c8bda8', textAlign: 'center', lineHeight: 1.8, marginBottom: '4px' }}>
+            15 West 39th Street, 7th Floor
+          </p>
+          <p style={{ fontSize: '15px', color: '#8a7d6d', textAlign: 'center', lineHeight: 1.8, marginBottom: '4px' }}>
+            Between 5th and 6th Avenues
+          </p>
+          <p style={{ fontSize: '15px', color: '#8a7d6d', textAlign: 'center', lineHeight: 1.8, marginBottom: '32px' }}>
+            Steps from Bryant Park and the New York Public Library
+          </p>
+          <p style={bodyStyle}>
+            The studio is an active working rehearsal space — simple and acoustically rich.
+          </p>
+          </div>
+        </section>
+
+        {/* SECTION 6 — WHY ONLY EIGHT GUESTS? */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "linear-gradient(180deg, rgba(13,11,9,0.88) 0%, rgba(13,11,9,0.75) 30%, rgba(13,11,9,0.75) 70%, rgba(13,11,9,0.92) 100%), url('/images/private-concerts-new.jpg')",
+            minHeight: 'auto',
+            padding: '100px 24px',
+          }}
+        >
+          <div className="hero-content" style={{ maxWidth: '720px' }}>
+          <h2 style={h2Style}>Why Only Eight to Ten Guests?</h2>
+          <p style={{ ...bodyStyle, fontStyle: 'italic', color: '#c4a574', marginBottom: '28px' }}>
+            Because the setting is built for intimacy.
+          </p>
+          <p style={bodyStyle}>
+            Eight to ten guests creates the feeling of a private gathering — like music in a family living room.
+          </p>
+          <p style={{ ...breathStyle, marginTop: '8px' }}>Direct connection. Shared attention. Emotional immediacy.</p>
+          <p style={bodyStyle}>
+            The songs unfold as they would among friends.
+          </p>
+          <div style={{ marginTop: '28px', textAlign: 'center' }}>
+            <a href="#reserve" className="card-link" style={{ fontSize: '16px', letterSpacing: '0.06em' }}>Reserve your place &rarr;</a>
+          </div>
+          </div>
+        </section>
+
+        {/* TAGLINE ABOVE RESERVATIONS */}
+        <section style={{ padding: '60px 24px 0', textAlign: 'center' }}>
+          <p style={{ fontFamily: "'Playfair Display', serif", fontSize: '28px', letterSpacing: '0.04em', color: '#e8dcc8', fontStyle: 'italic' }}>
+            Take the journey through the heart of Harry.
+          </p>
+        </section>
+
+        {/* SECTION 7 — RESERVATIONS */}
+        <section className="shows-section" id="reserve" style={{ borderTop: '1px solid rgba(196,165,116,0.1)' }}>
+          <div className="shows-title">Reservations</div>
+          {renderShowCards()}
+        </section>
+      </main>
+    );
+  }
+
+  // ============================================================
   // DEFAULT LAYOUT — ALL OTHER EXPERIENCES
   // ============================================================
   return (
