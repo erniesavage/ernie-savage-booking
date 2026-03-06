@@ -471,7 +471,7 @@ export default function ExperiencePage() {
             Savage held a residency at Sambucca Jazz Club in Houston (1998&ndash;2000). His live album <em>Swing This</em> received worldwide radio airplay and critical acclaim, and he and his band were routinely featured in the <em>Houston Chronicle</em>.
           </p>
           <p style={bodyStyle}>
-            From 2001&ndash;2007, he curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jesse Raphael, Jackie &quot;The Joke Man&quot; Martling, and Lisa Lampanelli.
+            He curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jesse Raphael, Jackie &quot;The Joke Man&quot; Martling, Lisa Lampanelli and Jeff Ross.
           </p>
           <p style={bodyStyle}>
             His six-month Friday night engagement fronting his 10-piece big band at New York City&apos;s Carnegie Club was a sellout.
