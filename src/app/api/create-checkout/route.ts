@@ -3,6 +3,21 @@ import { stripe } from '@/lib/stripe';
 import { supabase } from '@/lib/supabase';
 import { experienceData } from '@/lib/experiences';
 
+// Which site a given experience lives on. Celebrate Nilsson checks out on its own domain;
+// everything else stays on erniesavage.com.
+function siteFor(experienceSlug: string) {
+  if (experienceSlug === 'celebrate-nilsson') {
+    return {
+      base: 'https://celebratenilsson.com',
+      cancelPath: '/#shows',
+    };
+  }
+  return {
+    base: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    cancelPath: `/experience/${experienceSlug}`,
+  };
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -42,7 +57,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Not enough seats available' }, { status: 400 });
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    // Never trust the price from the browser: use the show's own price.
+    const unitAmount = show.price_cents || priceCents;
+
+    const site = siteFor(experienceSlug);
 
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
@@ -55,14 +73,14 @@ export async function POST(request: NextRequest) {
               name: `${info.title} — ${new Date(show.show_date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`,
               description: `${show.venue_name} · ${ticketCount} ticket${ticketCount > 1 ? 's' : ''}`,
             },
-            unit_amount: priceCents,
+            unit_amount: unitAmount,
           },
           quantity: ticketCount,
         },
       ],
       mode: 'payment',
-      success_url: `${siteUrl}/booking-confirmed?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/experience/${experienceSlug}`,
+      success_url: `${site.base}/booking-confirmed?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${site.base}${site.cancelPath}`,
       customer_email: customerEmail || undefined,
       metadata: {
         show_id: showId,
@@ -72,7 +90,7 @@ export async function POST(request: NextRequest) {
         customer_phone: customerPhone || '',
         contact_preference: contactPreference,
         ticket_count: ticketCount.toString(),
-        total_cents: (priceCents * ticketCount).toString(),
+        total_cents: (unitAmount * ticketCount).toString(),
       },
     });
 

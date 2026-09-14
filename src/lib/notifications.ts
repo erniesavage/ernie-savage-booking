@@ -17,15 +17,27 @@ interface BookingDetails {
   venueNotes?: string;
 }
 
+// Accepts "19:00:00", "19:00", or already-formatted "7:00 PM"
+function fmtTime(t: string) {
+  const m = /^(\d{1,2}):(\d{2})/.exec(t || '');
+  if (!m) return t;
+  let h = parseInt(m[1], 10);
+  const min = m[2];
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return min === '00' ? `${h} ${ampm}` : `${h}:${min} ${ampm}`;
+}
+
 export async function sendConfirmationEmail(booking: BookingDetails) {
   if (!booking.customerEmail) return;
 
-  const formattedDate = new Date(booking.showDate).toLocaleDateString('en-US', {
+  const formattedDate = new Date(booking.showDate + 'T00:00:00').toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+  const showTime = fmtTime(booking.showTime);
 
   try {
     await resend.emails.send({
@@ -47,7 +59,7 @@ export async function sendConfirmationEmail(booking: BookingDetails) {
             
             <table style="width:100%;color:#d4c8b4;line-height:2;">
               <tr><td style="color:#8a7d6d;">Date</td><td style="text-align:right;">${formattedDate}</td></tr>
-              <tr><td style="color:#8a7d6d;">Time</td><td style="text-align:right;">${booking.showTime}</td></tr>
+              <tr><td style="color:#8a7d6d;">Time</td><td style="text-align:right;">${showTime}</td></tr>
               <tr><td style="color:#8a7d6d;">Venue</td><td style="text-align:right;">${booking.venueName}</td></tr>
               ${booking.venueAddress ? `<tr><td style="color:#8a7d6d;">Address</td><td style="text-align:right;">${booking.venueAddress}</td></tr>` : ''}
               <tr><td style="color:#8a7d6d;">Tickets</td><td style="text-align:right;">${booking.ticketCount}</td></tr>
@@ -85,13 +97,12 @@ export async function sendConfirmationSMS(booking: BookingDetails) {
     return;
   }
 
-  console.log('SMS attempting to send to:', booking.customerPhone);
-
-  const formattedDate = new Date(booking.showDate).toLocaleDateString('en-US', {
+  const formattedDate = new Date(booking.showDate + 'T00:00:00').toLocaleDateString('en-US', {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
   });
+  const showTime = fmtTime(booking.showTime);
 
   try {
     const twilio = require('twilio')(
@@ -106,10 +117,8 @@ export async function sendConfirmationSMS(booking: BookingDetails) {
     }
     phoneNumber = '+' + phoneNumber;
 
-    console.log('SMS sending to formatted number:', phoneNumber, 'from:', process.env.TWILIO_PHONE_NUMBER);
-
     var result = await twilio.messages.create({
-      body: `🎵 Ernie Savage — You're in!\n\n${booking.experienceTitle}\n${formattedDate} at ${booking.showTime}\n${booking.venueName}\n\nTicket: ${booking.ticketCode}\n${booking.ticketCount} ticket(s)\n\nSee you there.`,
+      body: `Ernie Savage — You're in!\n\n${booking.experienceTitle}\n${formattedDate} at ${showTime}\n${booking.venueName}\n\nTicket: ${booking.ticketCode}\n${booking.ticketCount} ticket(s)\n\nSee you there.`,
       from: process.env.TWILIO_PHONE_NUMBER,
       to: phoneNumber,
     });

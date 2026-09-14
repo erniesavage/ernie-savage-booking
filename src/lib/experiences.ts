@@ -11,6 +11,20 @@ export interface ExperienceInfo {
 }
 
 export const experienceData: Record<string, ExperienceInfo> = {
+  'celebrate-nilsson': {
+    slug: 'celebrate-nilsson',
+    title: 'Celebrate Nilsson',
+    subtitle: 'The songs and story of Harry Nilsson',
+    cardDesc:
+      'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage on piano, guitar and voice.',
+    cardCta: 'Buy tickets',
+    fullDesc: [
+      'Harry Nilsson was one of the most gifted and misunderstood songwriters of the 20th century — celebrated, then overlooked; public, then deeply private. The wild one with the golden voice, and behind the chaos, songs that were fragile, tender, and full of sweetness.',
+      'Celebrate Nilsson is an intimate evening of those songs, the stories behind them, and the man himself, presented and performed by singer/songwriter Ernie Savage: solo, on piano, guitar and voice. The headlines faded; the magic didn\'t. This is the heart of Harry, live.',
+    ],
+    image: '/images/CN_Hero_Smoking_16x9.jpg',
+    color: '#f2c230',
+  },
   'secret-ballads': {
     slug: 'secret-ballads',
     title: 'Secret Ballads',
