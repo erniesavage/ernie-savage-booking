@@ -1,8 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
 import Script from 'next/script';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'Ernie Savage | Intimate Music Experiences',
@@ -36,6 +36,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Set by src/middleware.ts: 'nilsson' on celebratenilsson.com / .org, 'ernie' everywhere else.
+  const site = headers().get('x-site') === 'nilsson' ? 'nilsson' : 'ernie';
+
   return (
     <html lang="en">
       <head>
@@ -50,15 +53,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
       </head>
       <body>
-        <nav>
-          <Link href="/" className="logo">
-            Ernie Savage
-          </Link>
-          <div className="nav-links">
-            <Link href="/#experiences">Experiences</Link>
-            <Link href="/#about">About</Link>
-          </div>
-        </nav>
+        {site === 'nilsson' ? (
+          <nav>
+            <Link href="/" className="logo">
+              Celebrate Nilsson
+            </Link>
+            <div className="nav-links">
+              <Link href="/#watch">Watch</Link>
+              <Link href="/#signup">Sign up</Link>
+              <a href="https://www.erniesavage.com">Ernie Savage</a>
+            </div>
+          </nav>
+        ) : (
+          <nav>
+            <Link href="/" className="logo">
+              Ernie Savage
+            </Link>
+            <div className="nav-links">
+              <Link href="/#experiences">Experiences</Link>
+              <Link href="/#about">About</Link>
+            </div>
+          </nav>
+        )}
         {children}
         <footer>
           <p className="footer-copy">© 2026 Ernie Savage. All rights reserved.</p>
