@@ -9,14 +9,14 @@ const REMEMBER_VIDEO_ID = '';
 const OG_IMAGE = 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg';
 
 export const metadata = {
-  title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson · Live in New York',
+  title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
   description:
-    'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage on piano, guitar and voice. Tickets for New York dates, and first access to new shows by email or text.',
+    'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage on piano, guitar and voice. Tickets, and first access to new dates by email or text.',
   alternates: { canonical: 'https://celebratenilsson.com' },
   openGraph: {
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
     description:
-      'An intimate evening of the songs, stories and life of Harry Nilsson, presented and performed by Ernie Savage. Live in New York.',
+      'An intimate evening of the songs, stories and life of Harry Nilsson, presented and performed by Ernie Savage.',
     url: 'https://celebratenilsson.com',
     siteName: 'Celebrate Nilsson',
     type: 'website',
