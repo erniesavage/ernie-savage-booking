@@ -4,40 +4,59 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { headers } from 'next/headers';
 
-export const metadata: Metadata = {
-  title: 'Ernie Savage | Intimate Music Experiences',
+const ERNIE: Metadata = {
+  title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
   description:
-    'Intimate music experiences featuring classic ballads, timeless songs, and real connection. Small gatherings of 8–10 in New York City.',
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
+    'Ernie Savage is a New York-based composer, songwriter, and performer. Creator of Celebrate Nilsson, Secret Ballads NYC, and Celebrate the Songwriters: Radio 1967-1977 — songs and stories on piano and guitar.',
+  icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
   openGraph: {
-    title: 'Ernie Savage | Intimate Music Experiences',
-    description: 'Classic ballads, timeless songs, and real connection. Small gatherings of 8–10 in New York City.',
+    title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
+    description: 'Celebrate Nilsson, Secret Ballads NYC, and Celebrate the Songwriters: Radio 1967-1977 — songs and stories on piano and guitar.',
     url: 'https://www.erniesavage.com',
     siteName: 'Ernie Savage',
-    images: [
-      {
-        url: 'https://www.erniesavage.com/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Ernie Savage - Intimate Music Experiences',
-      },
-    ],
+    images: [{ url: 'https://www.erniesavage.com/images/HP_1_Hero_Image_Piano_and_Room_.jpg', width: 1200, height: 630, alt: 'Ernie Savage' }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ernie Savage | Intimate Music Experiences',
-    description: 'Classic ballads, timeless songs, and real connection. Small gatherings of 8–10 in New York City.',
-    images: ['https://www.erniesavage.com/og-image.png'],
+    title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
+    description: 'Celebrate Nilsson, Secret Ballads NYC, and Celebrate the Songwriters: Radio 1967-1977 — songs and stories on piano and guitar.',
+    images: ['https://www.erniesavage.com/images/HP_1_Hero_Image_Piano_and_Room_.jpg'],
   },
 };
 
+const NILSSON: Metadata = {
+  title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
+  description:
+    'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage on piano, guitar and voice. Live in New York.',
+  icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
+  openGraph: {
+    title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
+    description: 'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage. Live in New York.',
+    url: 'https://celebratenilsson.com',
+    siteName: 'Celebrate Nilsson',
+    images: [{ url: 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg', width: 1200, height: 630, alt: 'Celebrate Nilsson' }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
+    description: 'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage.',
+    images: ['https://www.erniesavage.com/images/CN_OG_1200x630.jpg'],
+  },
+};
+
+// Set by src/middleware.ts: 'nilsson' on celebratenilsson.com / .org, 'ernie' everywhere else.
+function currentSite() {
+  return headers().get('x-site') === 'nilsson' ? 'nilsson' : 'ernie';
+}
+
+export function generateMetadata(): Metadata {
+  return currentSite() === 'nilsson' ? NILSSON : ERNIE;
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Set by src/middleware.ts: 'nilsson' on celebratenilsson.com / .org, 'ernie' everywhere else.
-  const site = headers().get('x-site') === 'nilsson' ? 'nilsson' : 'ernie';
+  const site = currentSite();
 
   return (
     <html lang="en">
@@ -61,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="nav-links">
               <Link href="/#watch">Watch</Link>
               <Link href="/#signup">Sign up</Link>
-              <a href="https://www.erniesavage.com">Ernie Savage</a>
+              <a href="https://www.erniesavage.com/#about">Ernie Savage</a>
             </div>
           </nav>
         ) : (
