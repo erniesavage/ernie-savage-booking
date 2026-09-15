@@ -11,6 +11,15 @@ export default function BookingConfirmedPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  // Which site are we on? Sets the "back" link text. On celebratenilsson.com "/" is the Nilsson page.
+  const [isNilsson, setIsNilsson] = useState(false);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsNilsson(window.location.hostname.includes('celebratenilsson.'));
+    }
+  }, []);
+  const backLabel = isNilsson ? 'Back to Celebrate Nilsson' : 'Back to Ernie Savage';
+
   useEffect(() => {
     if (!sessionId) return;
 
@@ -45,7 +54,7 @@ export default function BookingConfirmedPage() {
     const hour = parseInt(h);
     const ampm = hour >= 12 ? 'PM' : 'AM';
     const h12 = hour % 12 || 12;
-    return `${h12}:${m} ${ampm}`;
+    return m === '00' ? `${h12} ${ampm}` : `${h12}:${m} ${ampm}`;
   }
 
   if (loading) {
@@ -70,7 +79,7 @@ export default function BookingConfirmedPage() {
             email and/or text.
           </p>
           <Link href="/" className="card-link" style={{ justifyContent: 'center' }}>
-            Back to Experiences
+            {backLabel}
           </Link>
         </div>
       </main>
@@ -126,7 +135,7 @@ export default function BookingConfirmedPage() {
 
         <div style={{ marginTop: '40px' }}>
           <Link href="/" className="card-link" style={{ justifyContent: 'center' }}>
-            Back to Experiences
+            {backLabel}
           </Link>
         </div>
       </div>

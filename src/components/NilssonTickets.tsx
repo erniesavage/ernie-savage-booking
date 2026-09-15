@@ -77,7 +77,7 @@ export default function NilssonTickets() {
                     {fmtDate(s.show_date)} · {fmtTime(s.show_time)}
                   </div>
                   <div className="cn-date-sub">
-                    {s.venue_name}, Midtown NYC · ${(s.price_cents / 100).toFixed(0)}
+                    {s.venue_name}, Midtown NYC · 24-seat room · ${(s.price_cents / 100).toFixed(0)}
                     {soldOut ? ' · Sold out' : few ? ` · ${s.available_seats} seats left` : ''}
                   </div>
                 </div>
