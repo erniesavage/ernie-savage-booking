@@ -206,7 +206,7 @@ export default function CelebrateNilssonPage() {
           <div className="cn-wrap">
             <h2>First access to new dates, by email or text</h2>
             <p className="cn-lede">
-              January goes on sale to this list first. Leave an email, a mobile number, or both.
+              New dates and on-sales go to this list first. Leave an email, a mobile number, or both.
             </p>
             <NilssonSignup />
           </div>

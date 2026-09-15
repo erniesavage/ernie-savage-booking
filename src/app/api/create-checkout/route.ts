@@ -18,6 +18,17 @@ function siteFor(experienceSlug: string) {
   };
 }
 
+// "19:00:00" -> "7 PM"
+function fmtTime(t: string) {
+  const m = /^(\d{1,2}):(\d{2})/.exec(t || '');
+  if (!m) return t || '';
+  let h = parseInt(m[1], 10);
+  const min = m[2];
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return min === '00' ? `${h} ${ampm}` : `${h}:${min} ${ampm}`;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -70,7 +81,7 @@ export async function POST(request: NextRequest) {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: `${info.title} — ${new Date(show.show_date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`,
+              name: `${info.title} — ${new Date(show.show_date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}, ${fmtTime(show.show_time)}`,
               description: `${show.venue_name} · ${ticketCount} ticket${ticketCount > 1 ? 's' : ''}`,
             },
             unit_amount: unitAmount,
