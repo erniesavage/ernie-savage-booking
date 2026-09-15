@@ -29,7 +29,15 @@ const NILSSON: Metadata = {
   title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
   description:
     'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage on piano, guitar and voice. Live in New York.',
-  icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
+  icons: {
+    icon: [
+      { url: '/cn-favicon.ico' },
+      { url: '/cn-favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/cn-favicon-16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/cn-icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: '/cn-apple-touch-icon.png',
+  },
   openGraph: {
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
     description: 'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage. Live in New York.',
