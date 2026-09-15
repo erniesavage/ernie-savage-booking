@@ -71,12 +71,14 @@ export async function POST(req: Request) {
   // Notifications are best-effort: a failure here should not fail the signup.
   const tasks: Promise<unknown>[] = [];
 
-  if (emailOptIn && email && process.env.RESEND_API_KEY && process.env.FROM_EMAIL) {
+  // List emails come from Ernie himself (LIST_FROM_EMAIL); ticket emails use FROM_EMAIL (tickets@).
+  const listFrom = process.env.LIST_FROM_EMAIL || process.env.FROM_EMAIL;
+  if (emailOptIn && email && process.env.RESEND_API_KEY && listFrom) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     tasks.push(
       resend.emails
         .send({
-          from: process.env.FROM_EMAIL,
+          from: listFrom,
           to: email,
           subject: "You're on the Celebrate Nilsson list",
           html: `
