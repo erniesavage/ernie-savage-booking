@@ -2,12 +2,13 @@
 // Served at the root of celebratenilsson.com (via src/middleware.ts) and at erniesavage.com/celebrate-nilsson
 import NilssonSignup from '../../components/NilssonSignup';
 import NilssonTickets from '../../components/NilssonTickets';
+import VideoTile from '../../components/VideoTile';
 
 // ---- EDIT HERE: paste each YouTube video ID (the part after v= or youtu.be/) as the uploads go up. Empty = "Coming soon" tile. ----
-const REMEMBER_VIDEO_ID = '';
-const ALL_I_THINK_VIDEO_ID = '';
-const WITHOUT_HER_VIDEO_ID = '';
-const OPEN_YOUR_WINDOW_VIDEO_ID = '';
+const REMEMBER_VIDEO_ID = 'rzqhQB1Y3E8';
+const ALL_I_THINK_VIDEO_ID = '-8Zw_pn52OE';
+const WITHOUT_HER_VIDEO_ID = 'RljIwC-tnOA';
+const OPEN_YOUR_WINDOW_VIDEO_ID = '_e9uzTsMRmM';
 
 const OG_IMAGE = 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg';
 
@@ -69,7 +70,11 @@ const CSS = `
   @media (max-width:820px){.cn-grid3{grid-template-columns:1fr}}
   .cn-vid{position:relative;aspect-ratio:16/9;border:1px solid var(--cn-hairline);border-radius:6px;overflow:hidden;background:var(--cn-night-2)}
   .cn-vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  .cn-vid-soon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--cn-ivory-dim);font-family:"Archivo",sans-serif;font-size:14px;letter-spacing:.04em}
+  .cn-vid-btn{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:var(--cn-night-2);cursor:pointer}
+  .cn-vid-btn img{width:100%;height:100%;object-fit:cover;display:block}
+  .cn-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(18,17,16,.72);border:1px solid rgba(239,231,213,.5);color:var(--cn-ivory);display:flex;align-items:center;justify-content:center;transition:background .15s}
+  .cn-vid-btn:hover .cn-play,.cn-vid-btn:focus-visible .cn-play{background:var(--cn-gold);color:var(--cn-night);border-color:var(--cn-gold)}
+  .cn-vid-btn:focus-visible{outline:2px solid var(--cn-gold);outline-offset:2px}
   .cn-vid-title{font-family:"Fraunces",serif;font-weight:560;font-size:19px;margin:12px 0 2px}
   .cn-vid-sub{color:var(--cn-ivory-dim);font-size:15px;line-height:1.5;margin:0}
 
@@ -112,25 +117,6 @@ const CSS = `
   .cn-foot a{color:var(--cn-ivory);text-decoration:none;border-bottom:1px solid var(--cn-gold)}
   .cn-foot a:hover,.cn-foot a:focus-visible{color:var(--cn-gold)}
 `;
-
-function Video({ id, title, sub, alt }: { id: string; title: string; sub: string; alt?: string }) {
-  if (!id) return null; // no ID yet = tile doesn't render
-  return (
-    <div>
-      <div className="cn-vid">
-        <iframe
-          src={`https://www.youtube.com/embed/${id}`}
-          title={alt || title}
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
-      <p className="cn-vid-title">{title}</p>
-      <p className="cn-vid-sub">{sub}</p>
-    </div>
-  );
-}
 
 export default function CelebrateNilssonPage() {
   return (
@@ -181,19 +167,19 @@ export default function CelebrateNilssonPage() {
           <div className="cn-wrap">
             <p className="cn-label">Watch</p>
             <div className="cn-grid3">
-              <Video
+              <VideoTile
                 id="v_7iWAQnzW4"
                 title="Live show highlights"
                 sub="Songs, stories, and a room singing along."
                 alt="Celebrate Nilsson — Live Show Highlights"
               />
-              <Video
+              <VideoTile
                 id={REMEMBER_VIDEO_ID}
                 title="Remember (Christmas)"
                 sub="One of Harry's most loved, and one of his most tender."
                 alt="Remember (Christmas) — Harry Nilsson cover, live"
               />
-              <Video
+              <VideoTile
                 id="FhMtc1kIJ8A"
                 title="Ernie's Harry stories"
                 sub="Ernie knew Harry in 1980s Nyack, New York. An hour talking Nilsson with Frank LoBuono on the Being Frank podcast."
@@ -205,19 +191,19 @@ export default function CelebrateNilssonPage() {
             <>
             <p className="cn-label cn-label-2">More from the show</p>
             <div className="cn-grid3">
-              <Video
+              <VideoTile
                 id={ALL_I_THINK_VIDEO_ID}
                 title="All I Think About Is You"
                 sub="A ballad most people have never heard Harry sing."
                 alt="All I Think About Is You — Harry Nilsson cover, live"
               />
-              <Video
+              <VideoTile
                 id={WITHOUT_HER_VIDEO_ID}
                 title="Without Her"
                 sub="On guitar. Harry at his most exposed."
                 alt="Without Her — Harry Nilsson cover, live"
               />
-              <Video
+              <VideoTile
                 id={OPEN_YOUR_WINDOW_VIDEO_ID}
                 title="Open Your Window"
                 sub="The jazz version. Harry the singer, before the hits."
