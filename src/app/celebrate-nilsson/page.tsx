@@ -3,8 +3,11 @@
 import NilssonSignup from '../../components/NilssonSignup';
 import NilssonTickets from '../../components/NilssonTickets';
 
-// ---- EDIT HERE when the Remember (Christmas) upload is ready: paste the YouTube video ID (the part after v= or youtu.be/) ----
+// ---- EDIT HERE: paste each YouTube video ID (the part after v= or youtu.be/) as the uploads go up. Empty = "Coming soon" tile. ----
 const REMEMBER_VIDEO_ID = '';
+const ALL_I_THINK_VIDEO_ID = '';
+const WITHOUT_HER_VIDEO_ID = '';
+const OPEN_YOUR_WINDOW_VIDEO_ID = '';
 
 const OG_IMAGE = 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg';
 
@@ -49,6 +52,7 @@ const CSS = `
 
   .cn-section{padding:44px 0;border-bottom:1px solid var(--cn-hairline)}
   .cn-label{font-family:"Archivo",sans-serif;font-size:13px;letter-spacing:.06em;color:var(--cn-ivory-dim);margin:0 0 14px}
+  .cn-label-2{margin-top:36px}
 
   .cn-dates{border-top:1px solid var(--cn-hairline)}
   .cn-date{border-bottom:1px solid var(--cn-hairline);padding:20px 0}
@@ -110,20 +114,17 @@ const CSS = `
 `;
 
 function Video({ id, title, sub, alt }: { id: string; title: string; sub: string; alt?: string }) {
+  if (!id) return null; // no ID yet = tile doesn't render
   return (
     <div>
       <div className="cn-vid">
-        {id ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${id}`}
-            title={alt || title}
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
-          <div className="cn-vid-soon">Coming this week</div>
-        )}
+        <iframe
+          src={`https://www.youtube.com/embed/${id}`}
+          title={alt || title}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       </div>
       <p className="cn-vid-title">{title}</p>
       <p className="cn-vid-sub">{sub}</p>
@@ -183,30 +184,56 @@ export default function CelebrateNilssonPage() {
               <Video
                 id="v_7iWAQnzW4"
                 title="Live show highlights"
-                sub="Maureen's Jazz Cellar, Nyack — July 2026"
+                sub="Songs, stories, and a room singing along."
                 alt="Celebrate Nilsson — Live Show Highlights"
               />
               <Video
                 id={REMEMBER_VIDEO_ID}
                 title="Remember (Christmas)"
-                sub="Full song, live"
+                sub="One of Harry's most loved, and one of his most tender."
                 alt="Remember (Christmas) — Harry Nilsson cover, live"
               />
               <Video
                 id="FhMtc1kIJ8A"
                 title="Ernie's Harry stories"
-                sub="Ernie knew Harry in his Nyack years. An hour of firsthand stories with Frank LoBuono on the Being Frank podcast, with four of Harry's songs played live."
+                sub="Ernie knew Harry in 1980s Nyack, New York. An hour talking Nilsson with Frank LoBuono on the Being Frank podcast."
                 alt="Harry Nilsson: The Man and His Music — Ernie Savage on Being Frank"
               />
             </div>
+
+            {(ALL_I_THINK_VIDEO_ID || WITHOUT_HER_VIDEO_ID || OPEN_YOUR_WINDOW_VIDEO_ID) && (
+            <>
+            <p className="cn-label cn-label-2">More from the show</p>
+            <div className="cn-grid3">
+              <Video
+                id={ALL_I_THINK_VIDEO_ID}
+                title="All I Think About Is You"
+                sub="A ballad most people have never heard Harry sing."
+                alt="All I Think About Is You — Harry Nilsson cover, live"
+              />
+              <Video
+                id={WITHOUT_HER_VIDEO_ID}
+                title="Without Her"
+                sub="On guitar. Harry at his most exposed."
+                alt="Without Her — Harry Nilsson cover, live"
+              />
+              <Video
+                id={OPEN_YOUR_WINDOW_VIDEO_ID}
+                title="Open Your Window"
+                sub="The jazz version. Harry the singer, before the hits."
+                alt="Open Your Window — Harry Nilsson cover, live"
+              />
+            </div>
+            </>
+            )}
           </div>
         </section>
 
         <section className="cn-section cn-signup" id="signup">
           <div className="cn-wrap">
-            <h2>First access to new dates, by email or text</h2>
+            <h2>Stay close to the show</h2>
             <p className="cn-lede">
-              New dates and on-sales go to this list first. Leave an email, a mobile number, or both.
+              New dates, new songs, and whatever&rsquo;s next &mdash; to this list first, by email or text.
             </p>
             <NilssonSignup />
           </div>
@@ -214,10 +241,8 @@ export default function CelebrateNilssonPage() {
 
         <footer className="cn-foot">
           <div className="cn-wrap">
-            <p>Presented by Ernie Savage</p>
-            <p>
-              More shows and booking at <a href="https://www.erniesavage.com">erniesavage.com</a>
-            </p>
+            <p><a href="/booking">Bring Celebrate Nilsson to your room &rarr;</a></p>
+            <p>Presented by <a href="https://www.erniesavage.com/#about">Ernie Savage</a></p>
           </div>
         </footer>
       </main>
