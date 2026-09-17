@@ -514,7 +514,6 @@ footer {
   .form-row { flex-direction: column; }
   .contact-options { flex-direction: column; }
 }
-cat >> src/app/globals.css << 'EOF'
 
 /* Celebrate Nilsson nav: in the page flow and sticky, so it never covers the hero */
 .cn-nav {
