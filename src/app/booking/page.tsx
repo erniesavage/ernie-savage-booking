@@ -68,7 +68,7 @@ export default function BookingPage() {
 
         <section className="bk-section"><div className="cn-wrap">
           <h2>Listening rooms &amp; theaters</h2>
-          <p>Built for the room where people come to listen. A full evening &mdash; the songs, the stories behind them, and the man himself &mdash; as one seventy-five-minute set or two sets with a break. Story-driven and singalong-ready; the audience leaves knowing Harry better than when they walked in. Available as a headline evening or paired with a guest artist for a double bill.</p>
+          <p>Built for the room where people come to listen. A full evening &mdash; the songs, the stories behind them, and the man himself, told by someone who knew him &mdash; as one seventy-five-minute set or two sets with a break. Story-driven and singalong-ready; the audience leaves knowing Harry better than when they walked in. Available as a headline evening or paired with a guest artist for a double bill.</p>
         </div></section>
 
         <section className="bk-section"><div className="cn-wrap">
@@ -78,7 +78,7 @@ export default function BookingPage() {
 
         <section className="bk-section"><div className="cn-wrap">
           <h2>Corporate &amp; special events</h2>
-          <p>Audiences who don&rsquo;t know Nilsson&rsquo;s name know his songs; by the end of the evening they realize it was him all along. Works as an after-dinner set, a themed evening, or a seventy-five-minute program with a Q&amp;A, from a performer with four decades on stages from the Carnegie Club to network television.</p>
+          <p>Audiences who don&rsquo;t know Nilsson&rsquo;s name know his songs; by the end of the evening they realize it was him all along. Works as an after-dinner set, a themed evening, or a seventy-five-minute program with a Q&amp;A, from a performer who knew Nilsson, with four decades on stages from the Carnegie Club to network television.</p>
         </div></section>
 
         <section className="bk-form-head" id="inquire"><div className="cn-wrap">

@@ -514,3 +514,21 @@ footer {
   .form-row { flex-direction: column; }
   .contact-options { flex-direction: column; }
 }
+cat >> src/app/globals.css << 'EOF'
+
+/* Celebrate Nilsson nav: in the page flow and sticky, so it never covers the hero */
+.cn-nav {
+position: sticky;
+top: 0;
+flex-wrap: wrap;
+gap: 10px 24px;
+padding: 16px 24px;
+background: 
+#121110;
+border-bottom: 1px solid rgba(242, 194, 48, 0.26);
+}
+.cn-nav .nav-links { flex-wrap: wrap; justify-content: flex-end; gap: 12px 24px; }
+@media (max-width: 640px) {
+.cn-nav { justify-content: center; }
+.cn-nav .nav-links { justify-content: center; }
+}

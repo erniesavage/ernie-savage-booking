@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 const SMS_CONSENT =
-  'I agree to receive text messages from Ernie Savage / Celebrate Nilsson about show dates and ticket on-sales. Message frequency varies (a few per year). Msg & data rates may apply. Reply STOP to opt out, HELP for help.';
+  'I agree to receive text messages from Ernie Savage / Celebrate Nilsson about show dates and ticket announcements. Message frequency varies (a few per year). Msg & data rates may apply. Reply STOP to opt out, HELP for help.';
 
 export default function NilssonSignup() {
   const [email, setEmail] = useState('');

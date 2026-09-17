@@ -12,15 +12,16 @@ const OPEN_YOUR_WINDOW_VIDEO_ID = '_e9uzTsMRmM';
 
 const OG_IMAGE = 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg';
 
+const DESCRIPTION =
+  "The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry's in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.";
+
 export const metadata = {
   title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
-  description:
-    'An intimate evening of the songs, the stories behind them, and the man himself — presented and performed by Ernie Savage on piano, guitar and voice. Tickets, and first access to new dates by email or text.',
+  description: DESCRIPTION,
   alternates: { canonical: 'https://celebratenilsson.com' },
   openGraph: {
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
-    description:
-      'An intimate evening of the songs, stories and life of Harry Nilsson, presented and performed by Ernie Savage.',
+    description: DESCRIPTION,
     url: 'https://celebratenilsson.com',
     siteName: 'Celebrate Nilsson',
     type: 'website',
@@ -29,7 +30,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
-    description: 'An intimate evening of the songs, stories and life of Harry Nilsson, presented and performed by Ernie Savage.',
+    description: DESCRIPTION,
     images: [OG_IMAGE],
   },
 };
@@ -49,7 +50,7 @@ const CSS = `
   .cn-hero{padding:28px 0 0}
   .cn-hero img{width:100%;display:block;border-radius:6px;border:1px solid var(--cn-hairline)}
   .cn-hero h1{font-family:"Fraunces",serif;font-weight:340;font-size:clamp(26px,3.8vw,40px);line-height:1.12;text-align:center;margin:28px auto 6px;max-width:24ch}
-  .cn-hero .cn-sub{text-align:center;color:var(--cn-ivory-dim);font-size:19px;margin:0}
+  .cn-hero .cn-sub{text-align:center;color:var(--cn-ivory-dim);font-size:19px;margin:0 auto;max-width:52ch}
 
   .cn-section{padding:44px 0;border-bottom:1px solid var(--cn-hairline)}
   .cn-label{font-family:"Archivo",sans-serif;font-size:13px;letter-spacing:.06em;color:var(--cn-ivory-dim);margin:0 0 14px}
@@ -137,7 +138,10 @@ export default function CelebrateNilssonPage() {
               alt="Celebrate Nilsson — a man in a flat cap lights a cigar against a smoky night street"
             />
             <h1>The songs and story of Harry Nilsson</h1>
-            <p className="cn-sub">A live show, presented and performed by Ernie Savage</p>
+            <p className="cn-sub">
+              A live show from Ernie Savage, who knew Harry in their hometown of Nyack, New York &mdash; the
+              songs, the stories, the man himself.
+            </p>
           </div>
         </header>
 
@@ -156,7 +160,14 @@ export default function CelebrateNilssonPage() {
               voice, and behind the chaos, songs that were fragile, tender, and full of sweetness.
             </p>
             <p>
-              Celebrate Nilsson is an intimate evening of those songs, the stories behind them, and the man
+              Ernie Savage met Harry Nilsson at nineteen, through his uncle&rsquo;s restaurant in Nyack, where
+              Harry had become a regular. Harry would drive around with Ernie, listening to demo tapes of
+              Ernie&rsquo;s songs. One afternoon over a lunch involving a pitcher of martinis, Harry declared,
+              &ldquo;You have a voice not unlike my own in my younger days...&rdquo; The show is built on
+              firsthand accounts like that one &mdash; encounters, stories, and Harry as Ernie knew him.
+            </p>
+            <p>
+              Celebrate Nilsson is an intimate evening of Harry&rsquo;s songs and the stories behind the man
               himself, presented and performed by singer/songwriter Ernie Savage: solo, on piano, guitar and
               voice. The headlines faded; the magic didn&rsquo;t. This is the heart of Harry, live.
             </p>
