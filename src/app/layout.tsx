@@ -28,7 +28,7 @@ const ERNIE: Metadata = {
 const NILSSON: Metadata = {
   title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
   description:
-    'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry's in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
+    'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry’s in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
   icons: {
     icon: [
       { url: '/cn-favicon.ico' },
@@ -40,7 +40,7 @@ const NILSSON: Metadata = {
   },
   openGraph: {
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
-    description: 'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry's in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
+    description: 'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry’s in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
     url: 'https://celebratenilsson.com',
     siteName: 'Celebrate Nilsson',
     images: [{ url: 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg', width: 1200, height: 630, alt: 'Celebrate Nilsson' }],
@@ -49,7 +49,7 @@ const NILSSON: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
-    description: 'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry's in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
+    description: 'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry’s in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
     images: ['https://www.erniesavage.com/images/CN_OG_1200x630.jpg'],
   },
 };
