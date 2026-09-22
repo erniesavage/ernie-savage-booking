@@ -13,7 +13,7 @@ const OPEN_YOUR_WINDOW_VIDEO_ID = '_e9uzTsMRmM';
 const OG_IMAGE = 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg';
 
 const DESCRIPTION =
-  "The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry's in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.";
+  'Celebrate Nilsson: an intimate concert portrait of Harry Nilsson — his songs, his stories, and the music he never took on the road — performed by Ernie Savage, who knew him. A Harry Nilsson tribute show with firsthand stories. Tickets and dates.';
 
 export const metadata = {
   title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
@@ -33,6 +33,82 @@ export const metadata = {
     description: DESCRIPTION,
     images: [OG_IMAGE],
   },
+};
+
+// ---- Structured data (JSON-LD) for search engines and AI answer engines. Update the two dates here when shows change. ----
+const PERFORMER = {
+  '@type': 'Person',
+  name: 'Ernie Savage',
+  url: 'https://www.erniesavage.com',
+  sameAs: ['https://www.facebook.com/profile.php?id=61594510407973', 'https://www.youtube.com/@erniesavageofficial'],
+};
+
+const ORGANIZER = { '@type': 'Organization', name: 'Ernie Savage LLC', url: 'https://www.erniesavage.com' };
+
+const VENUE = {
+  '@type': 'Place',
+  name: 'Michiko Studios, Studio 3',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '15 West 39th Street, 7th Floor',
+    addressLocality: 'New York',
+    addressRegion: 'NY',
+    postalCode: '10018',
+    addressCountry: 'US',
+  },
+};
+
+function showEvent(startIso: string, endIso: string, doorIso: string) {
+  return {
+    '@type': 'MusicEvent',
+    name: 'Celebrate Nilsson',
+    description:
+      'An intimate concert portrait of Harry Nilsson — his songs, his stories, and the music he never took on the road — presented and performed by Ernie Savage, who knew him, on piano, guitar and voice.',
+    startDate: startIso,
+    endDate: endIso,
+    doorTime: doorIso,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: VENUE,
+    performer: PERFORMER,
+    organizer: ORGANIZER,
+    image: [OG_IMAGE],
+    offers: {
+      '@type': 'Offer',
+      url: 'https://celebratenilsson.com/#shows',
+      price: '35.00',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      validFrom: '2026-09-14T00:00:00-04:00',
+    },
+  };
+}
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'Celebrate Nilsson',
+      url: 'https://celebratenilsson.com',
+      description: DESCRIPTION,
+    },
+    {
+      '@type': 'TheaterEvent',
+      name: 'Celebrate Nilsson',
+      alternateName: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
+      description:
+        'An intimate concert portrait of Harry Nilsson — his songs, that voice, the strange and funny stories, and the music he never took on the road — presented and performed by Ernie Savage, who knew him in Nyack, New York. One performer, piano, guitar and voice.',
+      url: 'https://celebratenilsson.com',
+      performer: PERFORMER,
+      organizer: ORGANIZER,
+      image: [OG_IMAGE],
+      subEvent: [
+        showEvent('2026-12-06T19:00:00-05:00', '2026-12-06T20:30:00-05:00', '2026-12-06T18:30:00-05:00'),
+        showEvent('2027-01-15T19:00:00-05:00', '2027-01-15T20:30:00-05:00', '2027-01-15T18:30:00-05:00'),
+      ],
+    },
+  ],
 };
 
 const CSS = `
@@ -66,6 +142,9 @@ const CSS = `
 
   .cn-intro p{font-size:clamp(19px,2.2vw,22px);line-height:1.6;max-width:62ch;margin:0 auto 18px;text-align:center}
   .cn-intro p:last-child{margin-bottom:0}
+
+  .cn-about{padding:30px 0 44px;border-bottom:1px solid var(--cn-hairline)}
+  .cn-about p{font-size:17px;line-height:1.65;color:var(--cn-ivory-dim);max-width:66ch;margin:0 auto;text-align:center}
 
   .cn-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
   @media (max-width:820px){.cn-grid3{grid-template-columns:1fr}}
@@ -129,6 +208,7 @@ export default function CelebrateNilssonPage() {
         rel="stylesheet"
       />
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
 
       <main>
         <header className="cn-hero">
@@ -160,7 +240,7 @@ export default function CelebrateNilssonPage() {
               voice, and behind the chaos, songs that were fragile, tender, and full of sweetness.
             </p>
             <p>
-              Ernie Savage met Harry Nilsson at nineteen, through his uncle&rsquo;s restaurant in Nyack, where
+              Ernie Savage met Harry Nilsson at nineteen, through his uncle&rsquo;s restaurant in Nyack, New York, where
               Harry had become a regular. Harry would drive around with Ernie, listening to demo tapes of
               Ernie&rsquo;s songs. One afternoon over a lunch involving a pitcher of martinis, Harry declared,
               &ldquo;You have a voice not unlike my own in my younger days...&rdquo; The show is built on
@@ -170,6 +250,18 @@ export default function CelebrateNilssonPage() {
               Celebrate Nilsson is an intimate evening of Harry&rsquo;s songs and the stories behind the man
               himself, presented and performed by singer/songwriter Ernie Savage: solo, on piano, guitar and
               voice. The headlines faded; the magic didn&rsquo;t. This is the heart of Harry, live.
+            </p>
+          </div>
+        </section>
+
+        <section className="cn-about" id="about">
+          <div className="cn-wrap">
+            <p>
+              Celebrate Nilsson is an intimate concert portrait of Harry Nilsson &mdash; his songs, that voice,
+              the strange and funny stories, and the music he never took on the road &mdash; presented and
+              performed by Ernie Savage, who knew him in Nyack, New York. One performer, piano, guitar and voice. It plays
+              listening rooms, theaters and private evenings anywhere, and it is the only Harry Nilsson tribute
+              show built on firsthand accounts.
             </p>
           </div>
         </section>
