@@ -61,9 +61,10 @@ const VENUE = {
 function showEvent(startIso: string, endIso: string, doorIso: string) {
   return {
     '@type': 'MusicEvent',
-    name: 'Celebrate Nilsson',
+    name: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
+    url: 'https://celebratenilsson.com',
     description:
-      'An intimate concert portrait of Harry Nilsson — his songs, his stories, and the music he never took on the road — presented and performed by Ernie Savage, who knew him, on piano, guitar and voice.',
+      'An intimate concert portrait of Harry Nilsson — his songs, that voice, the strange and funny stories, and the music he never took on the road — presented and performed by Ernie Savage, who knew him in Nyack, New York. One performer, piano, guitar and voice.',
     startDate: startIso,
     endDate: endIso,
     doorTime: doorIso,
@@ -93,21 +94,8 @@ const JSON_LD = {
       url: 'https://celebratenilsson.com',
       description: DESCRIPTION,
     },
-    {
-      '@type': 'TheaterEvent',
-      name: 'Celebrate Nilsson',
-      alternateName: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
-      description:
-        'An intimate concert portrait of Harry Nilsson — his songs, that voice, the strange and funny stories, and the music he never took on the road — presented and performed by Ernie Savage, who knew him in Nyack, New York. One performer, piano, guitar and voice.',
-      url: 'https://celebratenilsson.com',
-      performer: PERFORMER,
-      organizer: ORGANIZER,
-      image: [OG_IMAGE],
-      subEvent: [
-        showEvent('2026-12-06T19:00:00-05:00', '2026-12-06T20:30:00-05:00', '2026-12-06T18:30:00-05:00'),
-        showEvent('2027-01-15T19:00:00-05:00', '2027-01-15T20:30:00-05:00', '2027-01-15T18:30:00-05:00'),
-      ],
-    },
+    showEvent('2026-12-06T19:00:00-05:00', '2026-12-06T20:30:00-05:00', '2026-12-06T18:30:00-05:00'),
+    showEvent('2027-01-15T19:00:00-05:00', '2027-01-15T20:30:00-05:00', '2027-01-15T18:30:00-05:00'),
   ],
 };
 
