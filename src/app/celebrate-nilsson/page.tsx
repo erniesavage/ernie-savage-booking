@@ -143,9 +143,6 @@ const CSS = `
   .cn-intro p{font-size:clamp(19px,2.2vw,22px);line-height:1.6;max-width:62ch;margin:0 auto 18px;text-align:center}
   .cn-intro p:last-child{margin-bottom:0}
 
-  .cn-about{padding:30px 0 44px;border-bottom:1px solid var(--cn-hairline)}
-  .cn-about p{font-size:17px;line-height:1.65;color:var(--cn-ivory-dim);max-width:66ch;margin:0 auto;text-align:center}
-
   .cn-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
   @media (max-width:820px){.cn-grid3{grid-template-columns:1fr}}
   .cn-vid{position:relative;aspect-ratio:16/9;border:1px solid var(--cn-hairline);border-radius:6px;overflow:hidden;background:var(--cn-night-2)}
@@ -232,8 +229,15 @@ export default function CelebrateNilssonPage() {
           </div>
         </section>
 
-        <section className="cn-section cn-intro">
+        <section className="cn-section cn-intro" id="about">
           <div className="cn-wrap">
+            <p>
+              Celebrate Nilsson is an intimate concert portrait of Harry Nilsson &mdash; his songs, that voice,
+              the strange and funny stories, and the music he never took on the road &mdash; presented and
+              performed by Ernie Savage, who knew him in Nyack, New York. One performer, piano, guitar and voice. It plays
+              listening rooms, theaters and private evenings anywhere, and it is the only Harry Nilsson tribute
+              show built on firsthand accounts.
+            </p>
             <p>
               Harry Nilsson was one of the most gifted and misunderstood songwriters of the 20th century
               &mdash; celebrated, then overlooked; public, then deeply private. The wild one with the golden
@@ -247,21 +251,7 @@ export default function CelebrateNilssonPage() {
               firsthand accounts like that one &mdash; encounters, stories, and Harry as Ernie knew him.
             </p>
             <p>
-              Celebrate Nilsson is an intimate evening of Harry&rsquo;s songs and the stories behind the man
-              himself, presented and performed by singer/songwriter Ernie Savage: solo, on piano, guitar and
-              voice. The headlines faded; the magic didn&rsquo;t. This is the heart of Harry, live.
-            </p>
-          </div>
-        </section>
-
-        <section className="cn-about" id="about">
-          <div className="cn-wrap">
-            <p>
-              Celebrate Nilsson is an intimate concert portrait of Harry Nilsson &mdash; his songs, that voice,
-              the strange and funny stories, and the music he never took on the road &mdash; presented and
-              performed by Ernie Savage, who knew him in Nyack, New York. One performer, piano, guitar and voice. It plays
-              listening rooms, theaters and private evenings anywhere, and it is the only Harry Nilsson tribute
-              show built on firsthand accounts.
+              The headlines faded; the magic didn&rsquo;t. This is the heart of Harry, live.
             </p>
           </div>
         </section>
