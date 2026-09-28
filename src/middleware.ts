@@ -3,7 +3,8 @@ import type { NextRequest } from 'next/server';
 
 // 1) Marks requests arriving on celebratenilsson.com / .org so the layout can show the right header.
 // 2) Serves the Celebrate Nilsson landing page at the root of those domains.
-// erniesavage.com is untouched.
+// 3) Permanently redirects erniesavage.com/celebrate-nilsson to celebratenilsson.com so Google
+//    treats celebratenilsson.com as the canonical home of the show.
 export function middleware(req: NextRequest) {
   const host = (req.headers.get('host') || '').toLowerCase();
   const isNilssonHost = host.includes('celebratenilsson.');
@@ -15,6 +16,10 @@ export function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
     url.pathname = '/celebrate-nilsson';
     return NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+  }
+
+  if (!isNilssonHost && req.nextUrl.pathname === '/celebrate-nilsson') {
+    return NextResponse.redirect('https://celebratenilsson.com/', 301);
   }
 
   return NextResponse.next({ request: { headers: requestHeaders } });

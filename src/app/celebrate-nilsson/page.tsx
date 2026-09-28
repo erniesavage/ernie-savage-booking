@@ -13,7 +13,7 @@ const OPEN_YOUR_WINDOW_VIDEO_ID = '_e9uzTsMRmM';
 const OG_IMAGE = 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg';
 
 const DESCRIPTION =
-  'Celebrate Nilsson: an intimate concert portrait of Harry Nilsson — his songs, his stories, and the music he never took on the road — performed by Ernie Savage, who knew him. A Harry Nilsson tribute show with firsthand stories. Tickets and dates.';
+  'Celebrate Nilsson: an intimate concert portrait of Harry Nilsson — his songs, his stories, and the music he never took on the road — performed by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. A Harry Nilsson tribute show with firsthand stories. Tickets and dates.';
 
 export const metadata = {
   title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
@@ -64,7 +64,7 @@ function showEvent(startIso: string, endIso: string, doorIso: string) {
     name: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
     url: 'https://celebratenilsson.com',
     description:
-      'An intimate concert portrait of Harry Nilsson — his songs, that voice, the strange and funny stories, and the music he never took on the road — presented and performed by Ernie Savage, who knew him in Nyack, New York. One performer, piano, guitar and voice.',
+      'An intimate concert portrait of Harry Nilsson — his songs, that voice, the strange and funny stories, and the music he never took on the road — presented and performed by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. One performer, piano, guitar and voice.',
     startDate: startIso,
     endDate: endIso,
     doorTime: doorIso,
@@ -204,7 +204,7 @@ export default function CelebrateNilssonPage() {
             />
             <h1>The songs and story of Harry Nilsson</h1>
             <p className="cn-sub">
-              A live show from Ernie Savage, who knew Harry in their hometown of Nyack, New York &mdash; the
+              A live show from Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York &mdash; the
               songs, the stories, the man himself.
             </p>
           </div>
@@ -222,7 +222,7 @@ export default function CelebrateNilssonPage() {
             <p>
               Celebrate Nilsson is an intimate concert portrait of Harry Nilsson &mdash; his songs, that voice,
               the strange and funny stories, and the music he never took on the road &mdash; presented and
-              performed by Ernie Savage, who knew him in Nyack, New York. One performer, piano, guitar and voice. It plays
+              performed by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. One performer, piano, guitar and voice. It plays
               listening rooms, theaters and private evenings anywhere, and it is the only Harry Nilsson tribute
               show built on firsthand accounts.
             </p>
@@ -263,7 +263,7 @@ export default function CelebrateNilssonPage() {
               <VideoTile
                 id="FhMtc1kIJ8A"
                 title="Ernie's Harry stories"
-                sub="Ernie knew Harry in 1980s Nyack, New York. An hour talking Nilsson with Frank LoBuono on the Being Frank podcast."
+                sub="Ernie was friends with Harry in 1980s Nyack, New York. An hour talking Nilsson with Frank LoBuono on the Being Frank podcast."
                 alt="Harry Nilsson: The Man and His Music — Ernie Savage on Being Frank"
               />
             </div>
