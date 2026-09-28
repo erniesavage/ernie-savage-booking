@@ -8,11 +8,11 @@ const ERNIE: Metadata = {
   metadataBase: new URL('https://www.erniesavage.com'),
   title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
   description:
-    'Ernie Savage is a New York-based composer, songwriter, and performer. Creator of Celebrate Nilsson, Secret Ballads NYC, and Celebrate the Songwriters: Radio 1967-1977 — songs and stories on piano and guitar.',
+    'Ernie Savage is a pianist, guitarist, singer, and songwriter. Creator of Celebrate Nilsson, an intimate concert portrait of Harry Nilsson. Also coming soon: Celebrate the Songwriters (Radio 1967–1987) — songs and stories on piano and guitar.',
   icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
   openGraph: {
     title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
-    description: 'Celebrate Nilsson, Secret Ballads NYC, and Celebrate the Songwriters: Radio 1967-1977 — songs and stories on piano and guitar.',
+    description: 'Celebrate Nilsson and Celebrate the Songwriters (Radio 1967–1987) — songs and stories on piano and guitar.',
     url: 'https://www.erniesavage.com',
     siteName: 'Ernie Savage',
     images: [{ url: 'https://www.erniesavage.com/images/HP_1_Hero_Image_Piano_and_Room_.jpg', width: 1200, height: 630, alt: 'Ernie Savage' }],
@@ -21,7 +21,7 @@ const ERNIE: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
-    description: 'Celebrate Nilsson, Secret Ballads NYC, and Celebrate the Songwriters: Radio 1967-1977 — songs and stories on piano and guitar.',
+    description: 'Celebrate Nilsson and Celebrate the Songwriters (Radio 1967–1987) — songs and stories on piano and guitar.',
     images: ['https://www.erniesavage.com/images/HP_1_Hero_Image_Piano_and_Room_.jpg'],
   },
 };
@@ -30,7 +30,7 @@ const NILSSON: Metadata = {
   metadataBase: new URL('https://celebratenilsson.com'),
   title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
   description:
-    'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry’s in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
+    'An intimate concert portrait of Harry Nilsson: his songs, the stories, and the music he never took on the road, performed solo on piano, guitar, and voice by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. Tickets, and first access to new dates.',
   icons: {
     icon: [
       { url: '/cn-favicon.ico' },
@@ -42,7 +42,7 @@ const NILSSON: Metadata = {
   },
   openGraph: {
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
-    description: 'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry’s in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
+    description: 'An intimate concert portrait of Harry Nilsson: his songs, the stories, and the music he never took on the road, performed solo on piano, guitar, and voice by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. Tickets, and first access to new dates.',
     url: 'https://celebratenilsson.com',
     siteName: 'Celebrate Nilsson',
     images: [{ url: 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg', width: 1200, height: 630, alt: 'Celebrate Nilsson' }],
@@ -51,7 +51,7 @@ const NILSSON: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
-    description: 'The songs and stories of Harry Nilsson, presented and performed by Ernie Savage, a friend of Harry’s in the 1980s, on piano, guitar and voice. Tickets, and first access to new dates.',
+    description: 'An intimate concert portrait of Harry Nilsson: his songs, the stories, and the music he never took on the road, performed solo on piano, guitar, and voice by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. Tickets, and first access to new dates.',
     images: ['https://www.erniesavage.com/images/CN_OG_1200x630.jpg'],
   },
 };
