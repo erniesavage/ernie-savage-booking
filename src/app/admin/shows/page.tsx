@@ -4,14 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const EXPERIENCES = [
-  { slug: 'secret-ballads', label: 'Secret Ballads' },
-  { slug: 'everybody-knows-this-song', label: 'Everybody Knows This Song' },
-  { slug: 'heart-of-harry', label: 'Heart of Harry' },
+  { slug: 'celebrate-nilsson', label: 'Celebrate Nilsson' },
   { slug: 'private-concerts', label: 'Private & In-Home Concerts' },
 ];
 
 export default function AdminShowsPage() {
-  const [experience, setExperience] = useState('secret-ballads');
+  const [experience, setExperience] = useState('celebrate-nilsson');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('20:00');
   const [doorsTime, setDoorsTime] = useState('19:30');

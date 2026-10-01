@@ -46,8 +46,8 @@ export default function SmsConsentPage() {
           </p>
           <p style={{ marginBottom: '12px' }}>
             <strong style={{ color: '#e8dcc8' }}>Step 1:</strong> Customer visits a booking page (e.g.,{' '}
-            <a href="https://www.erniesavage.com/experience/secret-ballads" style={{ color: '#c4a574', textDecoration: 'underline' }}>
-              erniesavage.com/experience/secret-ballads
+            <a href="https://www.celebratenilsson.com" style={{ color: '#c4a574', textDecoration: 'underline' }}>
+              celebratenilsson.com
             </a>) and clicks &quot;Purchase Seats&quot; on an available date.
           </p>
           <p style={{ marginBottom: '12px' }}>

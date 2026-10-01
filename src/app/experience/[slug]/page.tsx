@@ -468,10 +468,10 @@ export default function ExperiencePage() {
             He co-composed the theme for NBC&apos;s <em>Early Today</em>, heard nationwide for nearly a decade, and received the 2005 Promax Gold Award for Best Show Theme.
           </p>
           <p style={bodyStyle}>
-            Savage held a residency at Sambucca Jazz Club in Houston (1998&ndash;2000). His live album <em>Swing This</em> received worldwide radio airplay and critical acclaim, and he and his band were routinely featured in the <em>Houston Chronicle</em>.
+            Savage held a residency at Sambuca Jazz Club in Houston (1998&ndash;2000). His live album <em>Swing This</em> received worldwide radio airplay and critical acclaim, and he and his band were routinely featured in the <em>Houston Chronicle</em>.
           </p>
           <p style={bodyStyle}>
-            He curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jesse Raphael, Jackie &quot;The Joke Man&quot; Martling, Lisa Lampanelli and Jeff Ross.
+            He curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jessy Raphael, Jackie &quot;The Joke Man&quot; Martling, Lisa Lampanelli and Jeff Ross.
           </p>
           <p style={bodyStyle}>
             His six-month Friday night engagement fronting his 10-piece big band at New York City&apos;s Carnegie Club was a sellout.
@@ -657,10 +657,10 @@ export default function ExperiencePage() {
             He co-composed the theme for NBC&apos;s <em>Early Today</em>, heard nationwide for nearly a decade, and received the 2005 Promax Gold Award for Best Show Theme.
           </p>
           <p style={bodyStyle}>
-            Savage held a residency at Sambucca Jazz Club in Houston (1998&ndash;2000). His live album <em>Swing This</em> received worldwide radio airplay and critical acclaim, and he and his band were routinely featured in the <em>Houston Chronicle</em>.
+            Savage held a residency at Sambuca Jazz Club in Houston (1998&ndash;2000). His live album <em>Swing This</em> received worldwide radio airplay and critical acclaim, and he and his band were routinely featured in the <em>Houston Chronicle</em>.
           </p>
           <p style={bodyStyle}>
-            He curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jesse Raphael, Jackie &quot;The Joke Man&quot; Martling, Lisa Lampanelli and Jeff Ross.
+            He curated and led a weekly Thursday night music series at New York&apos;s historic Friars Club that became a regular staple for entertainment professionals, including Sally Jessy Raphael, Jackie &quot;The Joke Man&quot; Martling, Lisa Lampanelli and Jeff Ross.
           </p>
           <p style={bodyStyle}>
             His six-month Friday night engagement fronting his 10-piece big band at New York City&apos;s Carnegie Club was a sellout.

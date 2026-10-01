@@ -6,12 +6,12 @@ import { headers } from 'next/headers';
 
 const ERNIE: Metadata = {
   metadataBase: new URL('https://www.erniesavage.com'),
-  title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
+  title: 'Ernie Savage — Composer, Pianist, Guitarist, Singer and Songwriter',
   description:
     'Ernie Savage is a pianist, guitarist, singer, and songwriter. Creator of Celebrate Nilsson, an intimate concert portrait of Harry Nilsson. Also coming soon: Celebrate the Songwriters (Radio 1967–1987) — songs and stories on piano and guitar.',
   icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
   openGraph: {
-    title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
+    title: 'Ernie Savage — Composer, Pianist, Guitarist, Singer and Songwriter',
     description: 'Celebrate Nilsson and Celebrate the Songwriters (Radio 1967–1987) — songs and stories on piano and guitar.',
     url: 'https://www.erniesavage.com',
     siteName: 'Ernie Savage',
@@ -20,7 +20,7 @@ const ERNIE: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ernie Savage — Singer/Songwriter, Composer and Storyteller',
+    title: 'Ernie Savage — Composer, Pianist, Guitarist, Singer and Songwriter',
     description: 'Celebrate Nilsson and Celebrate the Songwriters (Radio 1967–1987) — songs and stories on piano and guitar.',
     images: ['https://www.erniesavage.com/images/HP_1_Hero_Image_Piano_and_Room_.jpg'],
   },
