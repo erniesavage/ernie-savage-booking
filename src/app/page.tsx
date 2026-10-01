@@ -1,5 +1,5 @@
 // src/app/page.tsx — Ernie Savage landing page (Ernie's Harry Stories band)
-import Script from "next/script";
+import Script from "next/script"; import PersonJsonLd from "../components/PersonJsonLd";
 
 export const metadata = {
   title: "Ernie Savage — Composer, Pianist, Guitarist, Singer and Songwriter",
@@ -28,7 +28,7 @@ export default function Home() {
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,560;1,9..144,340&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Archivo:wght@500;600&display=swap"
         rel="stylesheet"
       />
-      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <PersonJsonLd /><style dangerouslySetInnerHTML={{ __html: CSS }} />
       <div dangerouslySetInnerHTML={{ __html: BODY }} />
       <Script id="call-btn" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: CALL_JS }} />
     </>
