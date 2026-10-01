@@ -8,7 +8,7 @@ const ERNIE: Metadata = {
   metadataBase: new URL('https://www.erniesavage.com'),
   title: 'Ernie Savage — Composer, Pianist, Guitarist, Singer and Songwriter',
   description:
-    'Ernie Savage is a pianist, guitarist, singer, and songwriter. Creator of Celebrate Nilsson, an intimate concert portrait of Harry Nilsson. Also coming soon: Celebrate the Songwriters (Radio 1967–1987) — songs and stories on piano and guitar.',
+    'Composer, pianist, guitarist, singer, and songwriter from Nyack, New York: television themes, four decades on stage, and Celebrate Nilsson, a concert portrait of Harry Nilsson.',
   icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
   openGraph: {
     title: 'Ernie Savage — Composer, Pianist, Guitarist, Singer and Songwriter',
