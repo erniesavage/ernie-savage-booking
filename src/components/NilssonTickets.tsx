@@ -4,13 +4,21 @@ import { useEffect, useState } from 'react';
 
 const SLUG = 'celebrate-nilsson';
 
-// The January date stays here as a teaser until it goes on sale (status 'scheduled' in Supabase).
-// Once the row is scheduled it shows up from the API and this teaser hides itself.
-const TEASER = {
-  date: '2027-01-15',
-  label: 'Friday, January 15, 2027 · 7 PM',
-  sub: 'Michiko Studios · On sale December 7 · The 33rd anniversary night',
-};
+// Known dates, written into the page itself. Search engines, AI assistants and anyone
+// whose browser has not loaded the live ticket list yet see these rows.
+// Add a row here when a show is announced; past dates hide themselves.
+const KNOWN_SHOWS = [
+  {
+    date: '2026-12-06',
+    label: 'Sunday, December 6, 2026 · 7 PM',
+    sub: 'Michiko Studios, Midtown NYC · 24-seat room · $35',
+  },
+  {
+    date: '2027-01-15',
+    label: 'Friday, January 15, 2027 · 7 PM',
+    sub: 'Michiko Studios, Midtown NYC · 24-seat room · $35',
+  },
+];
 
 type Show = {
   id: string;
@@ -46,26 +54,33 @@ function fmtDate(d: string) {
 
 export default function NilssonTickets() {
   const [shows, setShows] = useState<Show[] | null>(null);
+  const [failed, setFailed] = useState(false);
+  const [today, setToday] = useState<string | null>(null);
   const [open, setOpen] = useState<string | null>(null);
 
   useEffect(() => {
+    const now = new Date();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    setToday(`${now.getFullYear()}-${mm}-${dd}`);
+
     fetch(`/api/shows?experience=${SLUG}`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('shows request failed');
+        return r.json();
+      })
       .then((d) => setShows(d.shows || []))
-      .catch(() => setShows([]));
+      .catch(() => setFailed(true));
   }, []);
 
-  const hasTeaserDate = (shows || []).some((s) => s.show_date === TEASER.date);
+  const live = shows !== null && shows.length > 0;
+  const known = today ? KNOWN_SHOWS.filter((k) => k.date >= today) : KNOWN_SHOWS;
+  const loaded = shows !== null || failed;
 
   return (
     <div className="cn-dates">
-      {shows === null && <p className="cn-dates-note">Loading dates…</p>}
-
-      {shows && shows.length === 0 && !hasTeaserDate && (
-        <p className="cn-dates-note">New York dates are coming. Sign up below to hear first.</p>
-      )}
-
-      {shows &&
+      {shows !== null &&
+        shows.length > 0 &&
         shows.map((s) => {
           const soldOut = s.status === 'sold_out' || s.available_seats <= 0;
           const few = !soldOut && s.available_seats <= 6;
@@ -96,18 +111,24 @@ export default function NilssonTickets() {
           );
         })}
 
-      {shows && !hasTeaserDate && (
-        <div className="cn-date">
-          <div className="cn-date-row">
-            <div>
-              <div className="cn-date-title">{TEASER.label}</div>
-              <div className="cn-date-sub">{TEASER.sub}</div>
+      {!live &&
+        known.map((k) => (
+          <div key={k.date} className="cn-date">
+            <div className="cn-date-row">
+              <div>
+                <div className="cn-date-title">{k.label}</div>
+                <div className="cn-date-sub">{k.sub}</div>
+              </div>
             </div>
-            <a className="cn-btn cn-btn-inline cn-btn-ghost" href="#signup">
-              Get first access
-            </a>
           </div>
-        </div>
+        ))}
+
+      {!live && loaded && known.length > 0 && (
+        <p className="cn-dates-note">Ticket checkout did not load. Refresh the page to buy tickets.</p>
+      )}
+
+      {!live && known.length === 0 && (
+        <p className="cn-dates-note">New dates are coming. Sign up below to hear first.</p>
       )}
     </div>
   );
