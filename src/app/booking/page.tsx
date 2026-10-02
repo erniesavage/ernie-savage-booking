@@ -12,7 +12,7 @@ export const metadata = {
     url: 'https://celebratenilsson.com/booking',
     siteName: 'Celebrate Nilsson',
     type: 'website',
-    images: [{ url: 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg', width: 1200, height: 630, alt: 'Celebrate Nilsson' }],
+    images: [{ url: 'https://celebratenilsson.com/images/CN_OG_1200x630.jpg', width: 1200, height: 630, alt: 'Celebrate Nilsson' }],
   },
 };
 

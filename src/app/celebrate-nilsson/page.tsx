@@ -10,7 +10,7 @@ const ALL_I_THINK_VIDEO_ID = '-8Zw_pn52OE';
 const WITHOUT_HER_VIDEO_ID = 'RljIwC-tnOA';
 const OPEN_YOUR_WINDOW_VIDEO_ID = '_e9uzTsMRmM';
 
-const OG_IMAGE = 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg';
+const OG_IMAGE = 'https://celebratenilsson.com/images/CN_OG_1200x630.jpg';
 
 const DESCRIPTION =
   'Celebrate Nilsson: an intimate concert portrait of Harry Nilsson — his songs, his stories, and the music he never took on the road — performed by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. A Harry Nilsson tribute show with firsthand stories. Tickets and dates.';
