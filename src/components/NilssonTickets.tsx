@@ -124,7 +124,7 @@ export default function NilssonTickets() {
         ))}
 
       {!live && loaded && known.length > 0 && (
-        <p className="cn-dates-note">Ticket checkout did not load. Refresh the page to buy tickets.</p>
+        <p className="cn-dates-note">Tickets are sold on this page. If the Buy tickets buttons are missing, refresh the page.</p>
       )}
 
       {!live && known.length === 0 && (
