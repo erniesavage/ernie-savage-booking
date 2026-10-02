@@ -6,6 +6,7 @@ import { headers } from 'next/headers';
 
 const ERNIE: Metadata = {
   metadataBase: new URL('https://www.erniesavage.com'),
+  alternates: { canonical: './' },
   title: 'Ernie Savage — Composer, Pianist, Guitarist, Singer and Songwriter',
   description:
     'Composer, pianist, guitarist, singer, and songwriter from Nyack, New York: television themes, four decades on stage, and Celebrate Nilsson, a concert portrait of Harry Nilsson.',
@@ -28,6 +29,7 @@ const ERNIE: Metadata = {
 
 const NILSSON: Metadata = {
   metadataBase: new URL('https://celebratenilsson.com'),
+  alternates: { canonical: './' },
   title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
   description:
     'An intimate concert portrait of Harry Nilsson: his songs, the stories, and the music he never took on the road, performed solo on piano, guitar, and voice by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. Tickets, and first access to new dates.',
@@ -45,14 +47,14 @@ const NILSSON: Metadata = {
     description: 'An intimate concert portrait of Harry Nilsson: his songs, the stories, and the music he never took on the road, performed solo on piano, guitar, and voice by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. Tickets, and first access to new dates.',
     url: 'https://celebratenilsson.com',
     siteName: 'Celebrate Nilsson',
-    images: [{ url: 'https://www.erniesavage.com/images/CN_OG_1200x630.jpg', width: 1200, height: 630, alt: 'Celebrate Nilsson' }],
+    images: [{ url: '/images/CN_OG_1200x630.jpg', width: 1200, height: 630, alt: 'Celebrate Nilsson' }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Celebrate Nilsson — The Songs and Story of Harry Nilsson',
     description: 'An intimate concert portrait of Harry Nilsson: his songs, the stories, and the music he never took on the road, performed solo on piano, guitar, and voice by Ernie Savage, who was friends with Harry in their shared hometown of Nyack, New York. Tickets, and first access to new dates.',
-    images: ['https://www.erniesavage.com/images/CN_OG_1200x630.jpg'],
+    images: ['/images/CN_OG_1200x630.jpg'],
   },
 };
 
