@@ -1,5 +1,6 @@
 // src/components/PersonJsonLd.tsx — schema.org Person entity for Ernie Savage (erniesavage.com)
 // Mirrors Wikidata item Q141592199: occupations, birthplace, citizenship, and external identifiers.
+// v3 (Oct 23, 2026): added ISNI, Instagram, X.
 
 const person = {
   "@context": "https://schema.org",
@@ -59,6 +60,12 @@ const person = {
   identifier: [
     {
       "@type": "PropertyValue",
+      propertyID: "ISNI",
+      value: "0000000531799940",
+      url: "https://isni.org/isni/0000000531799940",
+    },
+    {
+      "@type": "PropertyValue",
       propertyID: "Wikidata",
       value: "Q141592199",
       url: "https://www.wikidata.org/wiki/Q141592199",
@@ -87,6 +94,7 @@ const person = {
     },
   ],
   sameAs: [
+    "https://isni.org/isni/0000000531799940",
     "https://www.wikidata.org/wiki/Q141592199",
     "https://musicbrainz.org/artist/1e34a831-c98a-498b-8851-ed3873c5aac7",
     "https://www.imdb.com/name/nm2125117/",
@@ -95,6 +103,8 @@ const person = {
     "https://www.bandsintown.com/a/15667612",
     "https://www.songkick.com/artists/10416054",
     "https://www.youtube.com/@erniesavageofficial",
+    "https://www.instagram.com/erniesavage",
+    "https://x.com/savage_ernie",
     "https://www.facebook.com/profile.php?id=61594510407973",
     "https://www.linkedin.com/in/erniesavage",
     "https://www.celebratenilsson.com",
