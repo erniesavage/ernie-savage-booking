@@ -30,7 +30,7 @@ const NIGHTS: Night[] = [
       { time: '10:30', name: 'Ernie Savage', note: 'Celebrate Nilsson' },
       { time: '11:00', name: 'Matt Nakoa', url: 'https://mattnakoa.com' },
       { time: '11:30', name: 'Wolftrap', url: 'https://wolftrap.band' },
-      { time: '11:50', name: 'Eddie D', url: 'https://eddiedandtheguarantee.com' },
+      { time: '11:50', name: 'Eddie D and the Guarantee', url: 'https://eddiedandtheguarantee.com' },
     ],
   },
   {
