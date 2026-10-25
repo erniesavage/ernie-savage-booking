@@ -27,7 +27,7 @@ const NIGHTS: Night[] = [
     day: 'Thursday',
     date: 'November 12',
     slots: [
-      { time: '10:30', name: 'Ernie Savage', note: 'Celebrate Nilsson: the songs of Harry Nilsson' },
+      { time: '10:30', name: 'Ernie Savage', url: 'https://www.erniesavage.com', note: 'Celebrate Nilsson: the songs of Harry Nilsson' },
       { time: '11:00', name: 'Matt Nakoa', url: 'https://mattnakoa.com' },
       { time: '11:30', name: 'Wolftrap', url: 'https://wolftrap.band' },
       { time: '11:50', name: 'Eddie D and the Guarantee', url: 'https://eddiedandtheguarantee.com' },
@@ -38,11 +38,11 @@ const NIGHTS: Night[] = [
     day: 'Friday',
     date: 'November 13',
     slots: [
-      { time: '10:30', name: 'Ernie Savage', note: 'Celebrate Nilsson: the songs of Harry Nilsson' },
+      { time: '10:30', name: 'Ernie Savage', url: 'https://www.erniesavage.com', note: 'Celebrate Nilsson: the songs of Harry Nilsson' },
       { time: '11:00', name: 'Chelsea Berry', url: 'https://chelseaberry.com' },
       { time: '11:30', name: 'Claire Wellin', url: 'https://www.clairewellin.com' },
       { time: '12:00', name: 'Kemp Harris', url: 'https://kempharris.band' },
-      { time: '12:30', name: 'Ernie Savage', note: 'Celebrate the Songwriters: 1967–1987' },
+      { time: '12:30', name: 'Ernie Savage', url: 'https://www.erniesavage.com', note: 'Celebrate the Songwriters: 1967–1987' },
     ],
   },
   {
@@ -50,7 +50,7 @@ const NIGHTS: Night[] = [
     day: 'Saturday',
     date: 'November 14',
     slots: [
-      { time: '10:30', name: 'Ernie Savage', note: 'Celebrate Nilsson: the songs of Harry Nilsson' },
+      { time: '10:30', name: 'Ernie Savage', url: 'https://www.erniesavage.com', note: 'Celebrate Nilsson: the songs of Harry Nilsson' },
       { time: '11:00', name: 'The Refugees', url: 'https://therefugeesmusic.com', note: 'Wendy Waldman, Cidny Bullens, Deborah Holland' },
       { time: '11:30', name: 'Hope Dunbar', url: 'https://hopedunbarmusic.com' },
       { time: '11:50', name: 'Juliet Lloyd', url: 'https://julietlloyd.com' },
