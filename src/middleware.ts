@@ -8,16 +8,21 @@ import type { NextRequest } from 'next/server';
 //   /                    the Celebrate Nilsson landing page
 //   /booking             the booking page
 //   /booking-confirmed   the booking confirmation page
+//   /nerfa               the NERFA 2026 Room 169 schedule (until the conference ends)
 //   Everything else on that address forwards to the same path on www.erniesavage.com.
 //
-// www.erniesavage.com shows everything else, and forwards the three
+// www.erniesavage.com shows everything else, and forwards the
 // Celebrate Nilsson pages above to celebratenilsson.com.
 
 const NILSSON_ORIGIN = 'https://celebratenilsson.com';
 const ERNIE_ORIGIN = 'https://www.erniesavage.com';
 
 // Pages that live only on celebratenilsson.com (besides the home page).
-const NILSSON_ONLY_PATHS = ['/booking', '/booking-confirmed'];
+const NILSSON_ONLY_PATHS = ['/booking', '/booking-confirmed', '/nerfa'];
+
+// After the conference, /nerfa sends people to the home page so the printed
+// cards and QR codes keep working. 4:00 AM New York time on Nov 16, 2026 = 09:00 UTC.
+const NERFA_PAGE_ENDS = Date.parse('2026-11-16T09:00:00Z');
 
 export function middleware(req: NextRequest) {
   const host = (req.headers.get('host') || '').toLowerCase();
@@ -33,6 +38,11 @@ export function middleware(req: NextRequest) {
 
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set('x-site', isNilssonHost ? 'nilsson' : 'ernie');
+
+  // The NERFA page retires itself once the conference is over (either address).
+  if (path === '/nerfa' && Date.now() > NERFA_PAGE_ENDS) {
+    return NextResponse.redirect(NILSSON_ORIGIN + '/', 302);
+  }
 
   if (isNilssonHost) {
     // Home page: serve the Celebrate Nilsson landing page.
