@@ -75,15 +75,6 @@ export default function NerfaPage() {
 
   return (
     <>
-      <nav className="cn-nav">
-        <a href="/" className="logo">Celebrate Nilsson</a>
-        <div className="nav-links">
-          <a href="/#shows">Shows</a>
-          <a href="/booking">Book the show</a>
-          <a href="https://www.erniesavage.com/#about">Ernie Savage</a>
-        </div>
-      </nav>
-
       <main className="nerfa">
         <header className="nerfa-head">
           <img
@@ -93,7 +84,9 @@ export default function NerfaPage() {
             width={1536}
             height={1024}
           />
-          <p className="nerfa-eyebrow">NERFA 2026 · The Desmond, Albany · Room 169</p>
+          <p className="nerfa-eyebrow">NERFA 2026 · The Desmond, Albany</p>
+          <p className="nerfa-room-number">Room 169</p>
+          <p className="nerfa-nightly">Thursday, Friday, Saturday · 10:30 PM</p>
           <h1 className="nerfa-title">Three nights of melody, story, and heart, in the spirit of Harry Nilsson.</h1>
         </header>
 
@@ -157,10 +150,6 @@ export default function NerfaPage() {
         </section>
       </main>
 
-      <footer>
-        <p className="footer-copy">Presented by Ernie Savage · celebratenilsson.com</p>
-        <p className="footer-company">© 2026 Ernie Savage LLC</p>
-      </footer>
     </>
   );
 }
