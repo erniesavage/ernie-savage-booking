@@ -42,7 +42,7 @@ const NIGHTS: Night[] = [
       { time: '11:00', name: 'Chelsea Berry', url: 'https://chelseaberry.com' },
       { time: '11:30', name: 'Claire Wellin', url: 'https://www.clairewellin.com' },
       { time: '12:00', name: 'Kemp Harris', url: 'https://kempharris.band' },
-      { time: '12:30', name: 'Ernie Savage', note: 'Celebrate the Songwriters: 1967–1987 (preview)' },
+      { time: '12:30', name: 'Ernie Savage', note: 'Celebrate the Songwriters: 1967–1987' },
     ],
   },
   {
@@ -118,7 +118,10 @@ export default function NerfaPage() {
                   ))}
                   <li className="slot slot-circle">
                     <span className="slot-time">after</span>
-                    <span className="slot-name">Zero Dark Circle</span>
+                    <span className="slot-name">
+                      Zero Dark Circle
+                      <span className="slot-note">Open song circle. Show up and sing.</span>
+                    </span>
                   </li>
                 </ul>
               </article>
