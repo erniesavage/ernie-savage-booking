@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description:
       'Three nights of melody, story, and heart, in the spirit of Harry Nilsson. Room 169, nightly from 10:30 PM.',
     url: 'https://celebratenilsson.com/nerfa',
-    images: ['/og-image.png'],
+    images: [{ url: '/og-nerfa.png', width: 1200, height: 630, alt: 'Celebrate Nilsson at NERFA 2026, Room 169' }],
   },
 };
 
