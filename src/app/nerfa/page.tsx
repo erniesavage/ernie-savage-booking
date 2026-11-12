@@ -39,7 +39,7 @@ const NIGHTS: Night[] = [
     date: 'November 13',
     slots: [
       { time: '10:30', name: 'Ernie Savage', url: 'https://www.erniesavage.com', note: 'Celebrate Nilsson: the songs of Harry Nilsson' },
-      { time: '11:00', name: 'E.W. Harris', url: 'https://ewharris.bandcamp.com' },
+      { time: '11:00', name: 'E.W. Harris', url: 'https://ewharrismusic.com' },
       { time: '11:30', name: 'Claire Wellin', url: 'https://www.clairewellin.com' },
       { time: '12:00', name: 'Kemp Harris', url: 'https://kempharris.band' },
       { time: '12:30', name: 'Ernie Savage', url: 'https://www.erniesavage.com', note: 'Celebrate the Songwriters: 1967–1987' },
